@@ -1,0 +1,192 @@
+﻿@model Entidad.Usuario
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Iniciar Sesión :: Canchitas</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap core CSS -->
+    <link href="@Url.Content("~/assets/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/css/fonts.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/font-awesome/css/font-awesome.min.css")" rel="stylesheet" type="text/css" />
+
+    <!-- PAGE LEVEL PLUGINS STYLES -->
+    <!-- REQUIRE FOR SPEECH COMMANDS -->
+    <link href="@Url.Content("~/assets/css/plugins/gritter/jquery.gritter.css")" rel="stylesheet" type="text/css" />
+
+    <!-- Tc core CSS -->
+    <link href="@Url.Content("~/assets/css/themes/style-4.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/css/CustomStyle.css")" rel="stylesheet" type="text/css" />
+    <!--[if lte IE 8]>
+        <link href="@Url.Content("~/assets/css/ie-fix.css")" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    <!-- Add custom CSS here -->
+    <!-- End custom CSS here -->
+    <!--[if lt IE 9]>
+    <script src="@Url.Content("~/assets/js/html5shiv.js")"></script>
+    <script src="@Url.Content("~/assets/js/respond.min.js")"></script>
+    <![endif]-->
+    <!-- core JavaScript -->
+    <script src="@Url.Content("~/assets/js/jquery.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/plugins/slimscroll/jquery.slimscroll.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/plugins/pace/pace.min.js")"></script>
+
+    <!-- Valida -->
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+    <link href="@Url.Content("~/assets/sweet-alert/sweet-alert.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/assets/sweet-alert/sweet-alert.js")"></script>
+    <style type="text/css">
+        .icon-refresh {
+            animation: 2s linear 0s normal none infinite running spin;
+            display: inline-block;
+        }
+    </style>
+
+    <script src="@Url.Content("~/assets/js/jquery.isloading.min.js")"></script>
+    <style>
+        .isloading-wrapper.isloading-right {
+            margin-left: 10px;
+        }
+
+        .isloading-overlay {
+            position: relative;
+            text-align: center;
+        }
+
+            .isloading-overlay .isloading-wrapper {
+                background: #FFFFFF;
+                -webkit-border-radius: 7px;
+                -webkit-background-clip: padding-box;
+                -moz-border-radius: 7px;
+                -moz-background-clip: padding;
+                border-radius: 7px;
+                background-clip: padding-box;
+                display: inline-block;
+                margin: 0 auto;
+                padding: 10px 20px;
+                top: 10%;
+                z-index: 9000;
+            }
+
+        .login-container {
+            width: 375px;
+            margin: 12% auto 50px;
+        }
+    </style>
+</head>
+
+<body class="login">
+    <div id="wrapper">
+        <!-- BEGIN MAIN PAGE CONTENT -->
+        <div class="login-container">
+
+            <!-- BEGIN LOGIN BOX -->
+            <div id="login-box" class="login-box visible">
+                <p class="bigger-110">
+                    <i class="fa fa-user"></i> Ingerese sus Datos
+                </p>
+
+                <div class="hr hr-8 hr-double dotted"></div>
+
+                <form id="frmLogin" method="post">
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        <div class="input-icon right">
+                            <span class="fa fa-key text-gray"></span>
+                            @Html.TextBoxFor(m => m.nick, new { @class = "form-control", @placeholder = "Ingrese el usuario" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.nick)
+                        @Html.Hidden("initialnick", "login")
+                    </div>
+                    <div class="form-group">
+                        <div class="input-icon right">
+                            <span class="fa fa-lock text-gray"></span>
+                            @Html.PasswordFor(m => m.clave, new { @class = "form-control", @placeholder = "Ingrese la clave" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.clave)
+                    </div>
+                    <div class="tcb">
+                        <a id="btnIniciarSesion" href="#" class="pull-right btn btn-success">Iniciar Sesión<i class="fa fa-key icon-on-right"></i></a>
+                        <div class="clearfix"></div>
+                        <div id="mensajelogin" class="well bg-primary" style="display:none;margin-top:10px">El usuario o contraseña es incorrecto</div>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                </form>
+            </div>
+            <!-- END LOGIN BOX -->
+        </div>
+
+        <!-- END MAIN PAGE CONTENT -->
+    </div>
+
+
+
+    <!-- PAGE LEVEL PLUGINS JS -->
+    <!-- Themes Core Scripts
+    <script src="@Url.Content("~/assets/js/main.js")"></script>
+    <script src="@Url.Content("~/assets/js/speech-commands.js")"></script>
+    <script src="@Url.Content("~/assets/js/plugins/gritter/jquery.gritter.min.js")"></script>
+    -->
+    <!-- initial page level scripts for examples -->
+    <script type="text/javascript">
+        function show_box(id) {
+            jQuery('.login-box.visible').removeClass('visible');
+            jQuery('#' + id).addClass('visible');
+        }
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnIniciarSesion").click(function () {
+                var validator = $("#frmLogin").validate();
+                if (validator.form() == true) {
+                    $.isLoading({ text: "Iniciando" });
+                    var user = $("#nick").val();
+                    var pass = $("#clave").val();
+                    $.ajax({
+                        url: '/Intranet/VerificarAcceso',
+                        data: {
+                            prusuario: user,
+                            prpassword: pass
+                        },
+                        type: "POST",
+                        success: function (data) {
+                            //alert("bienbenido");
+                            if (data == 'error') {
+                                $("#mensajelogin").css("display", "block");
+                                $.isLoading("hide");
+                            } else {
+                                window.location.href = "/Intranet/Index";
+                            }
+                        },
+                        error: function (data) {
+                            alert("Hubo un error en el servidor");
+                            $.isLoading("hide");
+                        }
+                    });
+                } else {
+                    //alert("gg");
+                }
+            });
+                        
+        });
+    </script>
+    <!-- generarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr -->
+    @section Scripts {
+        @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+    }
+    <!-- generarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr2222222 -->
+
+</body>
+</html>

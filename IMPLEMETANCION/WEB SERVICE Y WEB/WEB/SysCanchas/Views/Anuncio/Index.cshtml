@@ -1,0 +1,244 @@
+﻿@*-----------Generado :D--------------*@
+@model PagedList.IPagedList<Entidad.Anuncio>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Lista de Anuncios";
+    Layout = "~/Views/Shared/_MasterIntranet.cshtml";
+}
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<!-- Cabecera -->
+<div class="row">
+    <div class="col-lg-12">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <ul class="breadcrumb">
+                <li><a href="@Url.Content("~/Intranet/Index")">Inicio</a></li>
+                <li class="active"><a href="@Url.Content("~/Anuncio/Index")">Anuncios</a></li>
+            </ul>
+        </div>
+        <div class="page-header title">
+            <h1>Anuncios <span class="sub-title">Lista de Anuncios</span></h1>
+        </div>
+        <!-- Breadcrumbs -->
+    </div>
+</div>
+<!-- Cabecera -->
+<!-- Aqui empieza el codigo del content -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="clearfix">&nbsp;</div>
+        <div class="portlet">
+            <div class="portlet-heading dark">
+                <div class="portlet-title">
+                    <h4>Lista de Anuncios </h4>
+                </div>
+                <div class="portlet-widgets">
+                    <a style="text-decoration:none;" href="@Url.Action("Create")">
+                        <i class="fa fa-plus"></i>
+                        <span class="sr-only"></span>
+                    </a>
+                    <span class="divider"></span>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#basic"><i class="fa fa-chevron-down"></i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div id="basic" class="panel-collapse collapse in">
+                <div class="portlet-body no-padding">
+                    <table class="table table-bordered table-hover tc-table">
+                        <thead>
+                            <tr>
+                                <th>@Html.ActionLink("Nombre", "Index", new { orden = ViewBag.nombreOrden, filtro = ViewBag.filtro })</th>
+                                <th class="hidden-xs">@Html.ActionLink("Imagen", "Index", new { orden = ViewBag.imagenOrden, filtro = ViewBag.filtro })</th>
+                                <th class="hidden-xs">@Html.ActionLink("Descripcion", "Index", new { orden = ViewBag.descripcionOrden, filtro = ViewBag.filtro })</th>
+                                <th class="hidden-xs">@Html.ActionLink("Fecha Hora", "Index", new { orden = ViewBag.fechaHoraOrden, filtro = ViewBag.filtro })</th>
+                                <th class="hidden-xs">@Html.ActionLink("Activo", "Index", new { orden = ViewBag.activoOrden, filtro = ViewBag.filtro })</th>
+                                <th class="hidden-xs">@Html.ActionLink("Empresa", "Index", new { orden = ViewBag.idEmpresaOrden, filtro = ViewBag.filtro })</th>
+                                <th class="col-medium center">Acci&oacute;n</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Count > 0)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.nombre)
+                                            <ul class="table-mobile-ul visible-xs list-unstyled">
+                                                <li>
+                                                    @Html.LabelFor(modelItem => item.imagen)
+                                                    @Html.DisplayFor(modelItem => item.imagen)
+                                                </li>
+                                                <li>
+                                                    @Html.LabelFor(modelItem => item.descripcion)
+                                                    @Html.DisplayFor(modelItem => item.descripcion)
+                                                </li>
+                                                <li>
+                                                    @Html.LabelFor(modelItem => item.fechaHora)
+                                                    @Html.DisplayFor(modelItem => item.fechaHora)
+                                                </li>
+                                                <li>
+                                                    @Html.LabelFor(modelItem => item.activo)
+                                                    @if (item.activo)
+                                                    {
+                                                        <label class="label label-active label-lg arrowed arrowed-right">Si</label>
+                                                    }
+                                                    else
+                                                    {
+                                                        <label class="label label-terminated label-lg arrowed arrowed-right">No</label>
+                                                    }
+                                                </li>
+                                                <li>
+                                                    @Html.LabelFor(modelItem => item.Empresa.nombre)
+                                                    @Html.DisplayFor(modelItem => item.Empresa.nombre)
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="hidden-xs">
+                                            <a href="#" data-toggle="modal" data-target=".@item.id"><img src="@Url.Content("~/Exports/")@item.imagen" width="120" height="100" /></a>
+                                            
+                                        </td>
+                                        <td class="hidden-xs">
+                                            @Html.DisplayFor(modelItem => item.descripcion)
+                                        </td>
+                                        <td class="hidden-xs">
+                                            @Html.DisplayFor(modelItem => item.fechaHora)
+                                        </td>
+                                        <td class="hidden-xs">
+                                            @if (item.activo)
+                                            {
+                                                <label class="label label-active label-lg arrowed arrowed-right">Si</label>
+                                            }
+                                            else
+                                            {
+                                                <label class="label label-terminated label-lg arrowed arrowed-right">No</label>
+                                            }
+                                        </td>
+                                        <td class="hidden-xs">
+                                            @Html.DisplayFor(modelItem => item.Empresa.nombre)
+                                        </td>
+                                        <td class="col-medium center">
+                                            <div class="ui-group-buttons">
+                                                @using (Html.BeginForm("Details", "Anuncio", FormMethod.Post, new { @class = "inline" }))
+                                                {
+                                                    <input type="hidden" name="id" value="@item.id" />
+                                                    <a class="btnEdit btn btn-info">
+                                                        <i class="fa fa-search icon-only"></i>
+                                                    </a>
+                                                    <div class="or"></div>
+                                                }
+                                                @using (Html.BeginForm("Edit", "Anuncio", FormMethod.Post, new { @class = "inline" }))
+                                                {
+                                                    <input type="hidden" name="id" value="@item.id" />
+                                                    <a class="btnEdit btn btn-inverse">
+                                                        <i class="fa fa-edit icon-only"></i>
+                                                    </a>
+                                                    <div class="or"></div>
+                                                    <a class="btnDelete btn btn-danger inline" data-iddelete="@item.id">
+                                                        <i class="fa fa-trash icon-only"></i>
+                                                    </a>
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="79">
+                                        No se encontraron resultados
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        @if (Model != null && Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {
+                <div class="modal fade @item.id" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">@item.nombre</h4>
+                            </div>
+                            <div class="modal-body">
+                                <img src="@Url.Content("~/Exports/")@item.imagen" width="100%" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        @if (Model != null)
+        {
+            <div>
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            </div>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, orden = ViewBag.OrdenActual, filtro = ViewBag.filtro }))
+        }
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#btnBusca").click(function () {
+            $("#FrmBusca").submit();
+        });
+        $(".btnEdit").click(function () {
+            var form = $(this).parents('form:parent');
+            form.submit();
+        });
+        $(".btnDelete").click(function () {
+            var miid = $(this).attr("data-iddelete");
+            swal({
+                title: "Eliminar Anuncio",
+                text: "Seguro que quieres eliminar esta Anuncio?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-success",
+                confirmButtonText: "Si, eliminar!",
+                cancelButtonText: "No, cancelar!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+            function (isConfirm) {
+                $.isLoading({ text: "Procesando..." });
+                if (isConfirm) {
+                    $.ajax({
+                        type: "POST",
+                        url: '/Anuncio/DeleteConfirmed',
+                        data: {
+                            id: miid,
+                        },
+                        success: function (data) {
+                            // Realizar algo cuando la llamada es exitosa
+                            if (data == "true") {
+                                swal("Eliminación exitosa!", "El registro fue eliminado correctamente.", "success");
+                                $.isLoading("hide");
+                                window.location.href = "/Anuncio/Index";
+                            }
+                            else {
+                                swal("Eliminación erronea!", "El registro no se puedo eliminar.", "error");
+                                $.isLoading("hide");
+                            }
+                        },
+                        error: function () {
+                            swal("Error de registro!", "Hubo un error.", "error");
+                            $.isLoading("hide");
+                        }
+                    });
+                } else {
+                    swal("Operación Cancelada", "Puedes volver a intentar cuando estes listo.", "error");
+                    $.isLoading("hide");
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,294 @@
+﻿@*-----------Generado :D--------------*@
+@model PagedList.IPagedList<Entidad.CentroDeportivo>
+@using PagedList.Mvc;
+@{
+ ViewBag.Title = "Lista de CentroDeportivos";
+Layout = "~/Views/Shared/_MasterIntranet.cshtml";
+}
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<!-- Cabecera -->
+<div class="row">
+<div class="col-lg-12">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<ul class="breadcrumb">
+<li><a href="@Url.Content("~/Intranet/Index")">Inicio</a></li>
+<li class="active"><a href="@Url.Content("~/CentroDeportivo/Index")">CentroDeportivos</a></li>
+</ul>
+</div>
+<div class="page-header title">
+<h1>CentroDeportivos <span class="sub-title">Lista de CentroDeportivos</span></h1>
+</div>
+<!-- Breadcrumbs -->
+</div>
+</div>
+<!-- Cabecera -->
+<!-- Aqui empieza el codigo del content -->
+<div class="row">
+<div class="col-lg-12"> 
+<!-- Aqui empieza el codigo del buscador -->
+<div class="col-md-4 col-md-offset-8">
+@using (Html.BeginForm("Index", "CentroDeportivo", FormMethod.Get, new { id = "FrmBusca" }))
+{
+<div class="input-group">
+@Html.TextBox("busqueda", ViewBag.filtro as string, new { @class = "form-control search-query", placeholder = "Busqueda por idPelotero" })
+<span class="input-group-btn">
+<button type="button" class="btn btn-primary" id="btnBusca">
+<i class="fa fa-search icon-only"></i>
+</button>
+</span>
+</div>
+}
+</div>
+<!-- Aqui termina el codigo del buscador -->
+<div class="clearfix">&nbsp;</div>
+<div class="portlet">
+<div class="portlet-heading dark">
+<div class="portlet-title">
+<h4>Lista de CentroDeportivos </h4>
+</div>
+<div class="portlet-widgets">
+<a style="text-decoration:none;" href="@Url.Action("Create")">
+<i class="fa fa-plus"></i>
+<span class="sr-only"></span>
+</a>
+<span class="divider"></span>
+<a data-toggle="collapse" data-parent="#accordion" href="#basic"><i class="fa fa-chevron-down"></i></a>
+</div>
+<div class="clearfix"></div>
+</div>
+<div id="basic" class="panel-collapse collapse in">
+<div class="portlet-body no-padding">
+<table class="table table-bordered table-hover tc-table">
+<thead>
+<tr>
+<th>@Html.ActionLink("direccion", "Index", new { orden = ViewBag.direccionOrden, filtro = ViewBag.filtro })</th>
+<th class="hidden-xs">@Html.ActionLink("telefono", "Index", new { orden = ViewBag.telefonoOrden, filtro = ViewBag.filtro })</th>
+<th class="hidden-xs">@Html.ActionLink("celular", "Index", new { orden = ViewBag.celularOrden, filtro = ViewBag.filtro })</th>
+<th class="hidden-xs">@Html.ActionLink("idDistrito", "Index", new { orden = ViewBag.idDistritoOrden, filtro = ViewBag.filtro })</th>
+<th class="hidden-xs">@Html.ActionLink("nroCanchas", "Index", new { orden = ViewBag.nroCanchasOrden, filtro = ViewBag.filtro })</th>
+<th class="hidden-xs">@Html.ActionLink("balon", "Index", new { orden = ViewBag.balonOrden, filtro = ViewBag.filtro })</th>
+<th class="hidden-xs">@Html.ActionLink("camisetas", "Index", new { orden = ViewBag.camisetasOrden, filtro = ViewBag.filtro })</th>
+<th class="hidden-xs">@Html.ActionLink("idEmpresa", "Index", new { orden = ViewBag.idEmpresaOrden, filtro = ViewBag.filtro })</th>
+<th class="hidden-xs">@Html.ActionLink("nombre", "Index", new { orden = ViewBag.nombreOrden, filtro = ViewBag.filtro })</th>
+<th class="hidden-xs">@Html.ActionLink("foto", "Index", new { orden = ViewBag.fotoOrden, filtro = ViewBag.filtro })</th>
+<th class="hidden-xs">@Html.ActionLink("latitud", "Index", new { orden = ViewBag.latitudOrden, filtro = ViewBag.filtro })</th>
+<th class="hidden-xs">@Html.ActionLink("longitud", "Index", new { orden = ViewBag.longitudOrden, filtro = ViewBag.filtro })</th>
+<th class="hidden-xs">@Html.ActionLink("activo", "Index", new { orden = ViewBag.activoOrden, filtro = ViewBag.filtro })</th>
+<th class="col-medium center">Acci&oacute;n</th>
+</tr>
+</thead>
+<tbody>
+@if (Model != null && Model.Count > 0)
+{
+foreach (var item in Model)
+{
+<tr>
+<td>
+@Html.DisplayFor(modelItem => item.direccion)
+<ul class="table-mobile-ul visible-xs list-unstyled">
+<li>
+@Html.LabelFor(modelItem => item.telefono)
+@Html.DisplayFor(modelItem => item.telefono)
+</li>
+<li>
+@Html.LabelFor(modelItem => item.celular)
+@Html.DisplayFor(modelItem => item.celular)
+</li>
+<li>
+@Html.LabelFor(modelItem => item.idDistrito)
+@Html.DisplayFor(modelItem => item.idDistrito)
+</li>
+<li>
+@Html.LabelFor(modelItem => item.nroCanchas)
+@Html.DisplayFor(modelItem => item.nroCanchas)
+</li>
+<li>
+@Html.LabelFor(modelItem => item.balon)
+@Html.DisplayFor(modelItem => item.balon)
+</li>
+<li>
+@Html.LabelFor(modelItem => item.camisetas)
+@Html.DisplayFor(modelItem => item.camisetas)
+</li>
+<li>
+@Html.LabelFor(modelItem => item.idEmpresa)
+@Html.DisplayFor(modelItem => item.idEmpresa)
+</li>
+<li>
+@Html.LabelFor(modelItem => item.nombre)
+@Html.DisplayFor(modelItem => item.nombre)
+</li>
+<li>
+@Html.LabelFor(modelItem => item.foto)
+@Html.DisplayFor(modelItem => item.foto)
+</li>
+<li>
+@Html.LabelFor(modelItem => item.latitud)
+@Html.DisplayFor(modelItem => item.latitud)
+</li>
+<li>
+@Html.LabelFor(modelItem => item.longitud)
+@Html.DisplayFor(modelItem => item.longitud)
+</li>
+<li>
+@Html.LabelFor(modelItem => item.activo)
+@if (item.activo)
+{
+<label class="label label-active label-lg arrowed arrowed-right">Si</label>
+}
+else
+{
+<label class="label label-terminated label-lg arrowed arrowed-right">No</label>
+}
+</li>
+</ul>
+</td>
+<td class="hidden-xs">
+@Html.DisplayFor(modelItem => item.telefono)
+</td>
+<td class="hidden-xs">
+@Html.DisplayFor(modelItem => item.celular)
+</td>
+<td class="hidden-xs">
+@Html.DisplayFor(modelItem => item.idDistrito)
+</td>
+<td class="hidden-xs">
+@Html.DisplayFor(modelItem => item.nroCanchas)
+</td>
+<td class="hidden-xs">
+@Html.DisplayFor(modelItem => item.balon)
+</td>
+<td class="hidden-xs">
+@Html.DisplayFor(modelItem => item.camisetas)
+</td>
+<td class="hidden-xs">
+@Html.DisplayFor(modelItem => item.idEmpresa)
+</td>
+<td class="hidden-xs">
+@Html.DisplayFor(modelItem => item.nombre)
+</td>
+<td class="hidden-xs">
+@Html.DisplayFor(modelItem => item.foto)
+</td>
+<td class="hidden-xs">
+@Html.DisplayFor(modelItem => item.latitud)
+</td>
+<td class="hidden-xs">
+@Html.DisplayFor(modelItem => item.longitud)
+</td>
+<td class="hidden-xs">
+@if (item.activo)
+{
+<label class="label label-active label-lg arrowed arrowed-right">Si</label>
+}
+else
+{
+<label class="label label-terminated label-lg arrowed arrowed-right">No</label>
+}
+</td>
+<td class="col-medium center">
+<div class="ui-group-buttons">
+@using (Html.BeginForm("Details", "CentroDeportivo", FormMethod.Post, new { @class = "inline" }))
+{
+<input type="hidden" name="id" value="@item.id" />
+<a class="btnEdit btn btn-info">
+<i class="fa fa-search icon-only"></i>
+</a>
+<div class="or"></div>
+}
+@using (Html.BeginForm("Edit", "CentroDeportivo", FormMethod.Post, new { @class = "inline" }))
+{
+<input type="hidden" name="id" value="@item.id" />
+<a class="btnEdit btn btn-inverse">
+<i class="fa fa-edit icon-only"></i>
+</a>
+<div class="or"></div>
+<a class="btnDelete btn btn-danger inline" data-iddelete="@item.id">
+<i class="fa fa-trash icon-only"></i>
+</a>
+}
+</div>
+</td>
+</tr>
+}
+}
+else
+{
+<tr>
+<td colspan="87">
+No se encontraron resultados
+</td>
+</tr>
+}
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<br />
+@if (Model != null)
+{
+<div>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+</div>
+@Html.PagedListPager(Model, page => Url.Action("Index",new { page, orden = ViewBag.OrdenActual, filtro = ViewBag.filtro }))
+}
+</div>
+</div>
+<script>
+$(document).ready(function () {
+$("#btnBusca").click(function () {
+$("#FrmBusca").submit();
+});
+$(".btnEdit").click(function () {
+var form = $(this).parents('form:parent');
+form.submit();
+});
+$(".btnDelete").click(function () {
+var miid = $(this).attr("data-iddelete");
+swal({
+title: "Eliminar CentroDeportivo",
+text: "Seguro que quieres eliminar esta CentroDeportivo?",
+type: "warning",
+showCancelButton: true,
+confirmButtonClass: "btn-success",
+confirmButtonText: "Si, eliminar!",
+cancelButtonText: "No, cancelar!",
+closeOnConfirm: false,
+closeOnCancel: false
+},
+function (isConfirm) {
+$.isLoading({ text: "Procesando..." });
+if (isConfirm) {
+$.ajax({
+type: "POST",
+url: '/CentroDeportivo/DeleteConfirmed',
+data: {
+id: miid,
+},
+success: function (data) {
+// Realizar algo cuando la llamada es exitosa
+if (data == "true") {
+swal("Eliminación exitosa!", "El registro fue eliminado correctamente.", "success");
+ $.isLoading("hide");
+window.location.href = "/CentroDeportivo/Index";
+}
+else {
+swal("Eliminación erronea!", "El registro no se puedo eliminar.", "error");
+$.isLoading("hide");
+}
+},
+ error: function () {
+swal("Error de registro!", "Hubo un error.", "error");
+$.isLoading("hide");
+}
+});
+} else {
+swal("Operación Cancelada", "Puedes volver a intentar cuando estes listo.", "error");
+$.isLoading("hide");
+}
+});
+});
+});
+</script>

@@ -1,0 +1,184 @@
+﻿@using Entidad;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Canchas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Yuri Angulo - Moises Lazaro">
+    <meta name="application-name" content="Canchas" />
+    <link rel="shortcut icon" href="@Url.Content("~/assets/images/logo.ico")">
+    <!-- Bootstrap core CSS -->
+    <link href="@Url.Content("~/assets/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/css/fonts.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/font-awesome/css/font-awesome.min.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Tc core CSS -->
+    <link href="@Url.Content("~/assets/css/themes/style-3.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/css/CustomStyle.css")" rel="stylesheet" type="text/css" />
+
+    <link href="@Url.Content("~/assets/css/plugins/gritter/jquery.gritter.css")" rel="stylesheet" type="text/css" />
+
+    <!--[if lte IE 8]>
+        <link href="@Url.Content("~/assets/css/ie-fix.css")" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    <!-- Add custom CSS here -->
+    <link href="@Url.Content("~/assets/css/only-for-demos.css")" rel="stylesheet" type="text/css" />
+    <!-- End custom CSS here -->
+    <!--[if lt IE 9]>
+    <script src="@Url.Content("~/assets/js/html5shiv.js")"></script>
+    <script src="@Url.Content("~/assets/js/respond.min.js")"></script>
+    <![endif]-->
+    <!--[if lte IE 8]>
+        <script src="@Url.Content("~/assets/js/plugins/easypiechart/easypiechart.ie-fix.js")"></script>
+    <![endif]-->
+    <!-- core JavaScript -->
+    <script src="@Url.Content("~/assets/js/jquery.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/plugins/slimscroll/jquery.slimscroll.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/plugins/pace/pace.min.js")"></script>
+
+    <!-- timepicker bootstrap-->
+    <link type="text/css" href="@Url.Content("~/assets/js/plugins/bootstrap-timepicker/bootstrap-timepicker.css")" rel="stylesheet" />
+    <script type="text/javascript" src="@Url.Content("~/assets/js/plugins/bootstrap-timepicker/bootstrap-timepicker.js")"></script>
+
+    <!-- Alertas sweet-->
+    <link href="@Url.Content("~/assets/sweet-alert/sweet-alert.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/assets/sweet-alert/sweet-alert.js")"></script>
+    <script src="@Url.Content("~/assets/js/jquery.isloading.min.js")"></script>
+
+    <!-- Hijgh Chart-->
+    <script src="@Url.Content("~/assets/highchart/highcharts.js")"></script>
+    <script src="@Url.Content("~/assets/highchart/modules/exporting.js")"></script>
+
+    <script src="@Url.Content("~/assets/js/ToJson.js")"></script>
+
+    <!-- Jquery UI -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <!-- Valida -->
+    <script src="@Url.Content("~/assets/js/validacion/jquery.maskedinput.js")"></script>
+
+    <!-- Valida -->
+    <script src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")"></script>
+    @RenderSection("scripts", false)
+</head>
+<body>
+    <style>
+        .fa-street-view:before {
+            content: "\f21d" !important;
+        }
+    </style>
+    <div id="wrapper">
+        <div id="main-container">
+            <!-- BEGIN TOP NAVIGATION -->
+            <nav class="navbar-top" role="navigation">
+                <!-- BEGIN BRAND HEADING -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle pull-right" data-toggle="collapse" data-target=".top-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <div class="navbar-brand">
+                        <a href="index.html">
+                            <img src="@Url.Content("~/assets/images/logo.png")" alt="logo" class="img-responsive">
+                        </a>
+                    </div>
+                </div>
+                <!-- END BRAND HEADING -->
+                <div class="nav-top">
+                    <!-- BEGIN RIGHT SIDE DROPDOWN BUTTONS -->
+                    <ul class="nav navbar-right">
+                        <li class="dropdown">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                        </li>
+                        <li class="dropdown user-box">
+                            @if (Session["Usuario"] != null)
+                            {
+                                Usuario user = (Usuario)Session["Usuario"];
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">                                    
+                                        <img class="img-circle" src="@Url.Content("~/assets/images/secretaria.png")" alt="">
+                                    <span class="user-info">@user.nick (@user.TipoUsuario.nombre)</span> <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li>
+                                        <a href="@Url.Content("~/Intranet/Salir")">
+                                            <i class="fa fa-power-off"></i> Salir
+                                        </a>
+                                    </li>
+                                </ul>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <nav class="navbar-side" role="navigation">
+                <div class="navbar-collapse sidebar-collapse collapse">
+                    <ul id="side" class="nav navbar-nav side-nav">
+                        <li>
+                            <h4>Menú</h4>
+                        </li>
+                        <li>
+                            <a class="active" href="@Url.Content("~/Intranet/Index")">
+                                <i class="fa fa-delicious"></i> Inicio
+                            </a>
+                        </li>
+                        @if (Session["Usuario"] != null)
+                        {
+                            if ((int)Session["Cargo"] == 1)
+                            {
+                                <li>
+                                    <a href="@Url.Content("~/Anuncio/Index")">
+                                        <i class="fa fa-user"></i> Anuncios
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Content("~/Empresa/Index")">
+                                        <i class="fa fa-industry"></i> Empresas
+                                    </a>
+                                </li>
+                            }
+                            else if ((int)Session["Cargo"] == 2)
+                            {
+                                <li>
+                                    <a href="@Url.Content("~/Cancha/Index")">
+                                        <i class="fa fa-user"></i> Mis Canchas
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Content("~/Reserva/Index")">
+                                        <i class="fa fa-users"></i> Reservas
+                                    </a>
+                                </li>
+                            }
+                        }
+                        
+                    </ul>
+                </div>
+            </nav>
+            <div id="page-wrapper">
+                @RenderBody()
+                <!-- BEGIN FOOTER CONTENT -->
+                <div class="footer">
+                    <div class="footer-inner">
+                        <!-- basics/footer -->
+                        <div class="footer-content">
+                            &copy; 2015 <a href="#" target="_blank">Canchas</a>, Todos los Derechos Reservados.
+                        </div>
+                        <!-- /basics/footer -->
+                    </div>
+                </div>
+                <button type="button" id="back-to-top" class="btn btn-primary btn-sm back-to-top">
+                    <i class="fa fa-angle-double-up icon-only bigger-110"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="@Url.Content("~/assets/js/main.js")"></script>
+    <!-- REQUIRE FOR SPEECH COMMANDS -->
+    <script src="@Url.Content("~/assets/js/speech-commands.js")"></script>
+    <script src="@Url.Content("~/assets/js/plugins/gritter/jquery.gritter.min.js")"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+﻿@*-----------Generado :D--------------*@
+@model Entidad.Reserva
+@{
+    ViewBag.Title = "Detalle Reserva";
+    Layout = "~/Views/Shared/_MasterIntranet.cshtml";
+}
+<!-- Cabecera -->
+<div class="row">
+    <div class="col-lg-12">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <ul class="breadcrumb">
+                <li><a href="@Url.Content("~/Intranet/Index")">Inicio</a></li>
+                <li class="active"><a href="@Url.Content("~/Reserva/Index")">Reservas</a></li>
+            </ul>
+        </div>
+        <div class="page-header title">
+            <h1>Reservas <span class="sub-title">Detalle Reserva</span></h1>
+        </div>
+        <!-- Breadcrumbs -->
+    </div>
+</div>
+<!-- Cabecera -->
+<!-- Aqui empieza el codigo del content -->
+<div class="portlet">
+    <div class="portlet-heading dark">
+        <div class="portlet-title">
+            <h4>Detalle de Reserva</h4>
+        </div>
+        <div class="portlet-widgets">
+            <a data-toggle="collapse" data-parent="#accordion" href="#acordion1"><i class="fa fa-chevron-down"></i></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div id="acordion1" class="panel-collapse collapse in">
+        <div class="portlet-body">
+            <div class="display-label">
+                <label for="Fecha">Fecha</label>
+            </div>
+            <div class="editor-field">  
+                @Model.fecha.ToString("dd-MM-yyyy")            
+                @*@Html.DisplayFor(model => model.fecha.ToShortDateString())*@
+            </div>
+            <div class="display-label">
+                <label for="horaInicio">Hora Inicio</label>
+            </div>
+            <div class="editor-field">
+                @Html.DisplayFor(model => model.horaInicio)
+            </div>
+            <div class="display-label">
+                <label for="horaFin">Hora Fin</label>
+            </div>
+            <div class="editor-field">
+                @Html.DisplayFor(model => model.horaFin)
+            </div>            
+            <div class="display-label">
+                <label for="empresa">Cancha</label>
+            </div>
+            <div class="editor-field">
+                @Html.DisplayFor(model => model.Cancha.nombre)
+            </div>
+            <div class="display-label">
+                @Html.LabelFor(model => model.activo)
+            </div>
+            <div class="editor-field">
+                @if (Model.activo)
+                {
+                    <label class="label label-active label-lg arrowed arrowed-right">Si</label>
+                }
+                else
+                {
+                    <label class="label label-terminated label-lg arrowed arrowed-right">No</label>
+                }
+            </div>
+            <div class="form-actions">
+                @using (Html.BeginForm("Edit", "Reserva", FormMethod.Post))
+                {
+                    @Html.HiddenFor(model => model.id)
+                    <input type="submit" class="btn btn-primary" value="Editar" />
+                    @Html.ActionLink("Regresar a la Lista", "Index")
+                }
+            </div>
+        </div>
+    </div>
+</div>

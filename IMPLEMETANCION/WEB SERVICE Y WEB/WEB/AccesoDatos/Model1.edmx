@@ -1,0 +1,1262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CanchaDBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Amigo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPelotero" Type="int" Nullable="false" />
+          <Property Name="idAmigo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cancha">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="largo" Type="int" Nullable="false" />
+          <Property Name="ancho" Type="int" Nullable="false" />
+          <Property Name="precio" Type="int" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+          <Property Name="tipoCampo" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="CentroDeportivo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="150" />
+          <Property Name="telefono" Type="varchar" MaxLength="15" />
+          <Property Name="celular" Type="varchar" MaxLength="50" />
+          <Property Name="idDistrito" Type="int" />
+          <Property Name="nroCanchas" Type="nchar" MaxLength="10" />
+          <Property Name="balon" Type="bit" />
+          <Property Name="camisetas" Type="bit" />
+          <Property Name="idEmpresa" Type="int" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="foto" Type="varchar" MaxLength="150" />
+          <Property Name="latitud" Type="float" />
+          <Property Name="longitud" Type="float" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="CentroDeportivoCancha">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCentroDeportivo" Type="int" />
+          <Property Name="idCancha" Type="int" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="150" />
+          <Property Name="activo" Type="bit" />
+          <Property Name="idPais" Type="int" />
+        </EntityType>
+        <EntityType Name="DetalleInvitados">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPelotero" Type="int" Nullable="false" />
+          <Property Name="idReserva" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Distrito">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="idProvincia" Type="int" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mensaje">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPelotero" Type="int" Nullable="false" />
+          <Property Name="idReceptor" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="650" Nullable="false" />
+          <Property Name="visto" Type="bit" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pelotero">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidos" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="celular" Type="int" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="idDepartamento" Type="int" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reserva">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fechaHora" Type="datetime" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="idCancha" Type="int" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+          <Property Name="horaInicio" Type="time" Precision="7" />
+          <Property Name="horaFin" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="SolicitudAmistad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fechaHora" Type="datetime" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+          <Property Name="idPelotero" Type="int" Nullable="false" />
+          <Property Name="idReceptor" Type="int" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nick" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="clave" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="idTipoUsuario" Type="int" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Amigo_Pelotero">
+          <End Role="Pelotero" Type="Self.Pelotero" Multiplicity="1" />
+          <End Role="Amigo" Type="Self.Amigo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelotero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Amigo">
+              <PropertyRef Name="idPelotero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Amigo_Pelotero1">
+          <End Role="Pelotero" Type="Self.Pelotero" Multiplicity="1" />
+          <End Role="Amigo" Type="Self.Amigo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelotero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Amigo">
+              <PropertyRef Name="idAmigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CentroDeportivo_Distrito">
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="0..1" />
+          <End Role="CentroDeportivo" Type="Self.CentroDeportivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distrito">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CentroDeportivo">
+              <PropertyRef Name="idDistrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CentroDeportivo_Empresa">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="CentroDeportivo" Type="Self.CentroDeportivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CentroDeportivo">
+              <PropertyRef Name="idEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CentroDeportivoCancha_Cancha">
+          <End Role="Cancha" Type="Self.Cancha" Multiplicity="0..1" />
+          <End Role="CentroDeportivoCancha" Type="Self.CentroDeportivoCancha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cancha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CentroDeportivoCancha">
+              <PropertyRef Name="idCancha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CentroDeportivoCancha_CentroDeportivo">
+          <End Role="CentroDeportivo" Type="Self.CentroDeportivo" Multiplicity="0..1" />
+          <End Role="CentroDeportivoCancha" Type="Self.CentroDeportivoCancha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroDeportivo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CentroDeportivoCancha">
+              <PropertyRef Name="idCentroDeportivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Departamento_Pais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="idPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleInvitados_Pelotero">
+          <End Role="Pelotero" Type="Self.Pelotero" Multiplicity="1" />
+          <End Role="DetalleInvitados" Type="Self.DetalleInvitados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelotero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DetalleInvitados">
+              <PropertyRef Name="idPelotero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleInvitados_Reserva">
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="1" />
+          <End Role="DetalleInvitados" Type="Self.DetalleInvitados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserva">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DetalleInvitados">
+              <PropertyRef Name="idReserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Distrito_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Distrito">
+              <PropertyRef Name="idProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mensaje_Pelotero">
+          <End Role="Pelotero" Type="Self.Pelotero" Multiplicity="1" />
+          <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelotero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="idPelotero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mensaje_Pelotero1">
+          <End Role="Pelotero" Type="Self.Pelotero" Multiplicity="1" />
+          <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelotero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="idReceptor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pelotero_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Pelotero" Type="Self.Pelotero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pelotero">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provincia_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Provincia">
+              <PropertyRef Name="idDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reserva_Cancha">
+          <End Role="Cancha" Type="Self.Cancha" Multiplicity="1" />
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cancha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="idCancha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reserva_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolicitudAmistad_Pelotero">
+          <End Role="Pelotero" Type="Self.Pelotero" Multiplicity="1" />
+          <End Role="SolicitudAmistad" Type="Self.SolicitudAmistad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelotero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SolicitudAmistad">
+              <PropertyRef Name="idPelotero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolicitudAmistad_Pelotero1">
+          <End Role="Pelotero" Type="Self.Pelotero" Multiplicity="1" />
+          <End Role="SolicitudAmistad" Type="Self.SolicitudAmistad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelotero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SolicitudAmistad">
+              <PropertyRef Name="idReceptor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TipoUsuario">
+          <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idTipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CanchaDBModel1StoreContainer">
+          <EntitySet Name="Amigo" EntityType="Self.Amigo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cancha" EntityType="Self.Cancha" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CentroDeportivo" EntityType="Self.CentroDeportivo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CentroDeportivoCancha" EntityType="Self.CentroDeportivoCancha" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleInvitados" EntityType="Self.DetalleInvitados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Distrito" EntityType="Self.Distrito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mensaje" EntityType="Self.Mensaje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pelotero" EntityType="Self.Pelotero" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reserva" EntityType="Self.Reserva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SolicitudAmistad" EntityType="Self.SolicitudAmistad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Amigo_Pelotero" Association="Self.FK_Amigo_Pelotero">
+            <End Role="Pelotero" EntitySet="Pelotero" />
+            <End Role="Amigo" EntitySet="Amigo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Amigo_Pelotero1" Association="Self.FK_Amigo_Pelotero1">
+            <End Role="Pelotero" EntitySet="Pelotero" />
+            <End Role="Amigo" EntitySet="Amigo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CentroDeportivo_Distrito" Association="Self.FK_CentroDeportivo_Distrito">
+            <End Role="Distrito" EntitySet="Distrito" />
+            <End Role="CentroDeportivo" EntitySet="CentroDeportivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CentroDeportivo_Empresa" Association="Self.FK_CentroDeportivo_Empresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="CentroDeportivo" EntitySet="CentroDeportivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CentroDeportivoCancha_Cancha" Association="Self.FK_CentroDeportivoCancha_Cancha">
+            <End Role="Cancha" EntitySet="Cancha" />
+            <End Role="CentroDeportivoCancha" EntitySet="CentroDeportivoCancha" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CentroDeportivoCancha_CentroDeportivo" Association="Self.FK_CentroDeportivoCancha_CentroDeportivo">
+            <End Role="CentroDeportivo" EntitySet="CentroDeportivo" />
+            <End Role="CentroDeportivoCancha" EntitySet="CentroDeportivoCancha" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Departamento_Pais" Association="Self.FK_Departamento_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Departamento" EntitySet="Departamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleInvitados_Pelotero" Association="Self.FK_DetalleInvitados_Pelotero">
+            <End Role="Pelotero" EntitySet="Pelotero" />
+            <End Role="DetalleInvitados" EntitySet="DetalleInvitados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleInvitados_Reserva" Association="Self.FK_DetalleInvitados_Reserva">
+            <End Role="Reserva" EntitySet="Reserva" />
+            <End Role="DetalleInvitados" EntitySet="DetalleInvitados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Distrito_Provincia" Association="Self.FK_Distrito_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Distrito" EntitySet="Distrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Usuario" Association="Self.FK_Empresa_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mensaje_Pelotero" Association="Self.FK_Mensaje_Pelotero">
+            <End Role="Pelotero" EntitySet="Pelotero" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mensaje_Pelotero1" Association="Self.FK_Mensaje_Pelotero1">
+            <End Role="Pelotero" EntitySet="Pelotero" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pelotero_Usuario" Association="Self.FK_Pelotero_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pelotero" EntitySet="Pelotero" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provincia_Departamento" Association="Self.FK_Provincia_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Provincia" EntitySet="Provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reserva_Cancha" Association="Self.FK_Reserva_Cancha">
+            <End Role="Cancha" EntitySet="Cancha" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reserva_Usuario" Association="Self.FK_Reserva_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolicitudAmistad_Pelotero" Association="Self.FK_SolicitudAmistad_Pelotero">
+            <End Role="Pelotero" EntitySet="Pelotero" />
+            <End Role="SolicitudAmistad" EntitySet="SolicitudAmistad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolicitudAmistad_Pelotero1" Association="Self.FK_SolicitudAmistad_Pelotero1">
+            <End Role="Pelotero" EntitySet="Pelotero" />
+            <End Role="SolicitudAmistad" EntitySet="SolicitudAmistad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="Self.FK_Usuario_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CanchaDBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CanchaDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Amigo" EntityType="CanchaDBModel1.Amigo" />
+          <EntitySet Name="Cancha" EntityType="CanchaDBModel1.Cancha" />
+          <EntitySet Name="CentroDeportivo" EntityType="CanchaDBModel1.CentroDeportivo" />
+          <EntitySet Name="CentroDeportivoCancha" EntityType="CanchaDBModel1.CentroDeportivoCancha" />
+          <EntitySet Name="Departamento" EntityType="CanchaDBModel1.Departamento" />
+          <EntitySet Name="DetalleInvitados" EntityType="CanchaDBModel1.DetalleInvitados" />
+          <EntitySet Name="Distrito" EntityType="CanchaDBModel1.Distrito" />
+          <EntitySet Name="Empresa" EntityType="CanchaDBModel1.Empresa" />
+          <EntitySet Name="Mensaje" EntityType="CanchaDBModel1.Mensaje" />
+          <EntitySet Name="Pais" EntityType="CanchaDBModel1.Pais" />
+          <EntitySet Name="Pelotero" EntityType="CanchaDBModel1.Pelotero" />
+          <EntitySet Name="Provincia" EntityType="CanchaDBModel1.Provincia" />
+          <EntitySet Name="SolicitudAmistad" EntityType="CanchaDBModel1.SolicitudAmistad" />
+          <EntitySet Name="TipoUsuario" EntityType="CanchaDBModel1.TipoUsuario" />
+          <EntitySet Name="Usuario" EntityType="CanchaDBModel1.Usuario" />
+          <AssociationSet Name="FK_Amigo_Pelotero" Association="CanchaDBModel1.FK_Amigo_Pelotero">
+            <End Role="Pelotero" EntitySet="Pelotero" />
+            <End Role="Amigo" EntitySet="Amigo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Amigo_Pelotero1" Association="CanchaDBModel1.FK_Amigo_Pelotero1">
+            <End Role="Pelotero" EntitySet="Pelotero" />
+            <End Role="Amigo" EntitySet="Amigo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CentroDeportivoCancha_Cancha" Association="CanchaDBModel1.FK_CentroDeportivoCancha_Cancha">
+            <End Role="Cancha" EntitySet="Cancha" />
+            <End Role="CentroDeportivoCancha" EntitySet="CentroDeportivoCancha" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CentroDeportivo_Distrito" Association="CanchaDBModel1.FK_CentroDeportivo_Distrito">
+            <End Role="Distrito" EntitySet="Distrito" />
+            <End Role="CentroDeportivo" EntitySet="CentroDeportivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CentroDeportivo_Empresa" Association="CanchaDBModel1.FK_CentroDeportivo_Empresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="CentroDeportivo" EntitySet="CentroDeportivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CentroDeportivoCancha_CentroDeportivo" Association="CanchaDBModel1.FK_CentroDeportivoCancha_CentroDeportivo">
+            <End Role="CentroDeportivo" EntitySet="CentroDeportivo" />
+            <End Role="CentroDeportivoCancha" EntitySet="CentroDeportivoCancha" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Departamento_Pais" Association="CanchaDBModel1.FK_Departamento_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Departamento" EntitySet="Departamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provincia_Departamento" Association="CanchaDBModel1.FK_Provincia_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Provincia" EntitySet="Provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleInvitados_Pelotero" Association="CanchaDBModel1.FK_DetalleInvitados_Pelotero">
+            <End Role="Pelotero" EntitySet="Pelotero" />
+            <End Role="DetalleInvitados" EntitySet="DetalleInvitados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Distrito_Provincia" Association="CanchaDBModel1.FK_Distrito_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Distrito" EntitySet="Distrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Usuario" Association="CanchaDBModel1.FK_Empresa_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mensaje_Pelotero" Association="CanchaDBModel1.FK_Mensaje_Pelotero">
+            <End Role="Pelotero" EntitySet="Pelotero" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mensaje_Pelotero1" Association="CanchaDBModel1.FK_Mensaje_Pelotero1">
+            <End Role="Pelotero" EntitySet="Pelotero" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pelotero_Usuario" Association="CanchaDBModel1.FK_Pelotero_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pelotero" EntitySet="Pelotero" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolicitudAmistad_Pelotero" Association="CanchaDBModel1.FK_SolicitudAmistad_Pelotero">
+            <End Role="Pelotero" EntitySet="Pelotero" />
+            <End Role="SolicitudAmistad" EntitySet="SolicitudAmistad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolicitudAmistad_Pelotero1" Association="CanchaDBModel1.FK_SolicitudAmistad_Pelotero1">
+            <End Role="Pelotero" EntitySet="Pelotero" />
+            <End Role="SolicitudAmistad" EntitySet="SolicitudAmistad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="CanchaDBModel1.FK_Usuario_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <EntitySet Name="Reserva" EntityType="CanchaDBModel1.Reserva" />
+          <AssociationSet Name="FK_Reserva_Cancha" Association="CanchaDBModel1.FK_Reserva_Cancha">
+            <End Role="Cancha" EntitySet="Cancha" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleInvitados_Reserva" Association="CanchaDBModel1.FK_DetalleInvitados_Reserva">
+            <End Role="Reserva" EntitySet="Reserva" />
+            <End Role="DetalleInvitados" EntitySet="DetalleInvitados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reserva_Usuario" Association="CanchaDBModel1.FK_Reserva_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Amigo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPelotero" Type="Int32" Nullable="false" />
+          <Property Name="idAmigo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pelotero" Relationship="CanchaDBModel1.FK_Amigo_Pelotero" FromRole="Amigo" ToRole="Pelotero" />
+          <NavigationProperty Name="Pelotero1" Relationship="CanchaDBModel1.FK_Amigo_Pelotero1" FromRole="Amigo" ToRole="Pelotero" />
+        </EntityType>
+        <EntityType Name="Cancha">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="largo" Type="Int32" Nullable="false" />
+          <Property Name="ancho" Type="Int32" Nullable="false" />
+          <Property Name="precio" Type="Int32" Nullable="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <Property Name="tipoCampo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CentroDeportivoCancha" Relationship="CanchaDBModel1.FK_CentroDeportivoCancha_Cancha" FromRole="Cancha" ToRole="CentroDeportivoCancha" />
+          <NavigationProperty Name="Reserva" Relationship="CanchaDBModel1.FK_Reserva_Cancha" FromRole="Cancha" ToRole="Reserva" />
+        </EntityType>
+        <EntityType Name="CentroDeportivo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idDistrito" Type="Int32" />
+          <Property Name="nroCanchas" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="balon" Type="Boolean" />
+          <Property Name="camisetas" Type="Boolean" />
+          <Property Name="idEmpresa" Type="Int32" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="foto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="latitud" Type="Double" />
+          <Property Name="longitud" Type="Double" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="Distrito" Relationship="CanchaDBModel1.FK_CentroDeportivo_Distrito" FromRole="CentroDeportivo" ToRole="Distrito" />
+          <NavigationProperty Name="Empresa" Relationship="CanchaDBModel1.FK_CentroDeportivo_Empresa" FromRole="CentroDeportivo" ToRole="Empresa" />
+          <NavigationProperty Name="CentroDeportivoCancha" Relationship="CanchaDBModel1.FK_CentroDeportivoCancha_CentroDeportivo" FromRole="CentroDeportivo" ToRole="CentroDeportivoCancha" />
+        </EntityType>
+        <EntityType Name="CentroDeportivoCancha">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCentroDeportivo" Type="Int32" />
+          <Property Name="idCancha" Type="Int32" />
+          <NavigationProperty Name="Cancha" Relationship="CanchaDBModel1.FK_CentroDeportivoCancha_Cancha" FromRole="CentroDeportivoCancha" ToRole="Cancha" />
+          <NavigationProperty Name="CentroDeportivo" Relationship="CanchaDBModel1.FK_CentroDeportivoCancha_CentroDeportivo" FromRole="CentroDeportivoCancha" ToRole="CentroDeportivo" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <Property Name="idPais" Type="Int32" />
+          <NavigationProperty Name="Pais" Relationship="CanchaDBModel1.FK_Departamento_Pais" FromRole="Departamento" ToRole="Pais" />
+          <NavigationProperty Name="Provincia" Relationship="CanchaDBModel1.FK_Provincia_Departamento" FromRole="Departamento" ToRole="Provincia" />
+        </EntityType>
+        <EntityType Name="DetalleInvitados">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPelotero" Type="Int32" Nullable="false" />
+          <Property Name="idReserva" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pelotero" Relationship="CanchaDBModel1.FK_DetalleInvitados_Pelotero" FromRole="DetalleInvitados" ToRole="Pelotero" />
+          <NavigationProperty Name="Reserva" Relationship="CanchaDBModel1.FK_DetalleInvitados_Reserva" FromRole="DetalleInvitados" ToRole="Reserva" />
+        </EntityType>
+        <EntityType Name="Distrito">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="idProvincia" Type="Int32" Nullable="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CentroDeportivo" Relationship="CanchaDBModel1.FK_CentroDeportivo_Distrito" FromRole="Distrito" ToRole="CentroDeportivo" />
+          <NavigationProperty Name="Provincia" Relationship="CanchaDBModel1.FK_Distrito_Provincia" FromRole="Distrito" ToRole="Provincia" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="direccion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CentroDeportivo" Relationship="CanchaDBModel1.FK_CentroDeportivo_Empresa" FromRole="Empresa" ToRole="CentroDeportivo" />
+          <NavigationProperty Name="Usuario" Relationship="CanchaDBModel1.FK_Empresa_Usuario" FromRole="Empresa" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Mensaje">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPelotero" Type="Int32" Nullable="false" />
+          <Property Name="idReceptor" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="650" FixedLength="false" Unicode="false" />
+          <Property Name="visto" Type="Boolean" Nullable="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Pelotero" Relationship="CanchaDBModel1.FK_Mensaje_Pelotero" FromRole="Mensaje" ToRole="Pelotero" />
+          <NavigationProperty Name="Pelotero1" Relationship="CanchaDBModel1.FK_Mensaje_Pelotero1" FromRole="Mensaje" ToRole="Pelotero" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Departamento" Relationship="CanchaDBModel1.FK_Departamento_Pais" FromRole="Pais" ToRole="Departamento" />
+        </EntityType>
+        <EntityType Name="Pelotero">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellidos" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="celular" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Amigo" Relationship="CanchaDBModel1.FK_Amigo_Pelotero" FromRole="Pelotero" ToRole="Amigo" />
+          <NavigationProperty Name="Amigo1" Relationship="CanchaDBModel1.FK_Amigo_Pelotero1" FromRole="Pelotero" ToRole="Amigo" />
+          <NavigationProperty Name="DetalleInvitados" Relationship="CanchaDBModel1.FK_DetalleInvitados_Pelotero" FromRole="Pelotero" ToRole="DetalleInvitados" />
+          <NavigationProperty Name="Mensaje" Relationship="CanchaDBModel1.FK_Mensaje_Pelotero" FromRole="Pelotero" ToRole="Mensaje" />
+          <NavigationProperty Name="Mensaje1" Relationship="CanchaDBModel1.FK_Mensaje_Pelotero1" FromRole="Pelotero" ToRole="Mensaje" />
+          <NavigationProperty Name="Usuario" Relationship="CanchaDBModel1.FK_Pelotero_Usuario" FromRole="Pelotero" ToRole="Usuario" />
+          <NavigationProperty Name="SolicitudAmistad" Relationship="CanchaDBModel1.FK_SolicitudAmistad_Pelotero" FromRole="Pelotero" ToRole="SolicitudAmistad" />
+          <NavigationProperty Name="SolicitudAmistad1" Relationship="CanchaDBModel1.FK_SolicitudAmistad_Pelotero1" FromRole="Pelotero" ToRole="SolicitudAmistad" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="idDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Departamento" Relationship="CanchaDBModel1.FK_Provincia_Departamento" FromRole="Provincia" ToRole="Departamento" />
+          <NavigationProperty Name="Distrito" Relationship="CanchaDBModel1.FK_Distrito_Provincia" FromRole="Provincia" ToRole="Distrito" />
+        </EntityType>
+        <EntityType Name="SolicitudAmistad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fechaHora" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <Property Name="idPelotero" Type="Int32" Nullable="false" />
+          <Property Name="idReceptor" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pelotero" Relationship="CanchaDBModel1.FK_SolicitudAmistad_Pelotero" FromRole="SolicitudAmistad" ToRole="Pelotero" />
+          <NavigationProperty Name="Pelotero1" Relationship="CanchaDBModel1.FK_SolicitudAmistad_Pelotero1" FromRole="SolicitudAmistad" ToRole="Pelotero" />
+        </EntityType>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="CanchaDBModel1.FK_Usuario_TipoUsuario" FromRole="TipoUsuario" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nick" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="clave" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="idTipoUsuario" Type="Int32" Nullable="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Empresa" Relationship="CanchaDBModel1.FK_Empresa_Usuario" FromRole="Usuario" ToRole="Empresa" />
+          <NavigationProperty Name="Pelotero" Relationship="CanchaDBModel1.FK_Pelotero_Usuario" FromRole="Usuario" ToRole="Pelotero" />
+          <NavigationProperty Name="TipoUsuario" Relationship="CanchaDBModel1.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
+          <NavigationProperty Name="Reserva" Relationship="CanchaDBModel1.FK_Reserva_Usuario" FromRole="Usuario" ToRole="Reserva" />
+        </EntityType>
+        <Association Name="FK_Amigo_Pelotero">
+          <End Type="CanchaDBModel1.Pelotero" Role="Pelotero" Multiplicity="1" />
+          <End Type="CanchaDBModel1.Amigo" Role="Amigo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelotero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Amigo">
+              <PropertyRef Name="idPelotero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Amigo_Pelotero1">
+          <End Type="CanchaDBModel1.Pelotero" Role="Pelotero" Multiplicity="1" />
+          <End Type="CanchaDBModel1.Amigo" Role="Amigo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelotero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Amigo">
+              <PropertyRef Name="idAmigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CentroDeportivoCancha_Cancha">
+          <End Type="CanchaDBModel1.Cancha" Role="Cancha" Multiplicity="0..1" />
+          <End Type="CanchaDBModel1.CentroDeportivoCancha" Role="CentroDeportivoCancha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cancha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CentroDeportivoCancha">
+              <PropertyRef Name="idCancha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CentroDeportivo_Distrito">
+          <End Type="CanchaDBModel1.Distrito" Role="Distrito" Multiplicity="0..1" />
+          <End Type="CanchaDBModel1.CentroDeportivo" Role="CentroDeportivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distrito">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CentroDeportivo">
+              <PropertyRef Name="idDistrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CentroDeportivo_Empresa">
+          <End Type="CanchaDBModel1.Empresa" Role="Empresa" Multiplicity="0..1" />
+          <End Type="CanchaDBModel1.CentroDeportivo" Role="CentroDeportivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CentroDeportivo">
+              <PropertyRef Name="idEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CentroDeportivoCancha_CentroDeportivo">
+          <End Type="CanchaDBModel1.CentroDeportivo" Role="CentroDeportivo" Multiplicity="0..1" />
+          <End Type="CanchaDBModel1.CentroDeportivoCancha" Role="CentroDeportivoCancha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroDeportivo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CentroDeportivoCancha">
+              <PropertyRef Name="idCentroDeportivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Departamento_Pais">
+          <End Type="CanchaDBModel1.Pais" Role="Pais" Multiplicity="0..1" />
+          <End Type="CanchaDBModel1.Departamento" Role="Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="idPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provincia_Departamento">
+          <End Type="CanchaDBModel1.Departamento" Role="Departamento" Multiplicity="1" />
+          <End Type="CanchaDBModel1.Provincia" Role="Provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Provincia">
+              <PropertyRef Name="idDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleInvitados_Pelotero">
+          <End Type="CanchaDBModel1.Pelotero" Role="Pelotero" Multiplicity="1" />
+          <End Type="CanchaDBModel1.DetalleInvitados" Role="DetalleInvitados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelotero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DetalleInvitados">
+              <PropertyRef Name="idPelotero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Distrito_Provincia">
+          <End Type="CanchaDBModel1.Provincia" Role="Provincia" Multiplicity="1" />
+          <End Type="CanchaDBModel1.Distrito" Role="Distrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Distrito">
+              <PropertyRef Name="idProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Usuario">
+          <End Type="CanchaDBModel1.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="CanchaDBModel1.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mensaje_Pelotero">
+          <End Type="CanchaDBModel1.Pelotero" Role="Pelotero" Multiplicity="1" />
+          <End Type="CanchaDBModel1.Mensaje" Role="Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelotero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="idPelotero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mensaje_Pelotero1">
+          <End Type="CanchaDBModel1.Pelotero" Role="Pelotero" Multiplicity="1" />
+          <End Type="CanchaDBModel1.Mensaje" Role="Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelotero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="idReceptor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pelotero_Usuario">
+          <End Type="CanchaDBModel1.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="CanchaDBModel1.Pelotero" Role="Pelotero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pelotero">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolicitudAmistad_Pelotero">
+          <End Type="CanchaDBModel1.Pelotero" Role="Pelotero" Multiplicity="1" />
+          <End Type="CanchaDBModel1.SolicitudAmistad" Role="SolicitudAmistad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelotero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SolicitudAmistad">
+              <PropertyRef Name="idPelotero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolicitudAmistad_Pelotero1">
+          <End Type="CanchaDBModel1.Pelotero" Role="Pelotero" Multiplicity="1" />
+          <End Type="CanchaDBModel1.SolicitudAmistad" Role="SolicitudAmistad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pelotero">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SolicitudAmistad">
+              <PropertyRef Name="idReceptor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TipoUsuario">
+          <End Type="CanchaDBModel1.TipoUsuario" Role="TipoUsuario" Multiplicity="1" />
+          <End Type="CanchaDBModel1.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idTipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Reserva">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fechaHora" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="idCancha" Type="Int32" Nullable="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <Property Name="horaInicio" Type="Time" Precision="7" />
+          <Property Name="horaFin" Type="Time" Precision="7" />
+          <NavigationProperty Name="Cancha" Relationship="CanchaDBModel1.FK_Reserva_Cancha" FromRole="Reserva" ToRole="Cancha" />
+          <NavigationProperty Name="DetalleInvitados" Relationship="CanchaDBModel1.FK_DetalleInvitados_Reserva" FromRole="Reserva" ToRole="DetalleInvitados" />
+          <NavigationProperty Name="Usuario" Relationship="CanchaDBModel1.FK_Reserva_Usuario" FromRole="Reserva" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Reserva_Cancha">
+          <End Type="CanchaDBModel1.Cancha" Role="Cancha" Multiplicity="1" />
+          <End Type="CanchaDBModel1.Reserva" Role="Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cancha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="idCancha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleInvitados_Reserva">
+          <End Type="CanchaDBModel1.Reserva" Role="Reserva" Multiplicity="1" />
+          <End Type="CanchaDBModel1.DetalleInvitados" Role="DetalleInvitados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserva">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DetalleInvitados">
+              <PropertyRef Name="idReserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reserva_Usuario">
+          <End Type="CanchaDBModel1.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="CanchaDBModel1.Reserva" Role="Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CanchaDBModel1StoreContainer" CdmEntityContainer="CanchaDBEntities1">
+          <EntitySetMapping Name="Amigo">
+            <EntityTypeMapping TypeName="CanchaDBModel1.Amigo">
+              <MappingFragment StoreEntitySet="Amigo">
+                <ScalarProperty Name="idAmigo" ColumnName="idAmigo" />
+                <ScalarProperty Name="idPelotero" ColumnName="idPelotero" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cancha">
+            <EntityTypeMapping TypeName="CanchaDBModel1.Cancha">
+              <MappingFragment StoreEntitySet="Cancha">
+                <ScalarProperty Name="tipoCampo" ColumnName="tipoCampo" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="ancho" ColumnName="ancho" />
+                <ScalarProperty Name="largo" ColumnName="largo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CentroDeportivo">
+            <EntityTypeMapping TypeName="CanchaDBModel1.CentroDeportivo">
+              <MappingFragment StoreEntitySet="CentroDeportivo">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="longitud" ColumnName="longitud" />
+                <ScalarProperty Name="latitud" ColumnName="latitud" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+                <ScalarProperty Name="camisetas" ColumnName="camisetas" />
+                <ScalarProperty Name="balon" ColumnName="balon" />
+                <ScalarProperty Name="nroCanchas" ColumnName="nroCanchas" />
+                <ScalarProperty Name="idDistrito" ColumnName="idDistrito" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CentroDeportivoCancha">
+            <EntityTypeMapping TypeName="CanchaDBModel1.CentroDeportivoCancha">
+              <MappingFragment StoreEntitySet="CentroDeportivoCancha">
+                <ScalarProperty Name="idCancha" ColumnName="idCancha" />
+                <ScalarProperty Name="idCentroDeportivo" ColumnName="idCentroDeportivo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamento">
+            <EntityTypeMapping TypeName="CanchaDBModel1.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="idPais" ColumnName="idPais" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleInvitados">
+            <EntityTypeMapping TypeName="CanchaDBModel1.DetalleInvitados">
+              <MappingFragment StoreEntitySet="DetalleInvitados">
+                <ScalarProperty Name="idReserva" ColumnName="idReserva" />
+                <ScalarProperty Name="idPelotero" ColumnName="idPelotero" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Distrito">
+            <EntityTypeMapping TypeName="CanchaDBModel1.Distrito">
+              <MappingFragment StoreEntitySet="Distrito">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="idProvincia" ColumnName="idProvincia" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresa">
+            <EntityTypeMapping TypeName="CanchaDBModel1.Empresa">
+              <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mensaje">
+            <EntityTypeMapping TypeName="CanchaDBModel1.Mensaje">
+              <MappingFragment StoreEntitySet="Mensaje">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="visto" ColumnName="visto" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="idReceptor" ColumnName="idReceptor" />
+                <ScalarProperty Name="idPelotero" ColumnName="idPelotero" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pais">
+            <EntityTypeMapping TypeName="CanchaDBModel1.Pais">
+              <MappingFragment StoreEntitySet="Pais">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pelotero">
+            <EntityTypeMapping TypeName="CanchaDBModel1.Pelotero">
+              <MappingFragment StoreEntitySet="Pelotero">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provincia">
+            <EntityTypeMapping TypeName="CanchaDBModel1.Provincia">
+              <MappingFragment StoreEntitySet="Provincia">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SolicitudAmistad">
+            <EntityTypeMapping TypeName="CanchaDBModel1.SolicitudAmistad">
+              <MappingFragment StoreEntitySet="SolicitudAmistad">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="idReceptor" ColumnName="idReceptor" />
+                <ScalarProperty Name="idPelotero" ColumnName="idPelotero" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoUsuario">
+            <EntityTypeMapping TypeName="CanchaDBModel1.TipoUsuario">
+              <MappingFragment StoreEntitySet="TipoUsuario">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="CanchaDBModel1.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="idTipoUsuario" ColumnName="idTipoUsuario" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="nick" ColumnName="nick" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reserva">
+            <EntityTypeMapping TypeName="CanchaDBModel1.Reserva">
+              <MappingFragment StoreEntitySet="Reserva">
+                <ScalarProperty Name="horaFin" ColumnName="horaFin" />
+                <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="idCancha" ColumnName="idCancha" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

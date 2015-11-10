@@ -1,0 +1,121 @@
+﻿@*-----------Generado :D--------------*@
+@model Entidad.CentroDeportivo
+@{
+    ViewBag.Title = "Crear CentroDeportivo";
+    Layout = "~/Views/Shared/_MasterIntranet.cshtml";
+}
+@section Scripts {
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryvalidate")
+}
+<!-- Cabecera -->
+<div class="row">
+    <div class="col-lg-12">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <ul class="breadcrumb">
+                <li><a href="@Url.Content("~/Intranet/Index")">Inicio</a></li>
+                <li class="active"><a href="@Url.Content("~/CentroDeportivo/Index")">CentroDeportivos</a></li>
+            </ul>
+        </div>
+        <div class="page-header title">
+            <h1>CentroDeportivos <span class="sub-title">Crear CentroDeportivo</span></h1>
+        </div>
+        <!-- Breadcrumbs -->
+    </div>
+</div>
+<!-- Cabecera -->
+<!-- Aqui empieza el codigo del content -->
+<div class="col-md-12">
+    <div class="portlet">
+        <!-- Cabecera Tabla -->
+        <div class="portlet-heading dark">
+            <div class="portlet-title">
+                <h4>Crear CentroDeportivo</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#acordion1"><i class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- Cabecera Tabla -->
+        <!-- Cuerpo Tabla -->
+        <div id="acordion1" class="panel-collapse collapse in">
+            @using (Html.BeginForm("Create", "CentroDeportivo", FormMethod.Post))
+            {
+                <div class="portlet-body">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.direccion)
+                        @Html.TextBoxFor(m => m.direccion, new { @class = "form-control", @placeholder = "Ingrese su direccion", @maxlength = "" })
+                        @Html.ValidationMessageFor(model => model.direccion)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.telefono)
+                        @Html.TextBoxFor(m => m.telefono, new { @class = "form-control", @placeholder = "Ingrese su telefono", @maxlength = "" })
+                        @Html.ValidationMessageFor(model => model.telefono)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.celular)
+                        @Html.TextBoxFor(m => m.celular, new { @class = "form-control", @placeholder = "Ingrese su celular", @maxlength = "" })
+                        @Html.ValidationMessageFor(model => model.celular)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.idDistrito)
+                        @Html.TextBoxFor(m => m.idDistrito, new { @class = "form-control", @placeholder = "Ingrese su idDistrito", @maxlength = "" })
+                        @Html.ValidationMessageFor(model => model.idDistrito)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.nroCanchas)
+                        @Html.TextBoxFor(m => m.nroCanchas, new { @class = "form-control", @placeholder = "Ingrese su nroCanchas", @maxlength = "" })
+                        @Html.ValidationMessageFor(model => model.nroCanchas)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.balon)
+                        @Html.TextBoxFor(m => m.balon, new { @class = "form-control", @placeholder = "Ingrese su balon", @maxlength = "" })
+                        @Html.ValidationMessageFor(model => model.balon)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.camisetas)
+                        @Html.TextBoxFor(m => m.camisetas, new { @class = "form-control", @placeholder = "Ingrese su camisetas", @maxlength = "" })
+                        @Html.ValidationMessageFor(model => model.camisetas)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.idEmpresa)
+                        @Html.TextBoxFor(m => m.idEmpresa, new { @class = "form-control", @placeholder = "Ingrese su idEmpresa", @maxlength = "" })
+                        @Html.ValidationMessageFor(model => model.idEmpresa)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.nombre)
+                        @Html.TextBoxFor(m => m.nombre, new { @class = "form-control", @placeholder = "Ingrese su nombre", @maxlength = "" })
+                        @Html.ValidationMessageFor(model => model.nombre)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.foto)
+                        @Html.TextBoxFor(m => m.foto, new { @class = "form-control", @placeholder = "Ingrese su foto", @maxlength = "" })
+                        @Html.ValidationMessageFor(model => model.foto)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.latitud)
+                        @Html.TextBoxFor(m => m.latitud, new { @class = "form-control", @placeholder = "Ingrese su latitud", @maxlength = "" })
+                        @Html.ValidationMessageFor(model => model.latitud)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.longitud)
+                        @Html.TextBoxFor(m => m.longitud, new { @class = "form-control", @placeholder = "Ingrese su longitud", @maxlength = "" })
+                        @Html.ValidationMessageFor(model => model.longitud)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.activo)
+                        @Html.TextBoxFor(m => m.activo, new { @class = "form-control", @placeholder = "Ingrese su activo", @maxlength = "" })
+                        @Html.ValidationMessageFor(model => model.activo)
+                    </div>
+                    <div class="form-actions">
+                        <input type="submit" class="btn btn-primary" value="Guardar" />
+                        @Html.ActionLink("Regresar a la Lista de CentroDeportivos", "Index")
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

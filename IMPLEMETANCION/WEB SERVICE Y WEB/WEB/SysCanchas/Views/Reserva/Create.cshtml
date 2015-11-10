@@ -1,0 +1,246 @@
+﻿@*-----------Generado :D--------------*@
+@model Entidad.Reserva
+@{
+    ViewBag.Title = "Crear Reserva";
+    Layout = "~/Views/Shared/_MasterIntranet.cshtml";
+}
+
+<script type="text/javascript">
+    $(function () {
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '<Ant',
+            nextText: 'Sig>',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+
+        $('#fecha').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            minDate: new Date(),
+            dateFormat: 'yy-mm-dd'
+        });
+
+    });
+
+</script>
+<!-- Cabecera -->
+<div class="row">
+    <div class="col-lg-12">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <ul class="breadcrumb">
+                <li><a href="@Url.Content("~/Intranet/Index")">Inicio</a></li>
+                <li class="active"><a href="@Url.Content("~/Reserva/Index")">Reservas</a></li>
+            </ul>
+        </div>
+        <div class="page-header title">
+            <h1>Reservas <span class="sub-title">Crear Reserva</span></h1>
+        </div>
+        <!-- Breadcrumbs -->
+    </div>
+</div>
+<!-- Cabecera -->
+<!-- Aqui empieza el codigo del content -->
+<div class="col-md-12">
+    <div class="portlet">
+        <!-- Cabecera Tabla -->
+        <div class="portlet-heading dark">
+            <div class="portlet-title">
+                <h4>Crear Reserva</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#acordion1"><i class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- Cabecera Tabla -->
+        <!-- Cuerpo Tabla -->
+        <div id="acordion1" class="panel-collapse collapse in">
+            @using (Html.BeginForm("Create", "Reserva", FormMethod.Post, new { id = "form" }))
+            {
+                <div class="portlet-body">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.fecha)
+                        @Html.TextBoxFor(m => m.fecha, new { @class = "form-control", @placeholder = "Ingrese su fechaHora", @maxlength = "" })
+                        @Html.ValidationMessageFor(model => model.fecha)
+                    </div>                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.horaInicio)
+                                <div class="input-group timepicker">
+                                    <input id="horaInicio" name="horaInicio" class="form-control input-small" type="text"><span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.horaInicio)
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.horaFin)
+                                <div class="input-group timepicker">
+                                    <input id="horaFin" name="horaFin" class="form-control input-small" type="text"><span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                </div>
+                                @* @Html.TextBoxFor(m => m.horaSalida, new { @class = "form-control", @placeholder = "Ingrese la hora de salida", @maxlength = "5" })*@
+                                @Html.ValidationMessageFor(model => model.horaFin)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="CanchaLista"></div>
+                    </div>                    
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.activo)
+                        @Html.EditorFor(m => m.activo, new { @class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.activo)
+                    </div>
+                    <div class="form-actions">
+                        <input  type="submit" class="btn btn-primary" value="Guardar" />
+                        @Html.ActionLink("Regresar a la Lista de Reservas", "Index")
+                    </div>
+                </div>
+            }
+        </div>
+        @if (ViewBag.error != null)
+        {
+            <div class="portlet-heading bg-danger">
+                <div class="portlet-title">
+                    <h5><i class="fa fa-exclamation-triangle"></i>&nbsp; &nbsp; @ViewBag.error</h5>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        }        
+    </div>
+</div>
+<div class="clearfix"></div>
+<script>
+    $(document).ready(function () {
+        $.isLoading({ text: "Cargando Formato" });
+        $("#CanchaLista").load('/Intranet/SelectAllByEmpresaForReserva');
+        $('#horaInicio').timepicker({
+            minuteStep: 30,
+            appendWidgetTo: 'body',
+            showSeconds: false,
+            showMeridian: false,
+            defaultTime: 'current',
+            showInputs: false
+        });
+
+        var currentFech = new Date();
+        var hour = currentFech.getHours();
+        var minutes = currentFech.getMinutes();
+
+        var finCurrentHour;
+
+        if (minutes < 30) {
+            finCurrentHour = hour + 1 + ':00';
+        }
+        else {
+            finCurrentHour = hour + 1 + ':30';
+        }
+
+        $('#horaFin').timepicker({
+            minuteStep: 30,
+            appendWidgetTo: 'body',
+            showSeconds: false,
+            showMeridian: false,
+            defaultTime: finCurrentHour,            
+            showInputs: false
+        });
+        $.isLoading("hide");        
+
+        $('#fecha').change(function () {
+            var currentFecha=new Date();
+            var inputFecha = new Date($('#fecha').val());
+            if (parseInt(currentFecha.getDate()) == parseInt((inputFecha.getDate() + 1))) {
+                console.log('he regresado');
+                $('#horaInicio').timepicker('setTime', 'current');
+                $('#horaFin').timepicker('setTime', 'current');
+            }
+        });
+
+        $('#horaInicio').timepicker().on('changeTime.timepicker', function (e) {
+
+            
+            var fechaActual = new Date();
+            var fechaInput = new Date($('#fecha').val());
+            
+            if (parseInt(fechaActual.getDate()) == parseInt((fechaInput.getDate() + 1))) {
+                var horaActual = parseInt(fechaActual.getHours());
+                var minActual = parseInt(fechaActual.getMinutes());
+
+                var fechaInicio = $('#horaInicio').val();
+                var res = fechaInicio.split(":");
+
+                var horaInicio = parseInt(res[0]);
+                var minInicio = parseInt(res[1]);
+
+                if (horaInicio <= horaActual) {
+                    if (minInicio < minActual) {
+                        if (minActual <= 30) {
+                            $('#horaInicio').val(horaActual + ':30');
+                        } else {
+                            $('#horaInicio').val('' + (horaActual + 1) + ':00');
+                        }
+                    } else {
+                        if (minActual <= 30) {
+                            $('#horaInicio').val('' + horaActual + ':30');
+                        }
+                    }
+                }
+                else {
+
+                    if (minInicio < 30) {
+                        $('#horaFin').timepicker('setTime', '' + (horaInicio) + ':30');
+                    }
+                    else {
+                        $('#horaFin').timepicker('setTime', '' + (horaInicio + 1) + ':00');
+                    }
+                }
+            }
+            else {
+                
+            }                   
+                   
+        });
+
+
+        $('#horaFin').timepicker().on('changeTime.timepicker', function (e) {
+            var fechaIn = $('#horaInicio').val();
+            var res = fechaIn.split(":");
+
+            var horaInicio = parseInt(res[0]);
+            var minutoInicio = parseInt(res[1]);
+
+            var horaFin = parseInt(e.time.hours);
+            var minutoFin = parseInt(e.time.minutes);
+
+           
+            if (horaFin <= horaInicio) {
+                if (minutoInicio < 30) {
+                    $('#horaFin').val(horaInicio + ':30');
+                }
+                else {
+                    $('#horaFin').val((horaInicio+1) + ':00');
+                }                
+            }
+
+        });
+
+
+    });
+</script>

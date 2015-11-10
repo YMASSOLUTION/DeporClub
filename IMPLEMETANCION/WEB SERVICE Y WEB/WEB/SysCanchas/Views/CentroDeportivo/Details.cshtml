@@ -1,0 +1,132 @@
+﻿@*-----------Generado :D--------------*@
+@model Entidad.CentroDeportivo
+@{
+ViewBag.Title = "Detalle CentroDeportivo";
+Layout = "~/Views/Shared/_MasterIntranet.cshtml";
+}
+<!-- Cabecera -->
+<div class="row">
+<div class="col-lg-12">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<ul class="breadcrumb">
+<li><a href="@Url.Content("~/Intranet/Index")">Inicio</a></li>
+<li class="active"><a href="@Url.Content("~/CentroDeportivo/Index")">CentroDeportivos</a></li>
+</ul>
+</div>
+<div class="page-header title">
+<h1>CentroDeportivos <span class="sub-title">Detalle CentroDeportivo</span></h1>
+</div>
+<!-- Breadcrumbs -->
+</div>
+</div>
+<!-- Cabecera -->
+<!-- Aqui empieza el codigo del content -->
+<div class="portlet">
+<div class="portlet-heading dark">
+<div class="portlet-title">
+<h4>Detalle de CentroDeportivo</h4>
+</div>
+<div class="portlet-widgets">
+<a data-toggle="collapse" data-parent="#accordion" href="#acordion1"><i class="fa fa-chevron-down"></i></a>
+</div>
+<div class="clearfix"></div>
+</div>
+<div id="acordion1" class="panel-collapse collapse in">
+<div class="portlet-body">
+<div class="display-label">
+@Html.LabelFor(model => model.direccion)
+</div>
+<div class="editor-field">
+@Html.DisplayFor(model => model.direccion)
+</div>
+<div class="display-label">
+@Html.LabelFor(model => model.telefono)
+</div>
+<div class="editor-field">
+@Html.DisplayFor(model => model.telefono)
+</div>
+<div class="display-label">
+@Html.LabelFor(model => model.celular)
+</div>
+<div class="editor-field">
+@Html.DisplayFor(model => model.celular)
+</div>
+<div class="display-label">
+@Html.LabelFor(model => model.idDistrito)
+</div>
+<div class="editor-field">
+@Html.DisplayFor(model => model.idDistrito)
+</div>
+<div class="display-label">
+@Html.LabelFor(model => model.nroCanchas)
+</div>
+<div class="editor-field">
+@Html.DisplayFor(model => model.nroCanchas)
+</div>
+<div class="display-label">
+@Html.LabelFor(model => model.balon)
+</div>
+<div class="editor-field">
+@Html.DisplayFor(model => model.balon)
+</div>
+<div class="display-label">
+@Html.LabelFor(model => model.camisetas)
+</div>
+<div class="editor-field">
+@Html.DisplayFor(model => model.camisetas)
+</div>
+<div class="display-label">
+@Html.LabelFor(model => model.idEmpresa)
+</div>
+<div class="editor-field">
+@Html.DisplayFor(model => model.idEmpresa)
+</div>
+<div class="display-label">
+@Html.LabelFor(model => model.nombre)
+</div>
+<div class="editor-field">
+@Html.DisplayFor(model => model.nombre)
+</div>
+<div class="display-label">
+@Html.LabelFor(model => model.foto)
+</div>
+<div class="editor-field">
+@Html.DisplayFor(model => model.foto)
+</div>
+<div class="display-label">
+@Html.LabelFor(model => model.latitud)
+</div>
+<div class="editor-field">
+@Html.DisplayFor(model => model.latitud)
+</div>
+<div class="display-label">
+@Html.LabelFor(model => model.longitud)
+</div>
+<div class="editor-field">
+@Html.DisplayFor(model => model.longitud)
+</div>
+<div class="display-label">
+@Html.LabelFor(model => model.activo)
+</div>
+<div class="editor-field">
+@if (Model.activo)
+{
+<label class="label label-active label-lg arrowed arrowed-right">Si</label>
+}
+else
+{
+<label class="label label-terminated label-lg arrowed arrowed-right">No</label>
+}
+</div>
+<div class="form-actions">
+@using (Html.BeginForm("Edit", "CentroDeportivo", FormMethod.Post))
+{
+@Html.HiddenFor(model => model.id)
+<input type="submit" class="btn btn-primary" value="Editar" />
+ @Html.ActionLink("Regresar a la Lista", "Index")
+}
+</div>
+</div>
+</div>
+</div>
