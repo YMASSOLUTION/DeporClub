@@ -75,6 +75,9 @@ namespace Vista.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    obj.activo = true;
+                    obj.Usuario.idTipoUsuario = 2;
+                    obj.Usuario.activo = true;
                     NEmpresa.Instancia.Create(obj);
                 }
                 return RedirectToAction("Index");

@@ -26,8 +26,9 @@ namespace Entidad
         public bool activo { get; set; }
         public Nullable<System.TimeSpan> horaInicio { get; set; }
         public Nullable<System.TimeSpan> horaFin { get; set; }
+        public Nullable<System.DateTime> fecha { get; set; }
     
-        public virtual Cancha Cancha { get; set; }
+        public virtual Campo Campo { get; set; }
         public virtual ICollection<DetalleInvitados> DetalleInvitados { get; set; }
         public virtual Usuario Usuario { get; set; }
     }

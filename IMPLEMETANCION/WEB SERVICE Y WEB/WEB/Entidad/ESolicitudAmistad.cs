@@ -14,6 +14,6 @@ namespace Entidad
         public int idPelotero { get; set; }
         public int idReceptor { get; set; }
         public string estado { get; set; }
-        public Pelotero Pelotero { get; set; }
+        public EDeportista Pelotero { get; set; }
     }
 }

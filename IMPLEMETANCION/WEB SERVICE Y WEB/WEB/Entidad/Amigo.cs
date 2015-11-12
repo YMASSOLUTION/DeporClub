@@ -15,10 +15,10 @@ namespace Entidad
     public partial class Amigo
     {
         public int id { get; set; }
-        public int idPelotero { get; set; }
+        public int idDeportista { get; set; }
         public int idAmigo { get; set; }
     
-        public virtual Pelotero Pelotero { get; set; }
-        public virtual Pelotero Pelotero1 { get; set; }
+        public virtual Deportista Deportista { get; set; }
+        public virtual Deportista Deportista1 { get; set; }
     }
 }

@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="DAmigo.cs" />
-    <Compile Include="DCancha.cs" />
+    <Compile Include="DCampo.cs" />
     <Compile Include="DCentroDeportivo.cs" />
     <Compile Include="DCentroDeportivoCancha.cs" />
     <Compile Include="DDepartamento.cs" />
@@ -58,7 +58,7 @@
     <Compile Include="DDistrito.cs" />
     <Compile Include="DEmpresa.cs" />
     <Compile Include="DMensaje.cs" />
-    <Compile Include="DPelotero.cs" />
+    <Compile Include="DDeportista.cs" />
     <Compile Include="DProvincia.cs" />
     <Compile Include="DReserva.cs" />
     <Compile Include="DSolicitudAmistad.cs" />

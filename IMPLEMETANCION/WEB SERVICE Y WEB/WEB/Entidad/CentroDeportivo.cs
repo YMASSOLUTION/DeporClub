@@ -16,7 +16,7 @@ namespace Entidad
     {
         public CentroDeportivo()
         {
-            this.CentroDeportivoCancha = new HashSet<CentroDeportivoCancha>();
+            this.CentroDeportivoCampo = new HashSet<CentroDeportivoCampo>();
         }
     
         public int id { get; set; }
@@ -36,6 +36,6 @@ namespace Entidad
     
         public virtual Distrito Distrito { get; set; }
         public virtual Empresa Empresa { get; set; }
-        public virtual ICollection<CentroDeportivoCancha> CentroDeportivoCancha { get; set; }
+        public virtual ICollection<CentroDeportivoCampo> CentroDeportivoCampo { get; set; }
     }
 }

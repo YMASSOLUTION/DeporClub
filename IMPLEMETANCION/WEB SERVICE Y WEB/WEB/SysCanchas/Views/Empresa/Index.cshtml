@@ -27,6 +27,20 @@
 <div class="row">
     <div class="col-lg-12">
         <!-- Aqui empieza el codigo del buscador -->
+        <div class="col-md-4 col-md-offset-8">
+            @using (Html.BeginForm("Index", "Empresa", FormMethod.Get, new { id = "FrmBusca" }))
+            {
+                <div class="input-group">
+                    @Html.TextBox("busqueda", ViewBag.filtro as string, new { @class = "form-control search-query", placeholder = "Busqueda por idDeportista" })
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary" id="btnBusca">
+                            <i class="fa fa-search icon-only"></i>
+                        </button>
+                    </span>
+                </div>
+            }
+        </div>
+        <!-- Aqui termina el codigo del buscador -->
         <div class="clearfix">&nbsp;</div>
         <div class="portlet">
             <div class="portlet-heading dark">
@@ -48,16 +62,10 @@
                     <table class="table table-bordered table-hover tc-table">
                         <thead>
                             <tr>
-                                <th>@Html.ActionLink("Nombre", "Index", new { orden = ViewBag.nombreOrden, filtro = ViewBag.filtro })</th>
-                                <th class="hidden-xs">@Html.ActionLink("Usuario", "Index", new { orden = ViewBag.idUsuarioOrden, filtro = ViewBag.filtro })</th>
-                                <th class="hidden-xs">@Html.ActionLink("Direccion", "Index", new { orden = ViewBag.direccionOrden, filtro = ViewBag.filtro })</th>                                
-                                <th class="hidden-xs">@Html.ActionLink("Telefono", "Index", new { orden = ViewBag.telefonoOrden, filtro = ViewBag.filtro })</th>
-                                <th class="hidden-xs">@Html.ActionLink("Celular", "Index", new { orden = ViewBag.celularOrden, filtro = ViewBag.filtro })</th>
-                                <th class="hidden-xs">@Html.ActionLink("Numero de Canchas", "Index", new { orden = ViewBag.numeroCanchasOrden, filtro = ViewBag.filtro })</th>
-                                <th class="hidden-xs">@Html.ActionLink("Uniformes", "Index", new { orden = ViewBag.uniformesOrden, filtro = ViewBag.filtro })</th>
-                                <th class="hidden-xs">@Html.ActionLink("Balon", "Index", new { orden = ViewBag.balonOrden, filtro = ViewBag.filtro })</th>
-                                <th class="hidden-xs">@Html.ActionLink("Activo", "Index", new { orden = ViewBag.activoOrden, filtro = ViewBag.filtro })</th>
-                                <th class="hidden-xs">@Html.ActionLink("Distrito", "Index", new { orden = ViewBag.idDistritoOrden, filtro = ViewBag.filtro })</th>
+                                <th>@Html.ActionLink("nombre", "Index", new { orden = ViewBag.nombreOrden, filtro = ViewBag.filtro })</th>
+                                <th class="hidden-xs">@Html.ActionLink("idUsuario", "Index", new { orden = ViewBag.idUsuarioOrden, filtro = ViewBag.filtro })</th>
+                                <th class="hidden-xs">@Html.ActionLink("direccion", "Index", new { orden = ViewBag.direccionOrden, filtro = ViewBag.filtro })</th>
+                                <th class="hidden-xs">@Html.ActionLink("activo", "Index", new { orden = ViewBag.activoOrden, filtro = ViewBag.filtro })</th>
                                 <th class="col-medium center">Acci&oacute;n</th>
                             </tr>
                         </thead>
@@ -69,43 +77,33 @@
                                     <tr>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.nombre)
-                                            
+                                            <ul class="table-mobile-ul visible-xs list-unstyled">
+                                                <li>
+                                                    @Html.LabelFor(modelItem => item.Usuario.nick)
+                                                    @Html.DisplayFor(modelItem => item.Usuario.nick)
+                                                </li>
+                                                <li>
+                                                    @Html.LabelFor(modelItem => item.direccion)
+                                                    @Html.DisplayFor(modelItem => item.direccion)
+                                                </li>
+                                                <li>
+                                                    @Html.LabelFor(modelItem => item.activo)
+                                                    @if (item.activo)
+                                                    {
+                                                        <label class="label label-active label-lg arrowed arrowed-right">Si</label>
+                                                    }
+                                                    else
+                                                    {
+                                                        <label class="label label-terminated label-lg arrowed arrowed-right">No</label>
+                                                    }
+                                                </li>
+                                            </ul>
                                         </td>
                                         <td class="hidden-xs">
                                             @Html.DisplayFor(modelItem => item.Usuario.nick)
                                         </td>
                                         <td class="hidden-xs">
                                             @Html.DisplayFor(modelItem => item.direccion)
-                                        </td>
-                                        
-                                        <td class="hidden-xs">
-                                            @Html.DisplayFor(modelItem => item.telefono)
-                                        </td>
-                                        <td class="hidden-xs">
-                                            @Html.DisplayFor(modelItem => item.celular)
-                                        </td>
-                                        <td class="hidden-xs">
-                                            @Html.DisplayFor(modelItem => item.numeroCanchas)
-                                        </td>
-                                        <td class="hidden-xs">
-                                            @if (item.uniformes)
-                                            {
-                                                <label class="label label-active label-lg arrowed arrowed-right">Si</label>
-                                            }
-                                            else
-                                            {
-                                                <label class="label label-terminated label-lg arrowed arrowed-right">No</label>
-                                            }
-                                        </td>
-                                        <td class="hidden-xs">
-                                            @if (item.balon)
-                                            {
-                                                <label class="label label-active label-lg arrowed arrowed-right">Si</label>
-                                            }
-                                            else
-                                            {
-                                                <label class="label label-terminated label-lg arrowed arrowed-right">No</label>
-                                            }
                                         </td>
                                         <td class="hidden-xs">
                                             @if (item.activo)
@@ -117,15 +115,11 @@
                                                 <label class="label label-terminated label-lg arrowed arrowed-right">No</label>
                                             }
                                         </td>
-                                        <td class="hidden-xs">
-                                            @Html.DisplayFor(modelItem => item.Distrito.nombre)
-                                        </td>
                                         <td class="col-medium center">
                                             <div class="ui-group-buttons">
                                                 @using (Html.BeginForm("Details", "Empresa", FormMethod.Post, new { @class = "inline" }))
                                                 {
                                                     <input type="hidden" name="id" value="@item.id" />
-                                                    
                                                     <a class="btnEdit btn btn-info">
                                                         <i class="fa fa-search icon-only"></i>
                                                     </a>
@@ -138,9 +132,9 @@
                                                         <i class="fa fa-edit icon-only"></i>
                                                     </a>
                                                     <div class="or"></div>
-                                                <a class="btnDelete btn btn-danger inline" data-iddelete="@item.id" data-iddeleteu="@item.idUsuario">
-                                                 <i class="fa fa-trash icon-only"></i>
-                                                </a>
+                                                    <a class="btnDelete btn btn-danger inline" data-iddelete="@item.id">
+                                                        <i class="fa fa-trash icon-only"></i>
+                                                    </a>
                                                 }
                                             </div>
                                         </td>
@@ -150,7 +144,7 @@
                             else
                             {
                                 <tr>
-                                    <td colspan="79">
+                                    <td colspan="87">
                                         No se encontraron resultados
                                     </td>
                                 </tr>
@@ -181,7 +175,6 @@
         });
         $(".btnDelete").click(function () {
             var miid = $(this).attr("data-iddelete");
-            var miidu = $(this).attr("data-iddeleteu");
             swal({
                 title: "Eliminar Empresa",
                 text: "Seguro que quieres eliminar esta Empresa?",
@@ -200,7 +193,7 @@
                         type: "POST",
                         url: '/Empresa/DeleteConfirmed',
                         data: {
-                            id: miid, idu: miidu
+                            id: miid,
                         },
                         success: function (data) {
                             // Realizar algo cuando la llamada es exitosa

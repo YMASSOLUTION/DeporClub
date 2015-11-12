@@ -21,7 +21,7 @@ namespace Entidad
         public int idReceptor { get; set; }
         public string estado { get; set; }
     
-        public virtual Pelotero Pelotero { get; set; }
-        public virtual Pelotero Pelotero1 { get; set; }
+        public virtual Deportista Deportista { get; set; }
+        public virtual Deportista Deportista1 { get; set; }
     }
 }

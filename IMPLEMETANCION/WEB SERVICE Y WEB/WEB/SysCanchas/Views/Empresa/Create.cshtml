@@ -49,54 +49,15 @@
                         @Html.LabelFor(model => model.nombre)
                         @Html.TextBoxFor(m => m.nombre, new { @class = "form-control", @placeholder = "Ingrese su nombre", @maxlength = "" })
                         @Html.ValidationMessageFor(model => model.nombre)
-                    </div>                    
+                    </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.direccion)
                         @Html.TextBoxFor(m => m.direccion, new { @class = "form-control", @placeholder = "Ingrese su direccion", @maxlength = "" })
                         @Html.ValidationMessageFor(model => model.direccion)
-                    </div>                    
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.telefono)
-                        @Html.TextBoxFor(m => m.telefono, new { @class = "form-control", @placeholder = "Ingrese su telefono", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.telefono)
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.celular)
-                        @Html.TextBoxFor(m => m.celular, new { @class = "form-control", @placeholder = "Ingrese su celular", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.celular)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.numeroCanchas)
-                        @Html.TextBoxFor(m => m.numeroCanchas, new { @class = "form-control", @placeholder = "Ingrese su numeroCanchas", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.numeroCanchas)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.uniformes)
-                        @Html.EditorFor(m => m.uniformes, new { @class = "form-control", @placeholder = "Ingrese su uniformes", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.uniformes)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.balon)
-                        @Html.EditorFor(m => m.balon, new { @class = "form-control", @placeholder = "Ingrese su balon", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.balon)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.activo)
-                        @Html.EditorFor(m => m.activo, new { @class = "form-control", @placeholder = "Ingrese su activo", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.activo)
-                    </div>
-                    <div class="form-group">
-                        <div id="DepartamentoLista"></div>
-                    </div>
-                    <div class="form-group">
-                        <div id="ProvinciaLista"></div>
-                    </div>
-                    <div class="form-group">
-                        <div id="DistritoLista"></div>
-                    </div>                    
                     <div class="form-group">
                         @Html.LabelFor(model => model.Usuario.nick)
-                        @Html.TextBoxFor(m => m.Usuario.nick, new { @class = "form-control", @placeholder = "Ingrese el usuario", @autocomplete="off" })
+                        @Html.TextBoxFor(m => m.Usuario.nick, new { @class = "form-control", @placeholder = "Ingrese el usuario", @autocomplete = "off" })
                         @Html.ValidationMessageFor(model => model.Usuario.nick)
                     </div>
                     <div class="form-group">
@@ -104,34 +65,13 @@
                         @Html.PasswordFor(m => m.Usuario.clave, new { @class = "form-control", @placeholder = "Ingrese la clave", @autocomplete = "off" })
                         @Html.ValidationMessageFor(model => model.Usuario.clave)
                     </div>
-
+                    
                     <div class="form-actions">
                         <input type="submit" class="btn btn-primary" value="Guardar" />
                         @Html.ActionLink("Regresar a la Lista de Empresas", "Index")
                     </div>
                 </div>
             }
-        </div>        
+        </div>
     </div>
-    
 </div>
-<div class="clearfix">&nbsp;</div>
-<script>
-    $(document).ready(function () {
-        $.isLoading({ text: "Cargando Formato" });
-        $("#DepartamentoLista").load('/Intranet/DepartamentoLista?isActivo=true', function () {
-            $("#ProvinciaLista").load('/Intranet/ProvinciabyDepartamento?idDepartamento=-1');
-            $("#DistritoLista").load('/Intranet/DistritobyProvincia?idProvincia=-1');
-            $.isLoading("hide");
-            $('#cboDepartamento').change(function () {
-                var idDepartamento = this.value;
-                $("#ProvinciaLista").load('/Intranet/ProvinciabyDepartamento?idDepartamento=' + idDepartamento + '', function () {
-                    $('#cboProvincia').change(function () {
-                        var idProvincia = this.value;
-                        $("#DistritoLista").load('/Intranet/DistritobyProvincia?idProvincia=' + idProvincia + '');
-                    });
-                });
-            });
-        });
-    });
-</script>

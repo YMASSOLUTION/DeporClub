@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Author: Dev Peru 
 // Generado el Dia: 2015_noviembre_09 - 19_41_03 
-//-------------------------  ENTIDAD Empresa  ----------------------------------------
+//-------------------------  ENTIDAD Campo  ----------------------------------------
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
@@ -10,25 +10,25 @@ using System.Text;
 using Entidad;
 namespace AccesoDatos
 {
-    public class DEmpresa
+    public class DCampo
     {
-        private static DEmpresa _instancia;
-        public static DEmpresa Instancia
+        private static DCampo _instancia;
+        public static DCampo Instancia
         {
             get
             {
-                if (_instancia == null) _instancia = new DEmpresa();
+                if (_instancia == null) _instancia = new DCampo();
                 return _instancia;
             }
         }
-        protected DEmpresa() { }
+        protected DCampo() { }
         private CanchaDBEntities1 db = new CanchaDBEntities1();
         #region creacion del CRUD
-        public bool Create(Empresa obj)
+        public bool Create(Campo obj)
         {
             try
             {
-                db.Empresa.Add(obj);
+                db.Campo.Add(obj);
                 db.SaveChanges();
                 return true;
             }
@@ -37,14 +37,15 @@ namespace AccesoDatos
                 return false;
             }
         }
-        public bool Edit(Empresa objEmpresa)
+        public bool Edit(Campo objCampo)
         {
-            Empresa obj = db.Empresa.Find(objEmpresa.id);
-            obj.id = objEmpresa.id;
-            obj.nombre = objEmpresa.nombre;
-            obj.idUsuario = objEmpresa.idUsuario;
-            obj.direccion = objEmpresa.direccion;
-            obj.activo = objEmpresa.activo;
+            Campo obj = db.Campo.Find(objCampo.id);
+            obj.id = objCampo.id;
+            obj.largo = objCampo.largo;
+            obj.ancho = objCampo.ancho;
+            obj.precio = objCampo.precio;
+            obj.activo = objCampo.activo;
+            obj.tipoCampo = objCampo.tipoCampo;
             try
             {
                 db.SaveChanges();
@@ -55,11 +56,11 @@ namespace AccesoDatos
                 return false;
             }
         }
-        public Empresa Details(int id)
+        public Campo Details(int id)
         {
             try
             {
-                Empresa obj = db.Empresa.Find(id);
+                Campo obj = db.Campo.Find(id);
                 if (obj == null)
                 {
                     return null;
@@ -76,7 +77,7 @@ namespace AccesoDatos
             try
             {
                 string query = string.Empty;
-                query = "delete Empresa where id=" + id;
+                query = "delete Campo where id=" + id;
                 db.Database.ExecuteSqlCommand(query);
                 db.SaveChanges();
                 return true;
@@ -90,7 +91,7 @@ namespace AccesoDatos
         {
             try
             {
-                var obj = db.Empresa.Find(id);
+                var obj = db.Campo.Find(id);
                 obj.activo = false;
                 if (db.SaveChanges() > 0)
                 {
@@ -103,21 +104,36 @@ namespace AccesoDatos
                 return false;
             }
         }
-        public List<Empresa> SelectAll()
+        public List<Campo> SelectAll()
         {
-            List<Empresa> lista = db.Empresa.ToList();
+            List<Campo> lista = db.Campo.ToList();
             return lista;
         }
-        public List<Empresa> SelectAllActivo()
+        public List<Campo> SelectAllActivo()
         {
-            List<Empresa> lista = db.Empresa.Where(a => a.activo == true && a.id!=3).ToList();
+            List<Campo> lista = db.Campo.Where(a => a.activo == true).ToList();
             return lista;
         }
         #endregion
 
-        public bool DeleteConfirmed(int id, int idu)
+        public List<Campo> SelectAllByEmpresa(int idEmpresa)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Campo> SelectAllByEmpresaForReserva(int idEmpresa)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Campo> SelectAllByEmpresaForEditReserva(int idEmpresa)
+        {
+            throw new NotImplementedException();
+        }
+        public List<CentroDeportivoCampo> SelectAllbyCentroDeportivo(int idCentroDeportivo)
+        {
+            List<CentroDeportivoCampo> lista = db.CentroDeportivoCampo.Where(a => a.idCentroDeportivo == idCentroDeportivo).ToList();
+            return lista;
         }
     }
 }

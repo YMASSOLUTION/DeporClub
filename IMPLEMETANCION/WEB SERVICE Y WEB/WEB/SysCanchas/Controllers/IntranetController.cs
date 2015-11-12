@@ -102,16 +102,29 @@ namespace SysCanchas.Controllers
         }
 
         public ActionResult SelectAllCanchaActivo() {
-            return View("_ListaCanchaPartial",NCancha.Instancia.SelectAllActivo());
+            return View("_ListaCanchaPartial",NCampo.Instancia.SelectAllActivo());
         }
 
         public ActionResult SelectAllByEmpresaForReserva() {
-            return View("_ListaCanchaPartial", NCancha.Instancia.SelectAllByEmpresaForReserva((int)Session["idEmpresa"]));
+            return View("_ListaCanchaPartial", NCampo.Instancia.SelectAllByEmpresaForReserva((int)Session["idEmpresa"]));
         }
 
         public ActionResult SelectAllByEmpresaForEditReserva()
         {
-            return View("_ListaCanchaPartial", NCancha.Instancia.SelectAllByEmpresaForEditReserva((int)Session["idEmpresa"]));
+            return View("_ListaCanchaPartial", NCampo.Instancia.SelectAllByEmpresaForEditReserva((int)Session["idEmpresa"]));
+        }
+        public ActionResult SelectCentroDeportivobyEmpresa(int idEmpresa)
+        {
+            return View("_ListaCentroDeportivoPartial", NCentroDeportivo.Instancia.SelectAllbyEmpresa(idEmpresa));
+        }
+
+        public ActionResult CampobyCentroDeportivo(int idCentroDeportivo)
+        {
+            if (idCentroDeportivo==-1)
+            {
+                return View("_ListaCampoPartial",null);
+            }
+            return View("_ListaCampoPartial", NCampo.Instancia.SelectAllbyCentroDeportivo(idCentroDeportivo));
         }
               
     }

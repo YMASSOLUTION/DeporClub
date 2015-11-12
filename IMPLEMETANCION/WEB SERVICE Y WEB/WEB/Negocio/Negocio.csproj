@@ -41,14 +41,14 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="NAmigo.cs" />
-    <Compile Include="NCancha.cs" />
+    <Compile Include="NCampo.cs" />
     <Compile Include="NCentroDeportivo.cs" />
     <Compile Include="NDepartamento.cs" />
     <Compile Include="NDetalleInvitados.cs" />
     <Compile Include="NDistrito.cs" />
     <Compile Include="NEmpresa.cs" />
     <Compile Include="NMensaje.cs" />
-    <Compile Include="NPelotero.cs" />
+    <Compile Include="NDeportista.cs" />
     <Compile Include="NProvincia.cs" />
     <Compile Include="NReserva.cs" />
     <Compile Include="NSolicitudAmistad.cs" />

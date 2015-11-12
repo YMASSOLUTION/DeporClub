@@ -10,6 +10,7 @@ namespace Negocio
     public class NCentroDeportivo
     {
         private static NCentroDeportivo _instancia;
+        
         public static NCentroDeportivo Instancia
         {
             get
@@ -82,5 +83,15 @@ namespace Negocio
         {
             return DCentroDeportivo.Instancia.SelectAllActivo();
         }
+        public List<CentroDeportivo> SelectAllbyEmpresa(int idEmpresa)
+        {
+            return DCentroDeportivo.Instancia.SelectAllbyEmpresa(idEmpresa);
+        }
+
+        public List<CentroDeportivoCampo> SelectAllByCentroDeportivo(int idCentroDeportivo) {
+
+            return DCentroDeportivoCampo.Instancia.SelectAllByCentroDeportivo(idCentroDeportivo);
+        }
+
     }
 }

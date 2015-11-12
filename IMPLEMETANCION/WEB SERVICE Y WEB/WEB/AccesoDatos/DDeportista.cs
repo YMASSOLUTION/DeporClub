@@ -1,7 +1,7 @@
-//------------------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------
 // Author: Dev Peru 
-// Generado el Dia: 2015_noviembre_09 - 19_41_03 
-//-------------------------  ENTIDAD Empresa  ----------------------------------------
+// Generado el Dia: 2015_noviembre_11 - 13_48_39 
+//-------------------------  ENTIDAD Deportista  ----------------------------------------
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
@@ -10,25 +10,25 @@ using System.Text;
 using Entidad;
 namespace AccesoDatos
 {
-    public class DEmpresa
+    public class DDeportista
     {
-        private static DEmpresa _instancia;
-        public static DEmpresa Instancia
+        private static DDeportista _instancia;
+        public static DDeportista Instancia
         {
             get
             {
-                if (_instancia == null) _instancia = new DEmpresa();
+                if (_instancia == null) _instancia = new DDeportista();
                 return _instancia;
             }
         }
-        protected DEmpresa() { }
+        protected DDeportista() { }
         private CanchaDBEntities1 db = new CanchaDBEntities1();
         #region creacion del CRUD
-        public bool Create(Empresa obj)
+        public bool Create(Deportista obj)
         {
             try
             {
-                db.Empresa.Add(obj);
+                db.Deportista.Add(obj);
                 db.SaveChanges();
                 return true;
             }
@@ -37,14 +37,16 @@ namespace AccesoDatos
                 return false;
             }
         }
-        public bool Edit(Empresa objEmpresa)
+        public bool Edit(Deportista objDeportista)
         {
-            Empresa obj = db.Empresa.Find(objEmpresa.id);
-            obj.id = objEmpresa.id;
-            obj.nombre = objEmpresa.nombre;
-            obj.idUsuario = objEmpresa.idUsuario;
-            obj.direccion = objEmpresa.direccion;
-            obj.activo = objEmpresa.activo;
+            Deportista obj = db.Deportista.Find(objDeportista.id);
+            obj.id = objDeportista.id;
+            obj.nombre = objDeportista.nombre;
+            obj.apellidos = objDeportista.apellidos;
+            obj.idUsuario = objDeportista.idUsuario;
+            obj.celular = objDeportista.celular;
+            obj.email = objDeportista.email;
+            obj.activo = objDeportista.activo;
             try
             {
                 db.SaveChanges();
@@ -55,11 +57,11 @@ namespace AccesoDatos
                 return false;
             }
         }
-        public Empresa Details(int id)
+        public Deportista Details(int id)
         {
             try
             {
-                Empresa obj = db.Empresa.Find(id);
+                Deportista obj = db.Deportista.Find(id);
                 if (obj == null)
                 {
                     return null;
@@ -76,7 +78,7 @@ namespace AccesoDatos
             try
             {
                 string query = string.Empty;
-                query = "delete Empresa where id=" + id;
+                query = "delete Deportista where id=" + id;
                 db.Database.ExecuteSqlCommand(query);
                 db.SaveChanges();
                 return true;
@@ -90,7 +92,7 @@ namespace AccesoDatos
         {
             try
             {
-                var obj = db.Empresa.Find(id);
+                var obj = db.Deportista.Find(id);
                 obj.activo = false;
                 if (db.SaveChanges() > 0)
                 {
@@ -103,19 +105,29 @@ namespace AccesoDatos
                 return false;
             }
         }
-        public List<Empresa> SelectAll()
+        public List<Deportista> SelectAll()
         {
-            List<Empresa> lista = db.Empresa.ToList();
+            List<Deportista> lista = db.Deportista.ToList();
             return lista;
         }
-        public List<Empresa> SelectAllActivo()
+        public List<Deportista> SelectAllActivo()
         {
-            List<Empresa> lista = db.Empresa.Where(a => a.activo == true && a.id!=3).ToList();
+            List<Deportista> lista = db.Deportista.Where(a => a.activo == true).ToList();
             return lista;
         }
         #endregion
 
-        public bool DeleteConfirmed(int id, int idu)
+        public List<Deportista> SelectAll(string nombre, int idDeportista)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool solicitudAmistad(int idDeportista, int idReceptor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool responderSolicitudAmistad(int idDeportista, int idSolicitante, string respuesta)
         {
             throw new NotImplementedException();
         }

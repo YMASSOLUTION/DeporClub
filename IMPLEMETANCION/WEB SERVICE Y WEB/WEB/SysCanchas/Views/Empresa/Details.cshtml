@@ -35,69 +35,25 @@
     <div id="acordion1" class="panel-collapse collapse in">
         <div class="portlet-body">
             <div class="display-label">
-                <label for="nombre">Nombre</label>                
+                @Html.LabelFor(model => model.nombre)
             </div>
             <div class="editor-field">
                 @Html.DisplayFor(model => model.nombre)
             </div>
             <div class="display-label">
-                <label for="nombre">Usuario</label> 
+                @Html.LabelFor(model => model.Usuario.nick)
             </div>
             <div class="editor-field">
                 @Html.DisplayFor(model => model.Usuario.nick)
             </div>
             <div class="display-label">
-                <label for="nombre">Direccion</label> 
+                @Html.LabelFor(model => model.direccion)
             </div>
             <div class="editor-field">
                 @Html.DisplayFor(model => model.direccion)
-            </div>           
-            <div class="display-label">
-                <label for="nombre">Telefono</label> 
-            </div>
-            <div class="editor-field">
-                @Html.DisplayFor(model => model.telefono)
             </div>
             <div class="display-label">
-                <label for="nombre">Celular</label> 
-            </div>
-            <div class="editor-field">
-                @Html.DisplayFor(model => model.celular)
-            </div>
-            <div class="display-label">
-                <label for="nombre">Número de Canchas</label> 
-            </div>
-            <div class="editor-field">
-                @Html.DisplayFor(model => model.numeroCanchas)
-            </div>
-            <div class="display-label">
-                <label for="nombre">Tiene Uniformes?</label> 
-            </div>
-            <div class="editor-field">
-                @if (Model.uniformes)
-                {
-                    <label class="label label-active label-lg arrowed arrowed-right">Si</label>
-                }
-                else
-                {
-                    <label class="label label-terminated label-lg arrowed arrowed-right">No</label>
-                }
-            </div>
-            <div class="display-label">
-                <label for="nombre">Tiene Balon?</label> 
-            </div>
-            <div class="editor-field">
-                @if (Model.balon)
-                {
-                    <label class="label label-active label-lg arrowed arrowed-right">Si</label>
-                }
-                else
-                {
-                    <label class="label label-terminated label-lg arrowed arrowed-right">No</label>
-                }
-            </div>
-            <div class="display-label">
-                <label for="nombre">Activo</label> 
+                @Html.LabelFor(model => model.activo)
             </div>
             <div class="editor-field">
                 @if (Model.activo)
@@ -108,12 +64,6 @@
                 {
                     <label class="label label-terminated label-lg arrowed arrowed-right">No</label>
                 }
-            </div>
-            <div class="display-label">
-                <label for="nombre">Distrito</label> 
-            </div>
-            <div class="editor-field">
-                @Html.DisplayFor(model => model.Distrito.nombre)
             </div>
             <div class="form-actions">
                 @using (Html.BeginForm("Edit", "Empresa", FormMethod.Post))

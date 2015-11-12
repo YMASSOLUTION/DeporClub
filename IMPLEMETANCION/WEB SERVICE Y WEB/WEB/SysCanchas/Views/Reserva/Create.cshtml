@@ -4,7 +4,6 @@
     ViewBag.Title = "Crear Reserva";
     Layout = "~/Views/Shared/_MasterIntranet.cshtml";
 }
-
 <script type="text/javascript">
     $(function () {
         $.datepicker.regional['es'] = {
@@ -75,10 +74,16 @@
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
                     <div class="form-group">
+                        <div id="CentroDeportivoList"></div>
+                    </div>
+                    <div class="form-group">
+                        <div id="CampoList"></div>
+                    </div>
+                    <div class="form-group">
                         @Html.LabelFor(model => model.fecha)
                         @Html.TextBoxFor(m => m.fecha, new { @class = "form-control", @placeholder = "Ingrese su fechaHora", @maxlength = "" })
                         @Html.ValidationMessageFor(model => model.fecha)
-                    </div>                    
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -99,17 +104,14 @@
                                 @Html.ValidationMessageFor(model => model.horaFin)
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div id="CanchaLista"></div>
-                    </div>                    
+                    </div>                   
                     <div class="form-group">
                         @Html.LabelFor(model => model.activo)
-                        @Html.EditorFor(m => m.activo, new { @class = "form-control"})
+                        @Html.EditorFor(m => m.activo, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.activo)
                     </div>
                     <div class="form-actions">
-                        <input  type="submit" class="btn btn-primary" value="Guardar" />
+                        <input type="submit" class="btn btn-primary" value="Guardar" />
                         @Html.ActionLink("Regresar a la Lista de Reservas", "Index")
                     </div>
                 </div>
@@ -123,16 +125,23 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
-        }        
+        }
     </div>
 </div>
 <div class="clearfix"></div>
 <script>
     $(document).ready(function () {
         $.isLoading({ text: "Cargando Formato" });
-        $("#CanchaLista").load('/Intranet/SelectAllByEmpresaForReserva');
+        $("#CentroDeportivoList").load('/Intranet/SelectCentroDeportivobyEmpresa?idEmpresa=@ViewBag.idEmpresa', function () {
+            $("#CampoList").load('/Intranet/CampobyCentroDeportivo?idCentroDeportivo=-1');
+            $('#cboCentroDeportivo').change(function () {
+                var idCliente = this.value;
+                $("#CampoList").load('/Intranet/CampobyCentroDeportivo?idCentroDeportivo=' + idCliente + '');
+            });
+        });
+        //ViewBag.idEmpresa
         $('#horaInicio').timepicker({
-            minuteStep: 30,
+            minuteStep: 60,
             appendWidgetTo: 'body',
             showSeconds: false,
             showMeridian: false,
@@ -146,25 +155,19 @@
 
         var finCurrentHour;
 
-        if (minutes < 30) {
-            finCurrentHour = hour + 1 + ':00';
-        }
-        else {
-            finCurrentHour = hour + 1 + ':30';
-        }
 
         $('#horaFin').timepicker({
-            minuteStep: 30,
+            minuteStep: 60,
             appendWidgetTo: 'body',
             showSeconds: false,
             showMeridian: false,
-            defaultTime: finCurrentHour,            
+            defaultTime: finCurrentHour,
             showInputs: false
         });
-        $.isLoading("hide");        
+        $.isLoading("hide");
 
         $('#fecha').change(function () {
-            var currentFecha=new Date();
+            var currentFecha = new Date();
             var inputFecha = new Date($('#fecha').val());
             if (parseInt(currentFecha.getDate()) == parseInt((inputFecha.getDate() + 1))) {
                 console.log('he regresado');
@@ -174,70 +177,19 @@
         });
 
         $('#horaInicio').timepicker().on('changeTime.timepicker', function (e) {
-
-            
             var fechaActual = new Date();
             var fechaInput = new Date($('#fecha').val());
-            
-            if (parseInt(fechaActual.getDate()) == parseInt((fechaInput.getDate() + 1))) {
-                var horaActual = parseInt(fechaActual.getHours());
-                var minActual = parseInt(fechaActual.getMinutes());
 
-                var fechaInicio = $('#horaInicio').val();
-                var res = fechaInicio.split(":");
-
-                var horaInicio = parseInt(res[0]);
-                var minInicio = parseInt(res[1]);
-
-                if (horaInicio <= horaActual) {
-                    if (minInicio < minActual) {
-                        if (minActual <= 30) {
-                            $('#horaInicio').val(horaActual + ':30');
-                        } else {
-                            $('#horaInicio').val('' + (horaActual + 1) + ':00');
-                        }
-                    } else {
-                        if (minActual <= 30) {
-                            $('#horaInicio').val('' + horaActual + ':30');
-                        }
-                    }
-                }
-                else {
-
-                    if (minInicio < 30) {
-                        $('#horaFin').timepicker('setTime', '' + (horaInicio) + ':30');
-                    }
-                    else {
-                        $('#horaFin').timepicker('setTime', '' + (horaInicio + 1) + ':00');
-                    }
-                }
-            }
-            else {
-                
-            }                   
-                   
         });
-
 
         $('#horaFin').timepicker().on('changeTime.timepicker', function (e) {
             var fechaIn = $('#horaInicio').val();
             var res = fechaIn.split(":");
-
             var horaInicio = parseInt(res[0]);
             var minutoInicio = parseInt(res[1]);
-
             var horaFin = parseInt(e.time.hours);
             var minutoFin = parseInt(e.time.minutes);
 
-           
-            if (horaFin <= horaInicio) {
-                if (minutoInicio < 30) {
-                    $('#horaFin').val(horaInicio + ':30');
-                }
-                else {
-                    $('#horaFin').val((horaInicio+1) + ':00');
-                }                
-            }
 
         });
 

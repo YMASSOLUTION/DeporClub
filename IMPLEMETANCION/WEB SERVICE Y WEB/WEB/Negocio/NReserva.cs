@@ -26,19 +26,19 @@ namespace Negocio
             try
             {
                 bool aptoParaReserva=true;
-
-                List<Reserva> listilla = DReserva.Instancia.SelectReservaByCanchaAndFecha(obj.fechaHora,obj.idCancha);
-                foreach(var item in listilla){
-                    if (item.horaInicio == obj.horaInicio)
-                    {
-                        aptoParaReserva = false;
-                        break;
-                    }
-                    if (item.horaFin == obj.horaFin) {
-                        aptoParaReserva = false;
-                        break;
-                    }
-                }
+                obj.fechaHora = DateTime.Now;
+                //List<Reserva> listilla = DReserva.Instancia.SelectReservaByCanchaAndFecha(obj.fechaHora,obj.idCancha);
+                //foreach(var item in listilla){
+                //    if (item.horaInicio == obj.horaInicio)
+                //    {
+                //        aptoParaReserva = false;
+                //        break;
+                //    }
+                //    if (item.horaFin == obj.horaFin) {
+                //        aptoParaReserva = false;
+                //        break;
+                //    }
+                //}
 
                 if (aptoParaReserva)
                 {

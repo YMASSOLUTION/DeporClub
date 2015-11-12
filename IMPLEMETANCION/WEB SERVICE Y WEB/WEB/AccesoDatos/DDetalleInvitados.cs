@@ -41,7 +41,7 @@ namespace AccesoDatos
         {
             DetalleInvitados obj = db.DetalleInvitados.Find(objDetalleInvitados.id);
             obj.id = objDetalleInvitados.id;
-            obj.idPelotero = objDetalleInvitados.idPelotero;
+            obj.idDeportista = objDetalleInvitados.idDeportista;
             obj.idReserva = objDetalleInvitados.idReserva;
             try
             {

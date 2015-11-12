@@ -63,17 +63,23 @@ namespace Vista.Controllers
         }
         public ActionResult Create()
         {
+            if (Session["Usuario"] != null)
+            {
+                ViewBag.idEmpresa = (int)Session["idEmpresa"];
+                return View();
+            }
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Reserva obj,int cboCancha)
+        public ActionResult Create(Reserva obj, int cboCampo)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    obj.idCancha = cboCancha;
+                    obj.idCancha = cboCampo;
                     obj.idUsuario = (int)Session["idUsuario"];
 
                     if (NReserva.Instancia.Create(obj))
@@ -119,7 +125,7 @@ namespace Vista.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if ((cboCancha == initialcancha) && (obj.fecha == initialFecha) && (obj.horaInicio == initialHoraInicio)
+                    if ((cboCancha == initialcancha) && (obj.fechaHora == initialFecha) && (obj.horaInicio == initialHoraInicio)
                         && (obj.horaFin == initialHoraFin))
                     {
                         return RedirectToAction("Index");

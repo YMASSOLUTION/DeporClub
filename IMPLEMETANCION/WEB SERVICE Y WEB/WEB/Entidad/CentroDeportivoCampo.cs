@@ -12,13 +12,13 @@ namespace Entidad
     using System;
     using System.Collections.Generic;
     
-    public partial class DetalleInvitados
+    public partial class CentroDeportivoCampo
     {
         public int id { get; set; }
-        public int idDeportista { get; set; }
-        public int idReserva { get; set; }
+        public Nullable<int> idCentroDeportivo { get; set; }
+        public Nullable<int> idCancha { get; set; }
     
-        public virtual Deportista Deportista { get; set; }
-        public virtual Reserva Reserva { get; set; }
+        public virtual CentroDeportivo CentroDeportivo { get; set; }
+        public virtual Campo Campo { get; set; }
     }
 }

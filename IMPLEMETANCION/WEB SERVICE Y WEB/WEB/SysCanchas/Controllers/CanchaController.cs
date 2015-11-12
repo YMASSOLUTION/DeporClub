@@ -1,7 +1,7 @@
 ﻿//------------------------------------------------------------------------------
 // Author: Dev Peru
 // Generado el Dia: 2015_octubre_11 - 19_23_00 
-//-------------------------  Controller Cancha  ----------------------------------------
+//-------------------------  Controller Campo  ----------------------------------------
 using Entidad;
 using Negocio;
 using System;
@@ -15,7 +15,7 @@ using PagedList;
 namespace Vista.Controllers
 {
  //dgdfg
-    public class CanchaController : Controller
+    public class CampoController : Controller
     {
         public ActionResult Index(string orden, string filtro, string busqueda, int? page)
         {
@@ -36,7 +36,7 @@ namespace Vista.Controllers
                     busqueda = filtro;
                 }
                 ViewBag.filtro = busqueda;
-                var obj = from s in NCancha.Instancia.SelectAll()
+                var obj = from s in NCampo.Instancia.SelectAll()
                           select s;
                 
                 switch (orden)
@@ -75,13 +75,13 @@ namespace Vista.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Cancha obj)
+        public ActionResult Create(Campo obj)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    NCancha.Instancia.Create(obj);
+                    NCampo.Instancia.Create(obj);
                 }
                 return RedirectToAction("Index");
 
@@ -96,7 +96,7 @@ namespace Vista.Controllers
         {
             try
             {
-                Cancha obj = NCancha.Instancia.Details(id);
+                Campo obj = NCampo.Instancia.Details(id);
                 return View(obj);
             }
             catch (Exception)
@@ -106,13 +106,13 @@ namespace Vista.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditSave(Cancha obj)
+        public ActionResult EditSave(Campo obj)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    NCancha.Instancia.Edit(obj);
+                    NCampo.Instancia.Edit(obj);
                     return RedirectToAction("Index");
                 }
                 return View("Edit", obj);
@@ -127,7 +127,7 @@ namespace Vista.Controllers
         {
             try
             {
-                Cancha obj = NCancha.Instancia.Details(id);
+                Campo obj = NCampo.Instancia.Details(id);
                 return View(obj);
             }
             catch (Exception)
@@ -140,7 +140,7 @@ namespace Vista.Controllers
         {
             try
             {
-                if (NCancha.Instancia.DeleteConfirmed(id))
+                if (NCampo.Instancia.DeleteConfirmed(id))
                 {
                     return Json("true", JsonRequestBehavior.AllowGet);
                 }
@@ -156,7 +156,7 @@ namespace Vista.Controllers
         {
             try
             {
-                if (NCancha.Instancia.Disable(id))
+                if (NCampo.Instancia.Disable(id))
                 {
                     return Json("true", JsonRequestBehavior.AllowGet);
                 }

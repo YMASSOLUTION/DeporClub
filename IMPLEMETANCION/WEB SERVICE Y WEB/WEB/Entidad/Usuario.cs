@@ -16,8 +16,8 @@ namespace Entidad
     {
         public Usuario()
         {
+            this.Deportista = new HashSet<Deportista>();
             this.Empresa = new HashSet<Empresa>();
-            this.Pelotero = new HashSet<Pelotero>();
             this.Reserva = new HashSet<Reserva>();
         }
     
@@ -27,8 +27,8 @@ namespace Entidad
         public int idTipoUsuario { get; set; }
         public bool activo { get; set; }
     
+        public virtual ICollection<Deportista> Deportista { get; set; }
         public virtual ICollection<Empresa> Empresa { get; set; }
-        public virtual ICollection<Pelotero> Pelotero { get; set; }
         public virtual TipoUsuario TipoUsuario { get; set; }
         public virtual ICollection<Reserva> Reserva { get; set; }
     }

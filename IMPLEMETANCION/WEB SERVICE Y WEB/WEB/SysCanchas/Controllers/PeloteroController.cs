@@ -1,7 +1,7 @@
 ﻿//------------------------------------------------------------------------------
 // Author: Dev Peru
 // Generado el Dia: 2015_octubre_11 - 19_23_00 
-//-------------------------  Controller Pelotero  ----------------------------------------
+//-------------------------  Controller Deportista  ----------------------------------------
 using Entidad;
 using Negocio;
 using System;
@@ -14,7 +14,7 @@ using System.Web.Mvc;
 using PagedList;
 namespace Vista.Controllers
 {
-    public class PeloteroController : Controller
+    public class DeportistaController : Controller
     {
         public ActionResult Index(string orden, string filtro, string busqueda, int? page)
         {
@@ -36,7 +36,7 @@ namespace Vista.Controllers
                     busqueda = filtro;
                 }
                 ViewBag.filtro = busqueda;
-                var obj = from s in NPelotero.Instancia.SelectAll()
+                var obj = from s in NDeportista.Instancia.SelectAll()
                           select s;
                 if (!String.IsNullOrEmpty(busqueda))
                 {
@@ -81,13 +81,13 @@ namespace Vista.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Pelotero obj)
+        public ActionResult Create(Deportista obj)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    NPelotero.Instancia.Create(obj);
+                    NDeportista.Instancia.Create(obj);
                 }
                 return RedirectToAction("Index");
 
@@ -102,7 +102,7 @@ namespace Vista.Controllers
         {
             try
             {
-                Pelotero obj = NPelotero.Instancia.Details(id);
+                Deportista obj = NDeportista.Instancia.Details(id);
                 return View(obj);
             }
             catch (Exception)
@@ -112,13 +112,13 @@ namespace Vista.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditSave(Pelotero obj)
+        public ActionResult EditSave(Deportista obj)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    NPelotero.Instancia.Edit(obj);
+                    NDeportista.Instancia.Edit(obj);
                     return RedirectToAction("Index");
                 }
                 return View("Edit", obj);
@@ -133,7 +133,7 @@ namespace Vista.Controllers
         {
             try
             {
-                Pelotero obj = NPelotero.Instancia.Details(id);
+                Deportista obj = NDeportista.Instancia.Details(id);
                 return View(obj);
             }
             catch (Exception)
@@ -146,7 +146,7 @@ namespace Vista.Controllers
         {
             try
             {
-                if (NPelotero.Instancia.DeleteConfirmed(id))
+                if (NDeportista.Instancia.DeleteConfirmed(id))
                 {
                     return Json("true", JsonRequestBehavior.AllowGet);
                 }
@@ -162,7 +162,7 @@ namespace Vista.Controllers
         {
             try
             {
-                if (NPelotero.Instancia.Disable(id))
+                if (NDeportista.Instancia.Disable(id))
                 {
                     return Json("true", JsonRequestBehavior.AllowGet);
                 }

@@ -41,7 +41,7 @@ namespace AccesoDatos
         {
             Amigo obj = db.Amigo.Find(objAmigo.id);
             obj.id = objAmigo.id;
-            obj.idPelotero = objAmigo.idPelotero;
+            obj.idDeportista = objAmigo.idDeportista;
             obj.idAmigo = objAmigo.idAmigo;
             try
             {

@@ -1,7 +1,7 @@
 ﻿//------------------------------------------------------------------------------
 // Author: Dev Peru 
 // Generado el Dia: 2015_noviembre_09 - 19_41_03 
-//-------------------------  ENTIDAD CentroDeportivoCancha  ----------------------------------------
+//-------------------------  ENTIDAD CentroDeportivoCampo  ----------------------------------------
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
@@ -10,25 +10,25 @@ using System.Text;
 using Entidad;
 namespace AccesoDatos
 {
-    public class DCentroDeportivoCancha
+    public class DCentroDeportivoCampo
     {
-        private static DCentroDeportivoCancha _instancia;
-        public static DCentroDeportivoCancha Instancia
+        private static DCentroDeportivoCampo _instancia;
+        public static DCentroDeportivoCampo Instancia
         {
             get
             {
-                if (_instancia == null) _instancia = new DCentroDeportivoCancha();
+                if (_instancia == null) _instancia = new DCentroDeportivoCampo();
                 return _instancia;
             }
         }
-        protected DCentroDeportivoCancha() { }
+        protected DCentroDeportivoCampo() { }
         private CanchaDBEntities1 db = new CanchaDBEntities1();
         #region creacion del CRUD
-        public bool Create(CentroDeportivoCancha obj)
+        public bool Create(CentroDeportivoCampo obj)
         {
             try
             {
-                db.CentroDeportivoCancha.Add(obj);
+                db.CentroDeportivoCampo.Add(obj);
                 db.SaveChanges();
                 return true;
             }
@@ -37,12 +37,12 @@ namespace AccesoDatos
                 return false;
             }
         }
-        public bool Edit(CentroDeportivoCancha objCentroDeportivoCancha)
+        public bool Edit(CentroDeportivoCampo objCentroDeportivoCampo)
         {
-            CentroDeportivoCancha obj = db.CentroDeportivoCancha.Find(objCentroDeportivoCancha.id);
-            obj.id = objCentroDeportivoCancha.id;
-            obj.idCentroDeportivo = objCentroDeportivoCancha.idCentroDeportivo;
-            obj.idCancha = objCentroDeportivoCancha.idCancha;
+            CentroDeportivoCampo obj = db.CentroDeportivoCampo.Find(objCentroDeportivoCampo.id);
+            obj.id = objCentroDeportivoCampo.id;
+            obj.idCentroDeportivo = objCentroDeportivoCampo.idCentroDeportivo;
+            obj.idCancha = objCentroDeportivoCampo.idCancha;
             try
             {
                 db.SaveChanges();
@@ -53,11 +53,11 @@ namespace AccesoDatos
                 return false;
             }
         }
-        public CentroDeportivoCancha Details(int id)
+        public CentroDeportivoCampo Details(int id)
         {
             try
             {
-                CentroDeportivoCancha obj = db.CentroDeportivoCancha.Find(id);
+                CentroDeportivoCampo obj = db.CentroDeportivoCampo.Find(id);
                 if (obj == null)
                 {
                     return null;
@@ -74,7 +74,7 @@ namespace AccesoDatos
             try
             {
                 string query = string.Empty;
-                query = "delete CentroDeportivoCancha where id=" + id;
+                query = "delete CentroDeportivoCampo where id=" + id;
                 db.Database.ExecuteSqlCommand(query);
                 db.SaveChanges();
                 return true;
@@ -88,7 +88,7 @@ namespace AccesoDatos
         {
             try
             {
-                var obj = db.CentroDeportivoCancha.Find(id);
+                var obj = db.CentroDeportivoCampo.Find(id);
                 
                 if (db.SaveChanges() > 0)
                 {
@@ -101,12 +101,17 @@ namespace AccesoDatos
                 return false;
             }
         }
-        public List<CentroDeportivoCancha> SelectAll()
+        public List<CentroDeportivoCampo> SelectAll()
         {
-            List<CentroDeportivoCancha> lista = db.CentroDeportivoCancha.ToList();
+            List<CentroDeportivoCampo> lista = db.CentroDeportivoCampo.ToList();
             return lista;
         }
         
         #endregion
+
+        public List<CentroDeportivoCampo> SelectAllByCentroDeportivo(int idCentroDeportivo) {
+
+            return db.CentroDeportivoCampo.Where(a=>a.idCentroDeportivo==idCentroDeportivo).ToList();
+        }
     }
 }

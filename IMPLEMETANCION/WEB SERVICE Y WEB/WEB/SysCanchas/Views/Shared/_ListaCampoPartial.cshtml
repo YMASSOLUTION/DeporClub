@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Entidad.CentroDeportivoCampo>
+<label class="control-label">Seleccione el Campo</label>
+<select class="form-control" name="cboCampo" id="cboCampo">
+    <option value="-1" selected>--Seleccione el Campo--</option>
+    @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <option value="@Html.DisplayFor(modelItem => item.Campo.id)">@Html.DisplayFor(modelItem => item.Campo.nombre)</option>
+        }
+    }
+    else
+    {
+        <option value="0">No hay campos Disponibles</option>
+    }
+</select>

@@ -22,12 +22,12 @@ namespace SysCanchas.WebServices
             eobj.activo = obj.activo;
             return eobj;
         }
-        //gg
-      /*  [WebMethod]
+        
+        [WebMethod]
         public bool registrarPelotero(string nombre, string apellidos, int celular,
             string email, string nick, string clave)
         {
-            Pelotero pelotero = new Pelotero();
+            Deportista pelotero = new Deportista();
             Usuario usuario = new Usuario();
             pelotero.nombre = nombre;
             pelotero.apellidos = apellidos;
@@ -38,17 +38,17 @@ namespace SysCanchas.WebServices
             pelotero.Usuario = new Usuario();
             usuario.nick = nick;
             usuario.clave = clave;
-            usuario.idTipoUsuario = 2;
+            usuario.idTipoUsuario = 3;
             usuario.activo = true;
             pelotero.Usuario = usuario;
-            return NPelotero.Instancia.Create(pelotero);
-        }*/
+            return NDeportista.Instancia.Create(pelotero);
+        }
 
         [WebMethod]
         public bool registrarReserva(string fecha, int idUsuario, int idCancha, string horaInicio, string horaFin)
         {
             Reserva reserva = new Reserva();
-            reserva.fecha = Convert.ToDateTime(fecha);
+            reserva.fechaHora = Convert.ToDateTime(fecha);
             reserva.idUsuario = idUsuario;
             reserva.idCancha = idCancha;
             TimeSpan horaInicio2 = TimeSpan.Parse(horaInicio);
@@ -57,6 +57,52 @@ namespace SysCanchas.WebServices
             reserva.horaFin = horaFin2;
             reserva.activo = true;
             return NReserva.Instancia.Create(reserva);
+        }
+
+        [WebMethod]
+        public List<ECentroDeportivo> listarCentrosDeportivos(){
+
+            List<CentroDeportivo> listilla = NCentroDeportivo.Instancia.SelectAllActivo();
+
+            List<ECentroDeportivo> lista = new List<ECentroDeportivo>();
+
+            foreach(var item in listilla){
+                ECentroDeportivo obj = new ECentroDeportivo();
+                obj.id = item.id;
+                obj.nombre = item.nombre;
+                obj.direccion = item.direccion;
+                obj.telefono = item.telefono;
+                obj.balon = Convert.ToBoolean(item.balon);
+                obj.camisetas = Convert.ToBoolean(item.camisetas);
+                obj.latitud = Convert.ToDouble( item.latitud);
+                obj.longitud =Convert.ToDouble( item.longitud);
+
+                lista.Add(obj);
+            }
+
+            return lista;
+        
+        }
+
+
+
+        [WebMethod]
+        public List<ECampo> listarCamposPorCentroDeportivo(int idCentroDeportivo) {
+
+            List<CentroDeportivoCampo> listilla = NCentroDeportivo.Instancia.SelectAllByCentroDeportivo(idCentroDeportivo);
+            List<ECampo> lista = new List<ECampo>();
+
+            foreach(var item in listilla){
+                ECampo obj = new ECampo();
+                obj.id = item.Campo.id;
+                obj.ancho = item.Campo.ancho;
+                obj.largo = item.Campo.largo;
+                obj.precio = item.Campo.precio;
+                lista.Add(obj);
+            }
+
+            return lista;
+            
         }
 
        /* [WebMethod]

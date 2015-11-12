@@ -62,8 +62,7 @@
                                 {
                                     <tr>
                                         <td>
-                                            @String.Format("{0:d}", item.fecha)
-                                            @*@Html.DisplayFor(modelItem => item.fecha.ToLongDateString())*@                                            
+                                            @String.Format("{0:d}", item.fechaHora)                                           
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.horaInicio)
@@ -72,7 +71,7 @@
                                             @Html.DisplayFor(modelItem => item.horaFin)
                                         </td>                                       
                                         <td class="hidden-xs">
-                                            @Html.DisplayFor(modelItem => item.Cancha.nombre)
+                                            @Html.DisplayFor(modelItem => item.Campo.nombre)
                                         </td>
                                         <td class="hidden-xs">
                                             @if (item.activo)

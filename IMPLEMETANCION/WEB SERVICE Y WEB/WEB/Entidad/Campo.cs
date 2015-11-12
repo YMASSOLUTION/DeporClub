@@ -12,16 +12,23 @@ namespace Entidad
     using System;
     using System.Collections.Generic;
     
-    public partial class Mensaje
+    public partial class Campo
     {
-        public int id { get; set; }
-        public int idPelotero { get; set; }
-        public int idReceptor { get; set; }
-        public string descripcion { get; set; }
-        public bool visto { get; set; }
-        public bool activo { get; set; }
+        public Campo()
+        {
+            this.CentroDeportivoCampo = new HashSet<CentroDeportivoCampo>();
+            this.Reserva = new HashSet<Reserva>();
+        }
     
-        public virtual Deportista Deportista { get; set; }
-        public virtual Deportista Deportista1 { get; set; }
+        public int id { get; set; }
+        public int largo { get; set; }
+        public int ancho { get; set; }
+        public int precio { get; set; }
+        public bool activo { get; set; }
+        public string tipoCampo { get; set; }
+        public string nombre { get; set; }
+    
+        public virtual ICollection<CentroDeportivoCampo> CentroDeportivoCampo { get; set; }
+        public virtual ICollection<Reserva> Reserva { get; set; }
     }
 }
