@@ -88,9 +88,9 @@ namespace Negocio
             return DCentroDeportivo.Instancia.SelectAllbyEmpresa(idEmpresa);
         }
 
-        public List<CentroDeportivoCampo> SelectAllByCentroDeportivo(int idCentroDeportivo) {
+        public List<Campo> SelectAllByCentroDeportivo(int idCentroDeportivo) {
 
-            return DCentroDeportivoCampo.Instancia.SelectAllByCentroDeportivo(idCentroDeportivo);
+            return DCampo.Instancia.SelectAllByCentroDeportivo(idCentroDeportivo);
         }
 
     }

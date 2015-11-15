@@ -105,12 +105,12 @@ namespace AccesoDatos
         }
         public List<Empresa> SelectAll()
         {
-            List<Empresa> lista = db.Empresa.ToList();
+            List<Empresa> lista = db.Empresa.AsNoTracking().ToList();
             return lista;
         }
         public List<Empresa> SelectAllActivo()
         {
-            List<Empresa> lista = db.Empresa.Where(a => a.activo == true && a.id!=3).ToList();
+            List<Empresa> lista = db.Empresa.AsNoTracking().Where(a => a.activo == true && a.id != 3).ToList();
             return lista;
         }
         #endregion

@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
@@ -104,17 +103,37 @@ namespace Vista.Controllers
             }
         }
         public ActionResult Create()
-        {
+        {            
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CentroDeportivo obj)
+        public ActionResult Create(CentroDeportivo obj, int cboDistrito)
         {
             try
             {
+                obj.idEmpresa = (int)Session["idEmpresa"];
+                obj.activo = true;
+                obj.idDistrito = cboDistrito;
+                string latitud = Request["platitud"].ToString().Replace(".", ",");
+                string longitud = Request["plongitud"].ToString().Replace(".", ",");
+                obj.latitud = Convert.ToDouble(latitud);
+                obj.longitud = Convert.ToDouble(longitud);
+                obj.foto = "noimg.jpg";
                 if (ModelState.IsValid)
                 {
+                    
+                    String extension;
+                    String ExcelPath;
+                    extension = System.IO.Path.GetExtension(Request.Files["file"].FileName);
+                    string nombreimg = System.DateTime.Now.ToString("yyyy_MMMM_dd_H_mm_ss_") + Request.Files["file"].FileName;
+                    if (extension == ".jpg" || extension == ".png" || extension == ".JPG" || extension == ".PNG")
+                    {
+                        ExcelPath = Server.MapPath("~/Exports/") + nombreimg;
+                        Request.Files["file"].SaveAs(ExcelPath);
+                        obj.foto = nombreimg;
+
+                    }
                     NCentroDeportivo.Instancia.Create(obj);
                 }
                 return RedirectToAction("Index");
@@ -131,6 +150,10 @@ namespace Vista.Controllers
             try
             {
                 CentroDeportivo obj = NCentroDeportivo.Instancia.Details(id);
+                string latitud = obj.latitud.ToString().Replace(",", ".");
+                string longitud = obj.longitud.ToString().Replace(",", ".");
+                ViewBag.latitud = latitud;
+                ViewBag.longitud = longitud;
                 return View(obj);
             }
             catch (Exception)
@@ -140,10 +163,27 @@ namespace Vista.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditSave(CentroDeportivo obj)
+        public ActionResult EditSave(CentroDeportivo obj, int cboDistrito)
         {
             try
             {
+                string latitud = Request["platitud"].ToString().Replace(".", ",");
+                string longitud = Request["plongitud"].ToString().Replace(".", ",");
+                obj.latitud = Convert.ToDouble(latitud);
+                obj.longitud = Convert.ToDouble(longitud);
+                obj.idDistrito = cboDistrito;
+                String extension;
+                String ExcelPath;
+                extension = System.IO.Path.GetExtension(Request.Files["file"].FileName);
+                string nombreimg = System.DateTime.Now.ToString("yyyy_MMMM_dd_H_mm_ss_") + Request.Files["file"].FileName;
+                if (extension == ".jpg" || extension == ".png" || extension == ".JPG" || extension == ".PNG")
+                {
+                    ExcelPath = Server.MapPath("~/Exports/") + nombreimg;
+                    Request.Files["file"].SaveAs(ExcelPath);
+                    obj.foto = nombreimg;
+
+                }
+                
                 if (ModelState.IsValid)
                 {
                     NCentroDeportivo.Instancia.Edit(obj);

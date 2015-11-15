@@ -24,7 +24,8 @@ namespace SysCanchas.WebServices
         }
         
         [WebMethod]
-        public bool registrarPelotero(string nombre, string apellidos, int celular,string email, string nick, string clave)
+        public bool registrarPelotero(string nombre, string apellidos, int celular,
+            string email, string nick, string clave)
         {
             Deportista pelotero = new Deportista();
             Usuario usuario = new Usuario();
@@ -88,20 +89,28 @@ namespace SysCanchas.WebServices
         [WebMethod]
         public List<ECampo> listarCamposPorCentroDeportivo(int idCentroDeportivo) {
 
-            List<CentroDeportivoCampo> listilla = NCentroDeportivo.Instancia.SelectAllByCentroDeportivo(idCentroDeportivo);
+            List<Campo> listilla = NCampo.Instancia.SelectAllByCentroDeportivo(idCentroDeportivo);
             List<ECampo> lista = new List<ECampo>();
 
             foreach(var item in listilla){
                 ECampo obj = new ECampo();
-                obj.id = item.Campo.id;
-                obj.ancho = item.Campo.ancho;
-                obj.largo = item.Campo.largo;
-                obj.precio = item.Campo.precio;
+                obj.id = item.id;
+                obj.ancho = item.ancho;
+                obj.largo = item.largo;
+                obj.precio = item.precio;
                 lista.Add(obj);
             }
 
             return lista;
             
+        }
+
+        [WebMethod]
+
+        public List<EHorario> listarHorarioDisponible(string fecha,int idcampo) {
+
+            return NReserva.Instancia.SelectHorariosDisponiblesParaReserva(Convert.ToDateTime(fecha),idcampo);
+        
         }
 
        /* [WebMethod]

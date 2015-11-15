@@ -4,26 +4,28 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f7b34d74aaa34653b54aadcd9b65c855" Name="Diagram1" ZoomLevel="77">
-        <EntityTypeShape EntityType="CanchaDBModel1.Amigo" Width="1.5" PointX="0.625" PointY="12.625" />
-        <EntityTypeShape EntityType="CanchaDBModel1.CentroDeportivo" Width="1.875" PointX="8.5" PointY="3.375" />
-        <EntityTypeShape EntityType="CanchaDBModel1.CentroDeportivoCampo" Width="2.125" PointX="12.125" PointY="3.5" />
-        <EntityTypeShape EntityType="CanchaDBModel1.Departamento" Width="1.5" PointX="0.75" PointY="3.5" />
-        <EntityTypeShape EntityType="CanchaDBModel1.Deportista" Width="1.5" PointX="3.25" PointY="10.25" />
-        <EntityTypeShape EntityType="CanchaDBModel1.DetalleInvitados" Width="1.5" PointX="8" PointY="12.625" />
-        <EntityTypeShape EntityType="CanchaDBModel1.Distrito" Width="1.5" PointX="5.25" PointY="3.5" />
-        <EntityTypeShape EntityType="CanchaDBModel1.Empresa" Width="1.5" PointX="3.5" PointY="6.5" />
-        <EntityTypeShape EntityType="CanchaDBModel1.Mensaje" Width="1.5" PointX="0.625" PointY="9.5" />
-        <EntityTypeShape EntityType="CanchaDBModel1.Pais" Width="1.5" PointX="0.875" PointY="6.625" />
-        <EntityTypeShape EntityType="CanchaDBModel1.Provincia" Width="1.5" PointX="3" PointY="3.5" />
-        <EntityTypeShape EntityType="CanchaDBModel1.SolicitudAmistad" Width="1.5" PointX="5.375" PointY="10.75" />
-        <EntityTypeShape EntityType="CanchaDBModel1.TipoUsuario" Width="1.5" PointX="7.875" PointY="10.375" />
-        <EntityTypeShape EntityType="CanchaDBModel1.Usuario" Width="1.5" PointX="6" PointY="7.75" />
+      <Diagram DiagramId="f7b34d74aaa34653b54aadcd9b65c855" Name="Diagram1" ZoomLevel="19">
+        <EntityTypeShape EntityType="CanchaDBModel1.Amigo" Width="1.5" PointX="7.5" PointY="13.75" />
+        <EntityTypeShape EntityType="CanchaDBModel1.Campo" Width="1.5" PointX="9.75" PointY="3.375" />
+        <EntityTypeShape EntityType="CanchaDBModel1.CentroDeportivo" Width="1.5" PointX="7.5" PointY="2.75" />
+        <EntityTypeShape EntityType="CanchaDBModel1.Departamento" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="CanchaDBModel1.Deportista" Width="1.5" PointX="5.25" PointY="10.125" />
+        <EntityTypeShape EntityType="CanchaDBModel1.DetalleInvitados" Width="1.5" PointX="7.5" PointY="11.125" />
+        <EntityTypeShape EntityType="CanchaDBModel1.Distrito" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="CanchaDBModel1.Empresa" Width="1.5" PointX="5.25" PointY="4.625" />
+        <EntityTypeShape EntityType="CanchaDBModel1.Mensaje" Width="1.5" PointX="7.5" PointY="7.75" />
+        <EntityTypeShape EntityType="CanchaDBModel1.Pais" Width="1.5" PointX="1.5" PointY="2" />
+        <EntityTypeShape EntityType="CanchaDBModel1.Provincia" Width="1.5" PointX="3" PointY="4.75" />
+        <EntityTypeShape EntityType="CanchaDBModel1.Reserva" Width="1.5" PointX="12" PointY="6" />
+        <EntityTypeShape EntityType="CanchaDBModel1.SolicitudAmistad" Width="1.5" PointX="7.5" PointY="16.5" />
+        <EntityTypeShape EntityType="CanchaDBModel1.TipoUsuario" Width="1.5" PointX="0.75" PointY="9.625" />
+        <EntityTypeShape EntityType="CanchaDBModel1.Usuario" Width="1.5" PointX="3" PointY="9.125" />
         <AssociationConnector Association="CanchaDBModel1.FK_Amigo_Pelotero" />
         <AssociationConnector Association="CanchaDBModel1.FK_Amigo_Pelotero1" />
+        <AssociationConnector Association="CanchaDBModel1.FK_Campo_CentroDeportivo" />
+        <AssociationConnector Association="CanchaDBModel1.FK_Reserva_Cancha" />
         <AssociationConnector Association="CanchaDBModel1.FK_CentroDeportivo_Distrito" />
         <AssociationConnector Association="CanchaDBModel1.FK_CentroDeportivo_Empresa" />
-        <AssociationConnector Association="CanchaDBModel1.FK_CentroDeportivoCancha_CentroDeportivo" />
         <AssociationConnector Association="CanchaDBModel1.FK_Departamento_Pais" />
         <AssociationConnector Association="CanchaDBModel1.FK_Provincia_Departamento" />
         <AssociationConnector Association="CanchaDBModel1.FK_DetalleInvitados_Pelotero" />
@@ -32,15 +34,11 @@
         <AssociationConnector Association="CanchaDBModel1.FK_Pelotero_Usuario" />
         <AssociationConnector Association="CanchaDBModel1.FK_SolicitudAmistad_Pelotero" />
         <AssociationConnector Association="CanchaDBModel1.FK_SolicitudAmistad_Pelotero1" />
+        <AssociationConnector Association="CanchaDBModel1.FK_DetalleInvitados_Reserva" />
         <AssociationConnector Association="CanchaDBModel1.FK_Distrito_Provincia" />
         <AssociationConnector Association="CanchaDBModel1.FK_Empresa_Usuario" />
-        <AssociationConnector Association="CanchaDBModel1.FK_Usuario_TipoUsuario" />
-        <EntityTypeShape EntityType="CanchaDBModel1.Campo" Width="1.5" PointX="12.625" PointY="6.875" />
-        <AssociationConnector Association="CanchaDBModel1.FK_CentroDeportivoCancha_Cancha" />
-        <EntityTypeShape EntityType="CanchaDBModel1.Reserva" Width="1.5" PointX="9.625" PointY="7.875" />
-        <AssociationConnector Association="CanchaDBModel1.FK_Reserva_Cancha" />
-        <AssociationConnector Association="CanchaDBModel1.FK_DetalleInvitados_Reserva" />
         <AssociationConnector Association="CanchaDBModel1.FK_Reserva_Usuario" />
+        <AssociationConnector Association="CanchaDBModel1.FK_Usuario_TipoUsuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

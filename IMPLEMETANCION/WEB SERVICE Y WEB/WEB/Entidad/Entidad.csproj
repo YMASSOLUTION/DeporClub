@@ -48,9 +48,6 @@
     <Compile Include="CentroDeportivo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="CentroDeportivoCampo.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="Departamento.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -66,6 +63,7 @@
     </Compile>
     <Compile Include="ECampo.cs" />
     <Compile Include="ECentroDeportivo.cs" />
+    <Compile Include="EHorario.cs" />
     <Compile Include="Empresa.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

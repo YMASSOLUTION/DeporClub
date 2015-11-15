@@ -103,12 +103,12 @@ namespace AccesoDatos
         }
         public List<Departamento> SelectAll()
         {
-            List<Departamento> lista = db.Departamento.ToList();
+            List<Departamento> lista = db.Departamento.AsNoTracking().ToList();
             return lista;
         }
         public List<Departamento> SelectAllActivo()
         {
-            List<Departamento> lista = db.Departamento.Where(a => a.activo == true).ToList();
+            List<Departamento> lista = db.Departamento.AsNoTracking().Where(a => a.activo == true).ToList();
             return lista;
         }
         #endregion

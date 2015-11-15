@@ -16,26 +16,26 @@ namespace Entidad
     {
         public CentroDeportivo()
         {
-            this.CentroDeportivoCampo = new HashSet<CentroDeportivoCampo>();
+            this.Campo = new HashSet<Campo>();
         }
     
         public int id { get; set; }
         public string direccion { get; set; }
         public string telefono { get; set; }
         public string celular { get; set; }
-        public Nullable<int> idDistrito { get; set; }
+        public int idDistrito { get; set; }
         public string nroCanchas { get; set; }
-        public Nullable<bool> balon { get; set; }
-        public Nullable<bool> camisetas { get; set; }
-        public Nullable<int> idEmpresa { get; set; }
+        public bool balon { get; set; }
+        public bool camisetas { get; set; }
+        public int idEmpresa { get; set; }
         public string nombre { get; set; }
         public string foto { get; set; }
-        public Nullable<double> latitud { get; set; }
-        public Nullable<double> longitud { get; set; }
-        public Nullable<bool> activo { get; set; }
+        public double latitud { get; set; }
+        public double longitud { get; set; }
+        public bool activo { get; set; }
     
+        public virtual ICollection<Campo> Campo { get; set; }
         public virtual Distrito Distrito { get; set; }
         public virtual Empresa Empresa { get; set; }
-        public virtual ICollection<CentroDeportivoCampo> CentroDeportivoCampo { get; set; }
     }
 }

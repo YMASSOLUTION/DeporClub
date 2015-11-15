@@ -124,7 +124,7 @@ namespace SysCanchas.Controllers
             {
                 return View("_ListaCampoPartial",null);
             }
-            return View("_ListaCampoPartial", NCampo.Instancia.SelectAllbyCentroDeportivo(idCentroDeportivo));
+            return View("_ListaCampoPartial", NCampo.Instancia.SelectAllByCentroDeportivo(idCentroDeportivo));
         }
               
     }

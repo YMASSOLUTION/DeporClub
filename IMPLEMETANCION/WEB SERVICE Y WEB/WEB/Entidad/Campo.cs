@@ -16,7 +16,6 @@ namespace Entidad
     {
         public Campo()
         {
-            this.CentroDeportivoCampo = new HashSet<CentroDeportivoCampo>();
             this.Reserva = new HashSet<Reserva>();
         }
     
@@ -27,8 +26,9 @@ namespace Entidad
         public bool activo { get; set; }
         public string tipoCampo { get; set; }
         public string nombre { get; set; }
+        public Nullable<int> idCentroDeportivo { get; set; }
     
-        public virtual ICollection<CentroDeportivoCampo> CentroDeportivoCampo { get; set; }
+        public virtual CentroDeportivo CentroDeportivo { get; set; }
         public virtual ICollection<Reserva> Reserva { get; set; }
     }
 }

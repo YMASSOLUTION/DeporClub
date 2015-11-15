@@ -107,12 +107,12 @@ namespace AccesoDatos
         }
         public List<Deportista> SelectAll()
         {
-            List<Deportista> lista = db.Deportista.ToList();
+            List<Deportista> lista = db.Deportista.AsNoTracking().ToList();
             return lista;
         }
         public List<Deportista> SelectAllActivo()
         {
-            List<Deportista> lista = db.Deportista.Where(a => a.activo == true).ToList();
+            List<Deportista> lista = db.Deportista.AsNoTracking().Where(a => a.activo == true).ToList();
             return lista;
         }
         #endregion

@@ -115,9 +115,9 @@ namespace AccesoDatos
         }
         #endregion
 
-        public List<Reserva> SelectReservaByCanchaAndFecha(DateTime dateTime, int p)
+        public List<Reserva> SelectReservaByCanchaAndFecha(DateTime fecha, int idcancha)
         {
-            throw new NotImplementedException();
+            return db.Reserva.AsNoTracking().Where(a => a.fecha == fecha && a.idCancha==idcancha && a.activo==true).ToList();
         }
     }
 }

@@ -114,20 +114,21 @@ namespace AccesoDatos
         }
         public List<CentroDeportivo> SelectAll()
         {
-            List<CentroDeportivo> lista = db.CentroDeportivo.ToList();
+            List<CentroDeportivo> lista = db.CentroDeportivo.AsNoTracking().ToList();
             return lista;
         }
         public List<CentroDeportivo> SelectAllActivo()
         {
-            List<CentroDeportivo> lista = db.CentroDeportivo.Where(a => a.activo == true).ToList();
+            List<CentroDeportivo> lista = db.CentroDeportivo.AsNoTracking().Where(a => a.activo == true).ToList();
             return lista;
         }
 
         public List<CentroDeportivo> SelectAllbyEmpresa(int idEmpresa)
         {
-            List<CentroDeportivo> lista = db.CentroDeportivo.Where(a => a.activo == true && a.idEmpresa==idEmpresa).ToList();
+            List<CentroDeportivo> lista = db.CentroDeportivo.AsNoTracking().Where(a => a.activo == true && a.idEmpresa == idEmpresa).ToList();
             return lista;
         }
         #endregion
+
     }
 }

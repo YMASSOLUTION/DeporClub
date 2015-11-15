@@ -1,25 +1,31 @@
-﻿using Entidad;
+﻿//------------------------------------------------------------------------------
+// Author: Dev Peru
+// Generado el Dia: 2015_octubre_11 - 19_23_00 
+//-------------------------  Controller Campo  ----------------------------------------
+using Entidad;
 using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
-using System.Linq;
+
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
 namespace Vista.Controllers
 {
-    public class EmpresaController : Controller
+ //dgdfg
+    public class CampoController : Controller
     {
         public ActionResult Index(string orden, string filtro, string busqueda, int? page)
         {
             try
             {
-                ViewBag.nombreOrden = String.IsNullOrEmpty(orden) ? "nombre_desc" : "";
-                ViewBag.idUsuarioOrden = String.IsNullOrEmpty(orden) ? "idUsuario_desc" : "";
-                ViewBag.direccionOrden = String.IsNullOrEmpty(orden) ? "direccion_desc" : "";
+                ViewBag.largoOrden = String.IsNullOrEmpty(orden) ? "largo_desc" : "";
+                ViewBag.anchoOrden = String.IsNullOrEmpty(orden) ? "ancho_desc" : "";
+                ViewBag.precioOrden = String.IsNullOrEmpty(orden) ? "precio_desc" : "";
                 ViewBag.activoOrden = String.IsNullOrEmpty(orden) ? "activo_desc" : "";
+                ViewBag.tipoCampoOrden = String.IsNullOrEmpty(orden) ? "tipoCampo_desc" : "";
                 ViewBag.OrdenActual = orden;
                 if (busqueda != null)
                 {
@@ -30,28 +36,28 @@ namespace Vista.Controllers
                     busqueda = filtro;
                 }
                 ViewBag.filtro = busqueda;
-                var obj = from s in NEmpresa.Instancia.SelectAll()
+                var obj = from s in NCampo.Instancia.SelectAll()
                           select s;
-                if (!String.IsNullOrEmpty(busqueda))
-                {
-                    obj = obj.Where(s => s.nombre.ToLower().Trim().Contains(busqueda.ToLower().Trim()));
-                }
+                
                 switch (orden)
                 {
-                    case "nombre_desc":
-                        obj = obj.OrderByDescending(s => s.nombre);
+                    case "largo_desc":
+                        obj = obj.OrderByDescending(s => s.largo);
                         break;
-                    case "idUsuario_desc":
-                        obj = obj.OrderByDescending(s => s.idUsuario);
+                    case "ancho_desc":
+                        obj = obj.OrderByDescending(s => s.ancho);
                         break;
-                    case "direccion_desc":
-                        obj = obj.OrderByDescending(s => s.direccion);
+                    case "precio_desc":
+                        obj = obj.OrderByDescending(s => s.precio);
                         break;
                     case "activo_desc":
                         obj = obj.OrderByDescending(s => s.activo);
                         break;
+                    case "tipoCampo_desc":
+                        obj = obj.OrderByDescending(s => s.tipoCampo);
+                        break;
                     default:
-                        obj = obj.OrderBy(s => s.nombre);
+                        obj = obj.OrderBy(s => s.largo);
                         break;
                 }
                 int pageSize = 10;
@@ -65,20 +71,20 @@ namespace Vista.Controllers
         }
         public ActionResult Create()
         {
+            ViewBag.idEmpresa = (int)Session["idEmpresa"];
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Empresa obj)
+        public ActionResult Create(Campo obj, int cboCentroDeportivo)
         {
             try
             {
+                obj.idCentroDeportivo = cboCentroDeportivo;
                 if (ModelState.IsValid)
-                {
-                    obj.activo = true;
-                    obj.Usuario.idTipoUsuario = 2;
-                    obj.Usuario.activo = true;
-                    NEmpresa.Instancia.Create(obj);
+                {                    
+                    
+                    NCampo.Instancia.Create(obj);
                 }
                 return RedirectToAction("Index");
 
@@ -93,7 +99,8 @@ namespace Vista.Controllers
         {
             try
             {
-                Empresa obj = NEmpresa.Instancia.Details(id);
+                
+                Campo obj = NCampo.Instancia.Details(id);
                 return View(obj);
             }
             catch (Exception)
@@ -103,13 +110,14 @@ namespace Vista.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditSave(Empresa obj)
+        public ActionResult EditSave(Campo obj, int cboCentroDeportivo)
         {
             try
             {
+                obj.idCentroDeportivo = cboCentroDeportivo;
                 if (ModelState.IsValid)
                 {
-                    NEmpresa.Instancia.Edit(obj);
+                    NCampo.Instancia.Edit(obj);
                     return RedirectToAction("Index");
                 }
                 return View("Edit", obj);
@@ -124,7 +132,7 @@ namespace Vista.Controllers
         {
             try
             {
-                Empresa obj = NEmpresa.Instancia.Details(id);
+                Campo obj = NCampo.Instancia.Details(id);
                 return View(obj);
             }
             catch (Exception)
@@ -133,11 +141,11 @@ namespace Vista.Controllers
             }
         }
         [HttpPost]
-        public ActionResult DeleteConfirmed(int id, int ud)
+        public ActionResult DeleteConfirmed(int id)
         {
             try
             {
-                if (NEmpresa.Instancia.DeleteConfirmed(id,ud))
+                if (NCampo.Instancia.DeleteConfirmed(id))
                 {
                     return Json("true", JsonRequestBehavior.AllowGet);
                 }
@@ -153,7 +161,7 @@ namespace Vista.Controllers
         {
             try
             {
-                if (NEmpresa.Instancia.Disable(id))
+                if (NCampo.Instancia.Disable(id))
                 {
                     return Json("true", JsonRequestBehavior.AllowGet);
                 }

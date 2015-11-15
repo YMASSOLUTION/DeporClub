@@ -4,9 +4,11 @@
     ViewBag.Title = "Crear CentroDeportivo";
     Layout = "~/Views/Shared/_MasterIntranet.cshtml";
 }
-@section Scripts {
-    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryvalidate")
-}
+
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<!-- CSS and JS for our code -->
+<script src="@Url.Content("~/assets/js/jquery-gmaps-latlon-picker.js")"></script>
+<link href="@Url.Content("~/assets/js/jquery-gmaps-latlon-picker.css")" rel="stylesheet" type="text/css" />
 <!-- Cabecera -->
 <div class="row">
     <div class="col-lg-12">
@@ -45,77 +47,108 @@
                 <div class="portlet-body">
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.direccion)
-                        @Html.TextBoxFor(m => m.direccion, new { @class = "form-control", @placeholder = "Ingrese su direccion", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.direccion)
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div id="DepartamentoLista"></div>
+                        </div>
+                        <div class="form-group">
+                            <div id="ProvinciaLista"></div>
+                        </div>
+                        <div class="form-group">
+                            <div id="DistritoLista"></div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.direccion)
+                            @Html.TextBoxFor(m => m.direccion, new { @class = "form-control", @placeholder = "Ingrese su direccion", @maxlength = "" })
+                            @Html.ValidationMessageFor(model => model.direccion)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.telefono)
+                            @Html.TextBoxFor(m => m.telefono, new { @class = "form-control", @placeholder = "Ingrese su telefono", @maxlength = "" })
+                            @Html.ValidationMessageFor(model => model.telefono)
+                        </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.telefono)
-                        @Html.TextBoxFor(m => m.telefono, new { @class = "form-control", @placeholder = "Ingrese su telefono", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.telefono)
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.celular)
+                            @Html.TextBoxFor(m => m.celular, new { @class = "form-control", @placeholder = "Ingrese su celular", @maxlength = "" })
+                            @Html.ValidationMessageFor(model => model.celular)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.nroCanchas)
+                            @Html.TextBoxFor(m => m.nroCanchas, new { @class = "form-control", @placeholder = "Ingrese su nroCanchas", @maxlength = "" })
+                            @Html.ValidationMessageFor(model => model.nroCanchas)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.balon)
+                            @Html.EditorFor(m => m.balon, new { @class = "form-control", @placeholder = "Ingrese su balon", @maxlength = "" })
+                            @Html.ValidationMessageFor(model => model.balon)
+
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.camisetas)
+                            @Html.EditorFor(m => m.camisetas, new { @class = "form-control", @placeholder = "Ingrese su camisetas", @maxlength = "" })
+                            @Html.ValidationMessageFor(model => model.camisetas)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.nombre)
+                            @Html.TextBoxFor(m => m.nombre, new { @class = "form-control", @placeholder = "Ingrese su nombre", @maxlength = "" })
+                            @Html.ValidationMessageFor(model => model.nombre)
+                        </div>
+                        <div class="form-group">
+                            <label>Seleccione la imagen:</label>
+                            <input type="file" required name="file" class="form-control" />
+                        </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.celular)
-                        @Html.TextBoxFor(m => m.celular, new { @class = "form-control", @placeholder = "Ingrese su celular", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.celular)
+                    
+                    
+                    <div class="col-md-12">
+                        <fieldset class="row gllpLatlonPicker">
+
+                            <div class=" col-md-10"><input type="text" placeholder="ingrese un distrito" class="gllpSearchField  form-control" style="position:relative;display:inline"></div>
+                            <div class="col-md-2"><input type="button" class="btn btn-info gllpSearchButton" value="buscar" style="position:relative;display:inline"></div>
+                            <div class="clearfix">&nbsp;</div>
+
+                            <div class="gllpMap" style="width:80%;height:400px;margin-left:auto;margin-right:auto;">Google Maps</div>
+                            <br />
+                            lat/lon:
+                            <input type="text" id="platitud" name="platitud" class="gllpLatitude" value="-10.141931686131018" />
+                            /
+                            <input type="text" id="plongitud" name="plongitud" class="gllpLongitude" value="-75.76171875" />
+                            <input type="hidden" class="gllpZoom" value="6" />
+                            <input type="button" class="gllpUpdateButton" value="update map">
+
+                            <br />
+                        </fieldset>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.idDistrito)
-                        @Html.TextBoxFor(m => m.idDistrito, new { @class = "form-control", @placeholder = "Ingrese su idDistrito", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.idDistrito)
+                    <div class="clearfix">&nbsp;</div>
+
+                        <div class="form-actions">
+                            <input type="submit" class="btn btn-primary" value="Guardar" />
+                            @Html.ActionLink("Regresar a la Lista de CentroDeportivos", "Index")
+                        </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.nroCanchas)
-                        @Html.TextBoxFor(m => m.nroCanchas, new { @class = "form-control", @placeholder = "Ingrese su nroCanchas", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.nroCanchas)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.balon)
-                        @Html.TextBoxFor(m => m.balon, new { @class = "form-control", @placeholder = "Ingrese su balon", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.balon)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.camisetas)
-                        @Html.TextBoxFor(m => m.camisetas, new { @class = "form-control", @placeholder = "Ingrese su camisetas", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.camisetas)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.idEmpresa)
-                        @Html.TextBoxFor(m => m.idEmpresa, new { @class = "form-control", @placeholder = "Ingrese su idEmpresa", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.idEmpresa)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.nombre)
-                        @Html.TextBoxFor(m => m.nombre, new { @class = "form-control", @placeholder = "Ingrese su nombre", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.nombre)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.foto)
-                        @Html.TextBoxFor(m => m.foto, new { @class = "form-control", @placeholder = "Ingrese su foto", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.foto)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.latitud)
-                        @Html.TextBoxFor(m => m.latitud, new { @class = "form-control", @placeholder = "Ingrese su latitud", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.latitud)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.longitud)
-                        @Html.TextBoxFor(m => m.longitud, new { @class = "form-control", @placeholder = "Ingrese su longitud", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.longitud)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.activo)
-                        @Html.TextBoxFor(m => m.activo, new { @class = "form-control", @placeholder = "Ingrese su activo", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.activo)
-                    </div>
-                    <div class="form-actions">
-                        <input type="submit" class="btn btn-primary" value="Guardar" />
-                        @Html.ActionLink("Regresar a la Lista de CentroDeportivos", "Index")
-                    </div>
-                </div>
             }
         </div>
     </div>
 </div>
+<div class="clearfix"></div>
+<script>
+    $(document).ready(function () {
+        $.isLoading({ text: "Cargando Formato" });
+        $("#DepartamentoLista").load('/Intranet/DepartamentoLista?isActivo=true', function () {
+            $("#ProvinciaLista").load('/Intranet/ProvinciabyDepartamento?idDepartamento=-1');
+            $("#DistritoLista").load('/Intranet/DistritobyProvincia?idProvincia=-1');
+            $.isLoading("hide");
+            $('#cboDepartamento').change(function () {
+                var idDepartamento = this.value;
+                $("#ProvinciaLista").load('/Intranet/ProvinciabyDepartamento?idDepartamento=' + idDepartamento + '', function () {
+                    $('#cboProvincia').change(function () {
+                        var idProvincia = this.value;
+                        $("#DistritoLista").load('/Intranet/DistritobyProvincia?idProvincia=' + idProvincia + '');
+                    });
+                });
+            });
+        });
+    });
+</script>

@@ -104,19 +104,19 @@ namespace AccesoDatos
         }
         public List<Distrito> SelectAll()
         {
-            List<Distrito> lista = db.Distrito.ToList();
+            List<Distrito> lista = db.Distrito.AsNoTracking().ToList();
             return lista;
         }
         public List<Distrito> SelectAllActivo()
         {
-            List<Distrito> lista = db.Distrito.Where(a => a.activo == true).ToList();
+            List<Distrito> lista = db.Distrito.AsNoTracking().Where(a => a.activo == true).ToList();
             return lista;
         }
         #endregion
 
         public List<Distrito> SelectAllByIdProvincia(int idProvincia)
         {
-            List<Distrito> lista = db.Distrito.Where(a => a.idProvincia == idProvincia).ToList();
+            List<Distrito> lista = db.Distrito.AsNoTracking().Where(a => a.idProvincia == idProvincia).ToList();
             return lista;
         }
     }

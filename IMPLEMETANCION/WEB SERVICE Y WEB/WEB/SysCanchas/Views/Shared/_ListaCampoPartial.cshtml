@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Entidad.CentroDeportivoCampo>
+﻿@model IEnumerable<Entidad.Campo>
 <label class="control-label">Seleccione el Campo</label>
 <select class="form-control" name="cboCampo" id="cboCampo">
     <option value="-1" selected>--Seleccione el Campo--</option>
@@ -6,7 +6,7 @@
     {
         foreach (var item in Model)
         {
-            <option value="@Html.DisplayFor(modelItem => item.Campo.id)">@Html.DisplayFor(modelItem => item.Campo.nombre)</option>
+            <option value="@Html.DisplayFor(modelItem => item.id)">@Html.DisplayFor(modelItem => item.nombre)</option>
         }
     }
     else

@@ -29,7 +29,7 @@ namespace Entidad
     
         public virtual ICollection<Deportista> Deportista { get; set; }
         public virtual ICollection<Empresa> Empresa { get; set; }
-        public virtual TipoUsuario TipoUsuario { get; set; }
         public virtual ICollection<Reserva> Reserva { get; set; }
+        public virtual TipoUsuario TipoUsuario { get; set; }
     }
 }

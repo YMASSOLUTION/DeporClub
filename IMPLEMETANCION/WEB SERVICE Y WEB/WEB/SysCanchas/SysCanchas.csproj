@@ -199,6 +199,7 @@
     <Content Include="assets\images\user.png" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\home-page.init.js" />
+    <Content Include="assets\js\jquery-gmaps-latlon-picker.js" />
     <Content Include="assets\js\jquery.isloading.js" />
     <Content Include="assets\js\jquery.isloading.min.js" />
     <Content Include="assets\js\jquery.min.js" />
@@ -536,7 +537,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AnuncioController.cs" />
-    <Compile Include="Controllers\CanchaController.cs" />
+    <Compile Include="Controllers\CampoController.cs" />
     <Compile Include="Controllers\CentroDeportivoController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\IntranetController.cs" />
@@ -554,10 +555,10 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Views\Cancha\Create.cshtml" />
-    <Content Include="Views\Cancha\Details.cshtml" />
-    <Content Include="Views\Cancha\Edit.cshtml" />
-    <Content Include="Views\Cancha\Index.cshtml" />
+    <Content Include="Views\Campo\Create.cshtml" />
+    <Content Include="Views\Campo\Details.cshtml" />
+    <Content Include="Views\Campo\Edit.cshtml" />
+    <Content Include="Views\Campo\Index.cshtml" />
     <Content Include="Views\Empresa\Create.cshtml" />
     <Content Include="Views\Empresa\Details.cshtml" />
     <Content Include="Views\Empresa\Edit.cshtml" />

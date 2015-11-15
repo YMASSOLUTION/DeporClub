@@ -98,9 +98,10 @@ namespace Negocio
         public List<Campo> SelectAllByEmpresaForEditReserva(int idEmpresa) {
             return DCampo.Instancia.SelectAllByEmpresaForEditReserva(idEmpresa);
         }
-        public List<CentroDeportivoCampo> SelectAllbyCentroDeportivo(int idCentroDeportivo)
+
+        public List<Campo> SelectAllByCentroDeportivo(int idCentroDeportivo)
         {
-            return DCampo.Instancia.SelectAllbyCentroDeportivo(idCentroDeportivo);
+            return DCampo.Instancia.SelectAllByCentroDeportivo(idCentroDeportivo);
         }
 
     }

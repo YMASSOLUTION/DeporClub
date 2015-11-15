@@ -52,7 +52,6 @@
     <Compile Include="DAmigo.cs" />
     <Compile Include="DCampo.cs" />
     <Compile Include="DCentroDeportivo.cs" />
-    <Compile Include="DCentroDeportivoCancha.cs" />
     <Compile Include="DDepartamento.cs" />
     <Compile Include="DDetalleInvitados.cs" />
     <Compile Include="DDistrito.cs" />

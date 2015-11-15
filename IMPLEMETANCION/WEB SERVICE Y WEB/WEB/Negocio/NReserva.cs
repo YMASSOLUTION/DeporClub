@@ -27,14 +27,16 @@ namespace Negocio
             {
                 bool aptoParaReserva=true;
                 obj.fechaHora = DateTime.Now;
-                //List<Reserva> listilla = DReserva.Instancia.SelectReservaByCanchaAndFecha(obj.fechaHora,obj.idCancha);
-                //foreach(var item in listilla){
+                //List<Reserva> listilla = DReserva.Instancia.SelectReservaByCanchaAndFecha(obj.fechaHora, obj.idCancha);
+                //foreach (var item in listilla)
+                //{
                 //    if (item.horaInicio == obj.horaInicio)
                 //    {
                 //        aptoParaReserva = false;
                 //        break;
                 //    }
-                //    if (item.horaFin == obj.horaFin) {
+                //    if (item.horaFin == obj.horaFin)
+                //    {
                 //        aptoParaReserva = false;
                 //        break;
                 //    }
@@ -131,6 +133,41 @@ namespace Negocio
         public List<Reserva> SelectAllActivo()
         {
             return DReserva.Instancia.SelectAllActivo();
+        }
+
+        //Algoritmo del marido que no deberia estar en esta clase 
+        public List<EHorario> SelectHorariosDisponiblesParaReserva(DateTime fecha,int idcampo) {
+
+            List<int> horaInicio = new List<int>() {7,8,9,10,11,12,13,14,15,16,17,18,19,20,21};
+            List<int> horaFin = new List<int>() { 8,9,10,11,12,13,14,15,16,17,18,19,20,21,22};
+
+
+            List<Reserva> listilla = DReserva.Instancia.SelectReservaByCanchaAndFecha(fecha, idcampo);
+
+            int cantHoras=0;
+
+            foreach (var item in listilla)
+            {
+                
+                int horFin=item.horaFin.Value.Hours;
+                int horInicio=item.horaInicio.Value.Hours;
+                cantHoras = horFin - horInicio;                
+                for(int i=0;i<cantHoras;i++){
+                    horaInicio.Remove(horInicio+i);
+                    horaFin.Remove(horInicio + (i+1));
+                }
+            }
+
+            List<EHorario> listHorario = new List<EHorario>();
+            for (int i = 0; i < horaInicio.Count(); i++) {
+                EHorario obj = new EHorario();
+                obj.horainicio=horaInicio.ElementAt(i);
+                obj.horafin = horaFin.ElementAt(i);
+
+                listHorario.Add(obj);
+            }
+
+                return listHorario;
         }
     }
 }

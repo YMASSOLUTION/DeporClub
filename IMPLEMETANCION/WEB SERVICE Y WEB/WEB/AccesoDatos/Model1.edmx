@@ -24,33 +24,26 @@
           <Property Name="activo" Type="bit" Nullable="false" />
           <Property Name="tipoCampo" Type="varchar" MaxLength="150" />
           <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="idCentroDeportivo" Type="int" />
         </EntityType>
         <EntityType Name="CentroDeportivo">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="direccion" Type="varchar" MaxLength="150" />
-          <Property Name="telefono" Type="varchar" MaxLength="15" />
-          <Property Name="celular" Type="varchar" MaxLength="50" />
-          <Property Name="idDistrito" Type="int" />
-          <Property Name="nroCanchas" Type="nchar" MaxLength="10" />
-          <Property Name="balon" Type="bit" />
-          <Property Name="camisetas" Type="bit" />
-          <Property Name="idEmpresa" Type="int" />
-          <Property Name="nombre" Type="varchar" MaxLength="50" />
-          <Property Name="foto" Type="varchar" MaxLength="150" />
-          <Property Name="latitud" Type="float" />
-          <Property Name="longitud" Type="float" />
-          <Property Name="activo" Type="bit" />
-        </EntityType>
-        <EntityType Name="CentroDeportivoCampo">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idCentroDeportivo" Type="int" />
-          <Property Name="idCancha" Type="int" />
+          <Property Name="direccion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="celular" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idDistrito" Type="int" Nullable="false" />
+          <Property Name="nroCanchas" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="balon" Type="bit" Nullable="false" />
+          <Property Name="camisetas" Type="bit" Nullable="false" />
+          <Property Name="idEmpresa" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="foto" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="latitud" Type="float" Nullable="false" />
+          <Property Name="longitud" Type="float" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Departamento">
           <Key>
@@ -194,8 +187,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Campo_CentroDeportivo">
+          <End Role="CentroDeportivo" Type="Self.CentroDeportivo" Multiplicity="0..1" />
+          <End Role="Campo" Type="Self.Campo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroDeportivo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Campo">
+              <PropertyRef Name="idCentroDeportivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CentroDeportivo_Distrito">
-          <End Role="Distrito" Type="Self.Distrito" Multiplicity="0..1" />
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="1" />
           <End Role="CentroDeportivo" Type="Self.CentroDeportivo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Distrito">
@@ -207,7 +212,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CentroDeportivo_Empresa">
-          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="1" />
           <End Role="CentroDeportivo" Type="Self.CentroDeportivo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empresa">
@@ -215,30 +220,6 @@
             </Principal>
             <Dependent Role="CentroDeportivo">
               <PropertyRef Name="idEmpresa" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CentroDeportivoCancha_Cancha">
-          <End Role="Campo" Type="Self.Campo" Multiplicity="0..1" />
-          <End Role="CentroDeportivoCampo" Type="Self.CentroDeportivoCampo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Campo">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CentroDeportivoCampo">
-              <PropertyRef Name="idCancha" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CentroDeportivoCancha_CentroDeportivo">
-          <End Role="CentroDeportivo" Type="Self.CentroDeportivo" Multiplicity="0..1" />
-          <End Role="CentroDeportivoCampo" Type="Self.CentroDeportivoCampo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CentroDeportivo">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CentroDeportivoCampo">
-              <PropertyRef Name="idCentroDeportivo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -414,7 +395,6 @@
           <EntitySet Name="Amigo" EntityType="Self.Amigo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Campo" EntityType="Self.Campo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CentroDeportivo" EntityType="Self.CentroDeportivo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CentroDeportivoCampo" EntityType="Self.CentroDeportivoCampo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Deportista" EntityType="Self.Deportista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleInvitados" EntityType="Self.DetalleInvitados" Schema="dbo" store:Type="Tables" />
@@ -435,6 +415,10 @@
             <End Role="Deportista" EntitySet="Deportista" />
             <End Role="Amigo" EntitySet="Amigo" />
           </AssociationSet>
+          <AssociationSet Name="FK_Campo_CentroDeportivo" Association="Self.FK_Campo_CentroDeportivo">
+            <End Role="CentroDeportivo" EntitySet="CentroDeportivo" />
+            <End Role="Campo" EntitySet="Campo" />
+          </AssociationSet>
           <AssociationSet Name="FK_CentroDeportivo_Distrito" Association="Self.FK_CentroDeportivo_Distrito">
             <End Role="Distrito" EntitySet="Distrito" />
             <End Role="CentroDeportivo" EntitySet="CentroDeportivo" />
@@ -442,14 +426,6 @@
           <AssociationSet Name="FK_CentroDeportivo_Empresa" Association="Self.FK_CentroDeportivo_Empresa">
             <End Role="Empresa" EntitySet="Empresa" />
             <End Role="CentroDeportivo" EntitySet="CentroDeportivo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CentroDeportivoCancha_Cancha" Association="Self.FK_CentroDeportivoCancha_Cancha">
-            <End Role="Campo" EntitySet="Campo" />
-            <End Role="CentroDeportivoCampo" EntitySet="CentroDeportivoCampo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CentroDeportivoCancha_CentroDeportivo" Association="Self.FK_CentroDeportivoCancha_CentroDeportivo">
-            <End Role="CentroDeportivo" EntitySet="CentroDeportivo" />
-            <End Role="CentroDeportivoCampo" EntitySet="CentroDeportivoCampo" />
           </AssociationSet>
           <AssociationSet Name="FK_Departamento_Pais" Association="Self.FK_Departamento_Pais">
             <End Role="Pais" EntitySet="Pais" />
@@ -514,8 +490,8 @@
       <Schema Namespace="CanchaDBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="CanchaDBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Amigo" EntityType="CanchaDBModel1.Amigo" />
+          <EntitySet Name="Campo" EntityType="CanchaDBModel1.Campo" />
           <EntitySet Name="CentroDeportivo" EntityType="CanchaDBModel1.CentroDeportivo" />
-          <EntitySet Name="CentroDeportivoCampo" EntityType="CanchaDBModel1.CentroDeportivoCampo" />
           <EntitySet Name="Departamento" EntityType="CanchaDBModel1.Departamento" />
           <EntitySet Name="Deportista" EntityType="CanchaDBModel1.Deportista" />
           <EntitySet Name="DetalleInvitados" EntityType="CanchaDBModel1.DetalleInvitados" />
@@ -524,6 +500,7 @@
           <EntitySet Name="Mensaje" EntityType="CanchaDBModel1.Mensaje" />
           <EntitySet Name="Pais" EntityType="CanchaDBModel1.Pais" />
           <EntitySet Name="Provincia" EntityType="CanchaDBModel1.Provincia" />
+          <EntitySet Name="Reserva" EntityType="CanchaDBModel1.Reserva" />
           <EntitySet Name="SolicitudAmistad" EntityType="CanchaDBModel1.SolicitudAmistad" />
           <EntitySet Name="TipoUsuario" EntityType="CanchaDBModel1.TipoUsuario" />
           <EntitySet Name="Usuario" EntityType="CanchaDBModel1.Usuario" />
@@ -535,6 +512,14 @@
             <End Role="Deportista" EntitySet="Deportista" />
             <End Role="Amigo" EntitySet="Amigo" />
           </AssociationSet>
+          <AssociationSet Name="FK_Campo_CentroDeportivo" Association="CanchaDBModel1.FK_Campo_CentroDeportivo">
+            <End Role="CentroDeportivo" EntitySet="CentroDeportivo" />
+            <End Role="Campo" EntitySet="Campo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reserva_Cancha" Association="CanchaDBModel1.FK_Reserva_Cancha">
+            <End Role="Campo" EntitySet="Campo" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
           <AssociationSet Name="FK_CentroDeportivo_Distrito" Association="CanchaDBModel1.FK_CentroDeportivo_Distrito">
             <End Role="Distrito" EntitySet="Distrito" />
             <End Role="CentroDeportivo" EntitySet="CentroDeportivo" />
@@ -542,10 +527,6 @@
           <AssociationSet Name="FK_CentroDeportivo_Empresa" Association="CanchaDBModel1.FK_CentroDeportivo_Empresa">
             <End Role="Empresa" EntitySet="Empresa" />
             <End Role="CentroDeportivo" EntitySet="CentroDeportivo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CentroDeportivoCancha_CentroDeportivo" Association="CanchaDBModel1.FK_CentroDeportivoCancha_CentroDeportivo">
-            <End Role="CentroDeportivo" EntitySet="CentroDeportivo" />
-            <End Role="CentroDeportivoCampo" EntitySet="CentroDeportivoCampo" />
           </AssociationSet>
           <AssociationSet Name="FK_Departamento_Pais" Association="CanchaDBModel1.FK_Departamento_Pais">
             <End Role="Pais" EntitySet="Pais" />
@@ -579,6 +560,10 @@
             <End Role="Deportista" EntitySet="Deportista" />
             <End Role="SolicitudAmistad" EntitySet="SolicitudAmistad" />
           </AssociationSet>
+          <AssociationSet Name="FK_DetalleInvitados_Reserva" Association="CanchaDBModel1.FK_DetalleInvitados_Reserva">
+            <End Role="Reserva" EntitySet="Reserva" />
+            <End Role="DetalleInvitados" EntitySet="DetalleInvitados" />
+          </AssociationSet>
           <AssociationSet Name="FK_Distrito_Provincia" Association="CanchaDBModel1.FK_Distrito_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Distrito" EntitySet="Distrito" />
@@ -587,27 +572,13 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Empresa" EntitySet="Empresa" />
           </AssociationSet>
-          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="CanchaDBModel1.FK_Usuario_TipoUsuario">
-            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-          <EntitySet Name="Campo" EntityType="CanchaDBModel1.Campo" />
-          <AssociationSet Name="FK_CentroDeportivoCancha_Cancha" Association="CanchaDBModel1.FK_CentroDeportivoCancha_Cancha">
-            <End Role="Campo" EntitySet="Campo" />
-            <End Role="CentroDeportivoCampo" EntitySet="CentroDeportivoCampo" />
-          </AssociationSet>
-          <EntitySet Name="Reserva" EntityType="CanchaDBModel1.Reserva" />
-          <AssociationSet Name="FK_Reserva_Cancha" Association="CanchaDBModel1.FK_Reserva_Cancha">
-            <End Role="Campo" EntitySet="Campo" />
-            <End Role="Reserva" EntitySet="Reserva" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleInvitados_Reserva" Association="CanchaDBModel1.FK_DetalleInvitados_Reserva">
-            <End Role="Reserva" EntitySet="Reserva" />
-            <End Role="DetalleInvitados" EntitySet="DetalleInvitados" />
-          </AssociationSet>
           <AssociationSet Name="FK_Reserva_Usuario" Association="CanchaDBModel1.FK_Reserva_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="CanchaDBModel1.FK_Usuario_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Amigo">
@@ -620,37 +591,42 @@
           <NavigationProperty Name="Deportista" Relationship="CanchaDBModel1.FK_Amigo_Pelotero" FromRole="Amigo" ToRole="Deportista" />
           <NavigationProperty Name="Deportista1" Relationship="CanchaDBModel1.FK_Amigo_Pelotero1" FromRole="Amigo" ToRole="Deportista" />
         </EntityType>
+        <EntityType Name="Campo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="largo" Type="Int32" Nullable="false" />
+          <Property Name="ancho" Type="Int32" Nullable="false" />
+          <Property Name="precio" Type="Int32" Nullable="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <Property Name="tipoCampo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idCentroDeportivo" Type="Int32" />
+          <NavigationProperty Name="CentroDeportivo" Relationship="CanchaDBModel1.FK_Campo_CentroDeportivo" FromRole="Campo" ToRole="CentroDeportivo" />
+          <NavigationProperty Name="Reserva" Relationship="CanchaDBModel1.FK_Reserva_Cancha" FromRole="Campo" ToRole="Reserva" />
+        </EntityType>
         <EntityType Name="CentroDeportivo">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="idDistrito" Type="Int32" />
-          <Property Name="nroCanchas" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="balon" Type="Boolean" />
-          <Property Name="camisetas" Type="Boolean" />
-          <Property Name="idEmpresa" Type="Int32" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="foto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="latitud" Type="Double" />
-          <Property Name="longitud" Type="Double" />
-          <Property Name="activo" Type="Boolean" />
+          <Property Name="direccion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="celular" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idDistrito" Type="Int32" Nullable="false" />
+          <Property Name="nroCanchas" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="balon" Type="Boolean" Nullable="false" />
+          <Property Name="camisetas" Type="Boolean" Nullable="false" />
+          <Property Name="idEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="foto" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="latitud" Type="Double" Nullable="false" />
+          <Property Name="longitud" Type="Double" Nullable="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Campo" Relationship="CanchaDBModel1.FK_Campo_CentroDeportivo" FromRole="CentroDeportivo" ToRole="Campo" />
           <NavigationProperty Name="Distrito" Relationship="CanchaDBModel1.FK_CentroDeportivo_Distrito" FromRole="CentroDeportivo" ToRole="Distrito" />
           <NavigationProperty Name="Empresa" Relationship="CanchaDBModel1.FK_CentroDeportivo_Empresa" FromRole="CentroDeportivo" ToRole="Empresa" />
-          <NavigationProperty Name="CentroDeportivoCampo" Relationship="CanchaDBModel1.FK_CentroDeportivoCancha_CentroDeportivo" FromRole="CentroDeportivo" ToRole="CentroDeportivoCampo" />
-        </EntityType>
-        <EntityType Name="CentroDeportivoCampo">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idCentroDeportivo" Type="Int32" />
-          <Property Name="idCancha" Type="Int32" />
-          <NavigationProperty Name="CentroDeportivo" Relationship="CanchaDBModel1.FK_CentroDeportivoCancha_CentroDeportivo" FromRole="CentroDeportivoCampo" ToRole="CentroDeportivo" />
-          <NavigationProperty Name="Campo" Relationship="CanchaDBModel1.FK_CentroDeportivoCancha_Cancha" FromRole="CentroDeportivoCampo" ToRole="Campo" />
         </EntityType>
         <EntityType Name="Departamento">
           <Key>
@@ -749,6 +725,22 @@
           <NavigationProperty Name="Departamento" Relationship="CanchaDBModel1.FK_Provincia_Departamento" FromRole="Provincia" ToRole="Departamento" />
           <NavigationProperty Name="Distrito" Relationship="CanchaDBModel1.FK_Distrito_Provincia" FromRole="Provincia" ToRole="Distrito" />
         </EntityType>
+        <EntityType Name="Reserva">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fechaHora" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="idCancha" Type="Int32" Nullable="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <Property Name="horaInicio" Type="Time" Precision="7" />
+          <Property Name="horaFin" Type="Time" Precision="7" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Campo" Relationship="CanchaDBModel1.FK_Reserva_Cancha" FromRole="Reserva" ToRole="Campo" />
+          <NavigationProperty Name="DetalleInvitados" Relationship="CanchaDBModel1.FK_DetalleInvitados_Reserva" FromRole="Reserva" ToRole="DetalleInvitados" />
+          <NavigationProperty Name="Usuario" Relationship="CanchaDBModel1.FK_Reserva_Usuario" FromRole="Reserva" ToRole="Usuario" />
+        </EntityType>
         <EntityType Name="SolicitudAmistad">
           <Key>
             <PropertyRef Name="id" />
@@ -782,8 +774,8 @@
           <Property Name="activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Deportista" Relationship="CanchaDBModel1.FK_Pelotero_Usuario" FromRole="Usuario" ToRole="Deportista" />
           <NavigationProperty Name="Empresa" Relationship="CanchaDBModel1.FK_Empresa_Usuario" FromRole="Usuario" ToRole="Empresa" />
-          <NavigationProperty Name="TipoUsuario" Relationship="CanchaDBModel1.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
           <NavigationProperty Name="Reserva" Relationship="CanchaDBModel1.FK_Reserva_Usuario" FromRole="Usuario" ToRole="Reserva" />
+          <NavigationProperty Name="TipoUsuario" Relationship="CanchaDBModel1.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
         </EntityType>
         <Association Name="FK_Amigo_Pelotero">
           <End Type="CanchaDBModel1.Deportista" Role="Deportista" Multiplicity="1" />
@@ -809,8 +801,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Campo_CentroDeportivo">
+          <End Type="CanchaDBModel1.CentroDeportivo" Role="CentroDeportivo" Multiplicity="0..1" />
+          <End Type="CanchaDBModel1.Campo" Role="Campo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroDeportivo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Campo">
+              <PropertyRef Name="idCentroDeportivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reserva_Cancha">
+          <End Type="CanchaDBModel1.Campo" Role="Campo" Multiplicity="1" />
+          <End Type="CanchaDBModel1.Reserva" Role="Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="idCancha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CentroDeportivo_Distrito">
-          <End Type="CanchaDBModel1.Distrito" Role="Distrito" Multiplicity="0..1" />
+          <End Type="CanchaDBModel1.Distrito" Role="Distrito" Multiplicity="1" />
           <End Type="CanchaDBModel1.CentroDeportivo" Role="CentroDeportivo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Distrito">
@@ -822,7 +838,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CentroDeportivo_Empresa">
-          <End Type="CanchaDBModel1.Empresa" Role="Empresa" Multiplicity="0..1" />
+          <End Type="CanchaDBModel1.Empresa" Role="Empresa" Multiplicity="1" />
           <End Type="CanchaDBModel1.CentroDeportivo" Role="CentroDeportivo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empresa">
@@ -830,18 +846,6 @@
             </Principal>
             <Dependent Role="CentroDeportivo">
               <PropertyRef Name="idEmpresa" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CentroDeportivoCancha_CentroDeportivo">
-          <End Type="CanchaDBModel1.CentroDeportivo" Role="CentroDeportivo" Multiplicity="0..1" />
-          <End Type="CanchaDBModel1.CentroDeportivoCampo" Role="CentroDeportivoCampo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CentroDeportivo">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CentroDeportivoCampo">
-              <PropertyRef Name="idCentroDeportivo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -941,6 +945,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DetalleInvitados_Reserva">
+          <End Type="CanchaDBModel1.Reserva" Role="Reserva" Multiplicity="1" />
+          <End Type="CanchaDBModel1.DetalleInvitados" Role="DetalleInvitados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserva">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DetalleInvitados">
+              <PropertyRef Name="idReserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Distrito_Provincia">
           <End Type="CanchaDBModel1.Provincia" Role="Provincia" Multiplicity="1" />
           <End Type="CanchaDBModel1.Distrito" Role="Distrito" Multiplicity="*" />
@@ -965,84 +981,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Usuario_TipoUsuario">
-          <End Type="CanchaDBModel1.TipoUsuario" Role="TipoUsuario" Multiplicity="1" />
-          <End Type="CanchaDBModel1.Usuario" Role="Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoUsuario">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="idTipoUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Campo">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="largo" Type="Int32" Nullable="false" />
-          <Property Name="ancho" Type="Int32" Nullable="false" />
-          <Property Name="precio" Type="Int32" Nullable="false" />
-          <Property Name="activo" Type="Boolean" Nullable="false" />
-          <Property Name="tipoCampo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CentroDeportivoCampo" Relationship="CanchaDBModel1.FK_CentroDeportivoCancha_Cancha" FromRole="Campo" ToRole="CentroDeportivoCampo" />
-          <NavigationProperty Name="Reserva" Relationship="CanchaDBModel1.FK_Reserva_Cancha" FromRole="Campo" ToRole="Reserva" />
-        </EntityType>
-        <Association Name="FK_CentroDeportivoCancha_Cancha">
-          <End Type="CanchaDBModel1.Campo" Role="Campo" Multiplicity="0..1" />
-          <End Type="CanchaDBModel1.CentroDeportivoCampo" Role="CentroDeportivoCampo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Campo">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CentroDeportivoCampo">
-              <PropertyRef Name="idCancha" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Reserva">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fechaHora" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="idUsuario" Type="Int32" Nullable="false" />
-          <Property Name="idCancha" Type="Int32" Nullable="false" />
-          <Property Name="activo" Type="Boolean" Nullable="false" />
-          <Property Name="horaInicio" Type="Time" Precision="7" />
-          <Property Name="horaFin" Type="Time" Precision="7" />
-          <Property Name="fecha" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Campo" Relationship="CanchaDBModel1.FK_Reserva_Cancha" FromRole="Reserva" ToRole="Campo" />
-          <NavigationProperty Name="DetalleInvitados" Relationship="CanchaDBModel1.FK_DetalleInvitados_Reserva" FromRole="Reserva" ToRole="DetalleInvitados" />
-          <NavigationProperty Name="Usuario" Relationship="CanchaDBModel1.FK_Reserva_Usuario" FromRole="Reserva" ToRole="Usuario" />
-        </EntityType>
-        <Association Name="FK_Reserva_Cancha">
-          <End Type="CanchaDBModel1.Campo" Role="Campo" Multiplicity="1" />
-          <End Type="CanchaDBModel1.Reserva" Role="Reserva" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Campo">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Reserva">
-              <PropertyRef Name="idCancha" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleInvitados_Reserva">
-          <End Type="CanchaDBModel1.Reserva" Role="Reserva" Multiplicity="1" />
-          <End Type="CanchaDBModel1.DetalleInvitados" Role="DetalleInvitados" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Reserva">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DetalleInvitados">
-              <PropertyRef Name="idReserva" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Reserva_Usuario">
           <End Type="CanchaDBModel1.Usuario" Role="Usuario" Multiplicity="1" />
           <End Type="CanchaDBModel1.Reserva" Role="Reserva" Multiplicity="*" />
@@ -1052,6 +990,18 @@
             </Principal>
             <Dependent Role="Reserva">
               <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TipoUsuario">
+          <End Type="CanchaDBModel1.TipoUsuario" Role="TipoUsuario" Multiplicity="1" />
+          <End Type="CanchaDBModel1.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idTipoUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1066,6 +1016,20 @@
               <MappingFragment StoreEntitySet="Amigo">
                 <ScalarProperty Name="idAmigo" ColumnName="idAmigo" />
                 <ScalarProperty Name="idDeportista" ColumnName="idDeportista" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Campo">
+            <EntityTypeMapping TypeName="CanchaDBModel1.Campo">
+              <MappingFragment StoreEntitySet="Campo">
+                <ScalarProperty Name="idCentroDeportivo" ColumnName="idCentroDeportivo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="tipoCampo" ColumnName="tipoCampo" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="ancho" ColumnName="ancho" />
+                <ScalarProperty Name="largo" ColumnName="largo" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1086,15 +1050,6 @@
                 <ScalarProperty Name="celular" ColumnName="celular" />
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="direccion" ColumnName="direccion" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CentroDeportivoCampo">
-            <EntityTypeMapping TypeName="CanchaDBModel1.CentroDeportivoCampo">
-              <MappingFragment StoreEntitySet="CentroDeportivoCampo">
-                <ScalarProperty Name="idCancha" ColumnName="idCancha" />
-                <ScalarProperty Name="idCentroDeportivo" ColumnName="idCentroDeportivo" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1183,6 +1138,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Reserva">
+            <EntityTypeMapping TypeName="CanchaDBModel1.Reserva">
+              <MappingFragment StoreEntitySet="Reserva">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="horaFin" ColumnName="horaFin" />
+                <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="idCancha" ColumnName="idCancha" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="SolicitudAmistad">
             <EntityTypeMapping TypeName="CanchaDBModel1.SolicitudAmistad">
               <MappingFragment StoreEntitySet="SolicitudAmistad">
@@ -1211,33 +1180,6 @@
                 <ScalarProperty Name="idTipoUsuario" ColumnName="idTipoUsuario" />
                 <ScalarProperty Name="clave" ColumnName="clave" />
                 <ScalarProperty Name="nick" ColumnName="nick" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Campo">
-            <EntityTypeMapping TypeName="CanchaDBModel1.Campo">
-              <MappingFragment StoreEntitySet="Campo">
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="tipoCampo" ColumnName="tipoCampo" />
-                <ScalarProperty Name="activo" ColumnName="activo" />
-                <ScalarProperty Name="precio" ColumnName="precio" />
-                <ScalarProperty Name="ancho" ColumnName="ancho" />
-                <ScalarProperty Name="largo" ColumnName="largo" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Reserva">
-            <EntityTypeMapping TypeName="CanchaDBModel1.Reserva">
-              <MappingFragment StoreEntitySet="Reserva">
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="horaFin" ColumnName="horaFin" />
-                <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
-                <ScalarProperty Name="activo" ColumnName="activo" />
-                <ScalarProperty Name="idCancha" ColumnName="idCancha" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -46,6 +46,8 @@ namespace AccesoDatos
             obj.precio = objCampo.precio;
             obj.activo = objCampo.activo;
             obj.tipoCampo = objCampo.tipoCampo;
+            obj.nombre = objCampo.nombre;
+            obj.idCentroDeportivo = objCampo.idCentroDeportivo;
             try
             {
                 db.SaveChanges();
@@ -106,12 +108,12 @@ namespace AccesoDatos
         }
         public List<Campo> SelectAll()
         {
-            List<Campo> lista = db.Campo.ToList();
+            List<Campo> lista = db.Campo.AsNoTracking().ToList();
             return lista;
         }
         public List<Campo> SelectAllActivo()
         {
-            List<Campo> lista = db.Campo.Where(a => a.activo == true).ToList();
+            List<Campo> lista = db.Campo.AsNoTracking().Where(a => a.activo == true).ToList();
             return lista;
         }
         #endregion
@@ -130,10 +132,11 @@ namespace AccesoDatos
         {
             throw new NotImplementedException();
         }
-        public List<CentroDeportivoCampo> SelectAllbyCentroDeportivo(int idCentroDeportivo)
+        public List<Campo> SelectAllByCentroDeportivo(int idCentroDeportivo)
         {
-            List<CentroDeportivoCampo> lista = db.CentroDeportivoCampo.Where(a => a.idCentroDeportivo == idCentroDeportivo).ToList();
+            List<Campo> lista = db.Campo.Where(a => a.idCentroDeportivo == idCentroDeportivo).ToList();
             return lista;
         }
+
     }
 }
