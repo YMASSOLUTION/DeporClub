@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Canchas</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_sucursales">SucursalesActivity</string>
+    <string name="title_activity_canchas">CanchasActivity</string>
+    <string name="title_activity_reserva">ReservaActivity</string>
+    <string name="title_activity_registrar_pelotero">RegistrarPeloteroActivity</string>
+</resources>
