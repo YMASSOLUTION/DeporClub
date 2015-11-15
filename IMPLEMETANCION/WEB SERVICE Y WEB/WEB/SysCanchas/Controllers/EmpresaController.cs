@@ -118,8 +118,7 @@ namespace Vista.Controllers
             {
                 return RedirectToAction("Index");
             }
-        }
-        [HttpPost]
+        }[HttpPost]
         public ActionResult Details(int id = 0)
         {
             try
@@ -132,6 +131,7 @@ namespace Vista.Controllers
                 return RedirectToAction("Index");
             }
         }
+        
         [HttpPost]
         public ActionResult DeleteConfirmed(int id, int ud)
         {

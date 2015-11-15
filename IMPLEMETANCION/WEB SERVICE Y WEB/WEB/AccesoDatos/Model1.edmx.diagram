@@ -6,8 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="f7b34d74aaa34653b54aadcd9b65c855" Name="Diagram1" ZoomLevel="77">
         <EntityTypeShape EntityType="CanchaDBModel1.Amigo" Width="1.5" PointX="0.625" PointY="12.625" />
-        <EntityTypeShape EntityType="CanchaDBModel1.CentroDeportivo" Width="1.5" PointX="8.5" PointY="3.375" />
-        <EntityTypeShape EntityType="CanchaDBModel1.CentroDeportivoCampo" Width="1.5" PointX="12.125" PointY="3.5" />
+        <EntityTypeShape EntityType="CanchaDBModel1.CentroDeportivo" Width="1.875" PointX="8.5" PointY="3.375" />
+        <EntityTypeShape EntityType="CanchaDBModel1.CentroDeportivoCampo" Width="2.125" PointX="12.125" PointY="3.5" />
         <EntityTypeShape EntityType="CanchaDBModel1.Departamento" Width="1.5" PointX="0.75" PointY="3.5" />
         <EntityTypeShape EntityType="CanchaDBModel1.Deportista" Width="1.5" PointX="3.25" PointY="10.25" />
         <EntityTypeShape EntityType="CanchaDBModel1.DetalleInvitados" Width="1.5" PointX="8" PointY="12.625" />

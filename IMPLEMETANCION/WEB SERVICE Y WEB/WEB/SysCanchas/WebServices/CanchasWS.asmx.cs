@@ -24,8 +24,7 @@ namespace SysCanchas.WebServices
         }
         
         [WebMethod]
-        public bool registrarPelotero(string nombre, string apellidos, int celular,
-            string email, string nick, string clave)
+        public bool registrarPelotero(string nombre, string apellidos, int celular,string email, string nick, string clave)
         {
             Deportista pelotero = new Deportista();
             Usuario usuario = new Usuario();
