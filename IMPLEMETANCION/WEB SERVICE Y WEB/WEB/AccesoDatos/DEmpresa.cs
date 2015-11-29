@@ -105,7 +105,7 @@ namespace AccesoDatos
         }
         public List<Empresa> SelectAll()
         {
-            List<Empresa> lista = db.Empresa.AsNoTracking().ToList();
+            List<Empresa> lista = db.Empresa.AsNoTracking().Where(a=>a.id!=4).ToList();
             return lista;
         }
         public List<Empresa> SelectAllActivo()

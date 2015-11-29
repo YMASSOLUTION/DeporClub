@@ -105,12 +105,12 @@ namespace AccesoDatos
         }
         public List<Reserva> SelectAll()
         {
-            List<Reserva> lista = db.Reserva.ToList();
+            List<Reserva> lista = db.Reserva.AsNoTracking().ToList();
             return lista;
         }
         public List<Reserva> SelectAllActivo()
         {
-            List<Reserva> lista = db.Reserva.Where(a => a.activo == true).ToList();
+            List<Reserva> lista = db.Reserva.AsNoTracking().Where(a => a.activo == true).ToList();
             return lista;
         }
         #endregion
@@ -118,6 +118,11 @@ namespace AccesoDatos
         public List<Reserva> SelectReservaByCanchaAndFecha(DateTime fecha, int idcancha)
         {
             return db.Reserva.AsNoTracking().Where(a => a.fecha == fecha && a.idCancha==idcancha && a.activo==true).ToList();
+        }
+
+        public List<Reserva> SelectReservaByIdUsuario(int idusuario)
+        {
+            return db.Reserva.AsNoTracking().Where(a => a.idUsuario==idusuario && a.activo == true).ToList();
         }
     }
 }

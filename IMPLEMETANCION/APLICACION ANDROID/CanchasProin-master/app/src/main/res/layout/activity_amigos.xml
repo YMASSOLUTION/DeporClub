@@ -1,0 +1,94 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="canchas.com.proin2.canchas.AmigosActivity">
+
+    <TableLayout
+        android:id="@+id/tabla"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:stretchColumns="1"
+        >
+
+        <TableRow
+            android:id="@+id/fila1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/btnGrifo"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerVertical="false"
+                    android:layout_column="0"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="viewAgregarAmigos"
+                    android:background="@mipmap/icn_add_deportista"
+                    />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/btnRestaurante"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerVertical="false"
+                    android:layout_column="1"
+                    android:onClick="viewSolicitudes"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@mipmap/icn_soccerplayer"
+                    />
+            </FrameLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/fila2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Agregar Amigos" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Ver Solicitudes" />
+            </FrameLayout>
+        </TableRow>
+
+
+    </TableLayout>
+
+
+</RelativeLayout>

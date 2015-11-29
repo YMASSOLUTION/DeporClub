@@ -95,9 +95,17 @@ namespace Negocio
             return DDeportista.Instancia.solicitudAmistad(idDeportista,idReceptor);
         }
 
-        public bool responderSolicitudAmistad(int idDeportista, int idSolicitante, string respuesta)
+        public bool responderSolicitudAmistad(int idSolicitudAmistad)
         {
-            return DDeportista.Instancia.responderSolicitudAmistad(idDeportista, idSolicitante,respuesta);
+            return DDeportista.Instancia.responderSolicitudAmistad(idSolicitudAmistad);
+        }
+
+        public List<Deportista> listarAmigos(int idDeportista) {
+            return DDeportista.Instancia.listarAmigos(idDeportista);
+        }
+
+        public List<Deportista> listarDeportistas(int idDeportista) {
+            return DDeportista.Instancia.listarDeportistas(idDeportista);
         }
     }
 }

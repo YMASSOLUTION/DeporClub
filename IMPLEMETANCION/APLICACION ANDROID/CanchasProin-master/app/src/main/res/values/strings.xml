@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Canchas</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">Iniciar Sesion</string>
+    <string name="title_activity_sucursales">Centros Deportivos</string>
+    <string name="title_activity_canchas">Campos Deportivos</string>
+    <string name="title_activity_reserva">Reservar </string>
+    <string name="title_activity_registrar_pelotero">Registrarse</string>
+    <string name="title_activity_mis_reservas">Mis Reservas</string>
+    <string name="title_activity_invitar_amigos">Invitar Amigos</string>
+    <string name="title_activity_listar_peloteros">Deportistas</string>
+    <string name="title_activity_amigos">Menu Amigos</string>
+    <string name="title_activity_responder_solicitud">Solicitudes de Amistad</string>
+</resources>

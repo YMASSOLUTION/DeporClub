@@ -1,0 +1,84 @@
+
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:id="@+id/scrollView"
+    >
+<LinearLayout
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:scrollbars="horizontal">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/id"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_horizontal"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="180dp"
+
+            />
+        <!-- android:background="@drawable/urbina"-->
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/txtUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Usuario"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginLeft="45dp"
+        android:inputType="textPersonName">
+    </EditText>
+
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="Arial"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:layout_marginRight="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="18dp"
+        android:inputType="textPassword">
+    </EditText>
+
+    <Button
+        android:id="@+id/btnInicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="#009688"
+        android:textColor="@color/white"
+        android:layout_marginTop="55dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginLeft="45dp"
+        android:padding="10dp"
+        android:onClick="viewLogin"
+        android:text="Entrar"/>
+
+
+    <TextView
+        android:layout_marginTop="25dp"
+        android:layout_width="wrap_content"
+        android:text="Registrarse"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:onClick="viewRegistrar"
+        />
+
+
+
+</LinearLayout>
+</ScrollView>

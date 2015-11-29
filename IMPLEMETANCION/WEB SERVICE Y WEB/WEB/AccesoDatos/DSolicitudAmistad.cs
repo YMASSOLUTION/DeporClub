@@ -120,5 +120,20 @@ namespace AccesoDatos
         {
             return db.SolicitudAmistad.Where(a => a.idReceptor == idPelotero && a.estado == "pendiente").ToList();
         }
+
+        public bool registrarSolicitud(SolicitudAmistad obj) {
+
+            try
+            {
+                db.SolicitudAmistad.Add(obj);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        
+        }
     }
 }

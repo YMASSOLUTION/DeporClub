@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="celeste">#1acef6</color>
+    <color name="application">@color/buttoncolor</color>
+    <color name="buttoncolor">#009688</color>
+    <color name="white">#ffffff</color>
+
+</resources>

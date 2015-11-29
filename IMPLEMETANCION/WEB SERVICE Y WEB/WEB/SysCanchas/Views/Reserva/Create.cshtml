@@ -73,23 +73,32 @@
                 <div class="portlet-body">
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
-                    <div class="form-group">
-                        <div id="CentroDeportivoList"></div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div id="CentroDeportivoList"></div>
+                        </div>
+                        <div class="form-group">
+                            <div id="CampoList"></div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.fecha)
+                            @Html.TextBoxFor(m => m.fecha, new { @class = "form-control", @placeholder = "Ingrese su fechaHora", @maxlength = "" })
+                            @Html.ValidationMessageFor(model => model.fecha)
+                        </div>
+                        <a href="#" id="btnBuscarHorario" class="btn btn-info">Buscar Horarios Disponibles</a>
+                        <div class="clearfix">&nbsp;</div>
                     </div>
-                    <div class="form-group">
-                        <div id="CampoList"></div>
+                    <div class="col-md-6">
+                        <div id="tblHorarios"></div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.fecha)
-                        @Html.TextBoxFor(m => m.fecha, new { @class = "form-control", @placeholder = "Ingrese su fechaHora", @maxlength = "" })
-                        @Html.ValidationMessageFor(model => model.fecha)
-                    </div>
+                    
+                    
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 @Html.LabelFor(model => model.horaInicio)
                                 <div class="input-group timepicker">
-                                    <input id="horaInicio" name="horaInicio" class="form-control input-small" type="text"><span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                    <input id="horaInicio" required name="horaInicio" class="form-control input-small" type="text"><span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                                 </div>
                                 @Html.ValidationMessageFor(model => model.horaInicio)
                             </div>
@@ -105,11 +114,7 @@
                             </div>
                         </div>
                     </div>                   
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.activo)
-                        @Html.EditorFor(m => m.activo, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.activo)
-                    </div>
+                    
                     <div class="form-actions">
                         <input type="submit" class="btn btn-primary" value="Guardar" />
                         @Html.ActionLink("Regresar a la Lista de Reservas", "Index")
@@ -131,7 +136,43 @@
 <div class="clearfix"></div>
 <script>
     $(document).ready(function () {
+
         $.isLoading({ text: "Cargando Formato" });
+        $("#btnBuscarHorario").click(function () {
+            $.ajax({
+                url: '/Reserva/listarHorarioDisponible',
+                data: {
+                    fecha: $("#fecha").val(),
+                    idcampo: $("#cboCampo").val()
+                },
+                type: "POST",
+                success: function (data) {
+                    console.log(data);
+                    var html = "";
+                    html +="<table class='table table-bordered table-striped table-hover tc-table table-primary footable' data-page-size='2'>";
+                    html +="<thead>";
+                    html +="<tr>";
+                    html +="<th>Hora Inicio</th>";
+                    html +="<th>Hora Fin</th>";
+                    html +="</tr>";
+                    html+= "</thead>";
+                    html += "<tbody>";
+                    for (var i = 0; i < data.length; i++) {
+                        html += "<tr>";
+                        html += "<td class='col-small center'>"+data[i].horainicio+":00</td>";
+                        html += "<td class='col-small center'>" + data[i].horafin + ":00</td>";
+                        html += "</tr>";
+                    }
+                    html +="</tbody>";
+                    html += "</table>";
+                    $("#tblHorarios").html(html);
+                },
+                error: function (data) {
+                    alert("Hubo un error en el servidor");
+                    $.isLoading("hide");
+                }
+            });
+        });
         $("#CentroDeportivoList").load('/Intranet/SelectCentroDeportivobyEmpresa?idEmpresa=@ViewBag.idEmpresa', function () {
             $("#CampoList").load('/Intranet/CampobyCentroDeportivo?idCentroDeportivo=-1');
             $('#cboCentroDeportivo').change(function () {

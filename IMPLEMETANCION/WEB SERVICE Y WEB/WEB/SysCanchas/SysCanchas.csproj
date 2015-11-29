@@ -620,16 +620,13 @@
     <Content Include="Views\Shared\_ListaProvinciaPartial.cshtml" />
     <Content Include="Views\Shared\_ListaDistritoPartial.cshtml" />
     <Content Include="Views\Shared\_ListaEmpresaPartial.cshtml" />
-    <Content Include="Views\Anuncio\Create.cshtml" />
-    <Content Include="Views\Anuncio\Details.cshtml" />
-    <Content Include="Views\Anuncio\Edit.cshtml" />
-    <Content Include="Views\Anuncio\Index.cshtml" />
     <Content Include="Views\CentroDeportivo\Create.cshtml" />
     <Content Include="Views\CentroDeportivo\Details.cshtml" />
     <Content Include="Views\CentroDeportivo\Edit.cshtml" />
     <Content Include="Views\CentroDeportivo\Index.cshtml" />
     <Content Include="Views\Shared\_ListaCentroDeportivoPartial.cshtml" />
     <Content Include="Views\Shared\_ListaCampoPartial.cshtml" />
+    <Content Include="Views\Shared\_HorariosPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -127,9 +127,82 @@ namespace AccesoDatos
             throw new NotImplementedException();
         }
 
-        public bool responderSolicitudAmistad(int idDeportista, int idSolicitante, string respuesta)
+        public bool responderSolicitudAmistad(int idSolicitudAmistad)
         {
-            throw new NotImplementedException();
+            SolicitudAmistad objSolicitud = db.SolicitudAmistad.Find(idSolicitudAmistad);
+            objSolicitud.estado = "aceptado";
+
+            Amigo objAmigo = new Amigo();
+            objAmigo.idDeportista = objSolicitud.idPelotero;
+            objAmigo.idAmigo = objSolicitud.idReceptor;
+                        
+            db.Amigo.Add(objAmigo);
+           
+
+            Amigo objAmigo2 = new Amigo();
+            objAmigo2.idDeportista = objSolicitud.idReceptor;
+            objAmigo2.idAmigo = objSolicitud.idPelotero;
+
+            db.Amigo.Add(objAmigo2);
+
+            try
+            {
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
+        public List<Deportista> listarAmigos(int idDeportista) { 
+        
+            List<Amigo> listilla=db.Amigo.AsNoTracking().Where(a=>a.idDeportista==idDeportista).ToList();
+            
+            List<Deportista> lista=new List<Deportista>();
+
+            foreach(var item in listilla){
+                Deportista obj=new Deportista();
+                obj.id=item.Deportista1.id;
+                obj.nombre=item.Deportista1.nombre;
+                obj.apellidos=item.Deportista1.apellidos;
+                obj.celular=item.Deportista1.celular;
+
+                lista.Add(obj);
+            }
+
+
+            return lista;
+        }
+
+        public List<Deportista> listarDeportistas(int idDeportista)
+        {
+
+            List<Amigo> listilla = db.Amigo.AsNoTracking().Where(a => a.idDeportista == idDeportista).ToList();
+
+            List<Deportista> listillaReborn = db.Deportista.AsNoTracking().Where(a=>a.id!=idDeportista).ToList();
+
+            List<Deportista> lista = new List<Deportista>();
+
+            foreach (var item in listillaReborn)
+            {
+                bool flag = true;
+                foreach (var i in listilla){
+                    if (item.id == i.idAmigo) {
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if(flag)
+                    lista.Add(item);
+             
+            }
+
+
+            return lista;
         }
     }
 }

@@ -1,0 +1,167 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="canchas.com.proin2.canchas.CanchasActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/lblT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:text="NOMBRE: "
+                android:textColor="@color/application"
+                />
+
+            <TextView
+                android:id="@+id/lblNombre"
+                android:layout_height="35dp"
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:text="0"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp">
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:text="DIRECCIÓN: "
+                android:textColor="@color/application"
+                />
+
+            <TextView
+                android:id="@+id/lblDireccion"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textStyle="bold"
+                android:text="0"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:text="TELEFONO: "
+                android:textColor="@color/application"
+                />
+
+            <TextView
+                android:id="@+id/lblTelefono"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textStyle="bold"
+                android:text="0"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                />
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:text=" BALON: "
+                android:textColor="@color/application"
+                />
+
+            <TextView
+                android:id="@+id/lblBalon"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textStyle="bold"
+                android:text="0"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:text=" CAMISETAS: "
+                android:textColor="@color/application"
+                />
+
+            <TextView
+                android:id="@+id/lblCamisetas"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textStyle="bold"
+                android:text="0"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp">
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:text="CAMPOS "
+                android:textColor="@color/application"
+                />
+        </LinearLayout>
+
+        <View android:id="@+id/primerdivisor"
+            android:layout_height="1dp"
+            android:layout_marginTop="3dp"
+            android:layout_width="fill_parent" />
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewPersona" />
+
+    </LinearLayout>
+
+</RelativeLayout>

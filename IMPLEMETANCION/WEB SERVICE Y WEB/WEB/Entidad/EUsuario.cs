@@ -13,5 +13,6 @@ namespace Entidad
         public string clave { get; set; }
         public int idTipoUsuario { get; set; }
         public bool activo { get; set; }
+        public int idDeportista { get; set; }
     }
 }

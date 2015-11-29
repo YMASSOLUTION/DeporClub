@@ -128,12 +128,7 @@
                         @if (Session["Usuario"] != null)
                         {
                             if ((int)Session["Cargo"] == 1)
-                            {
-                                <li>
-                                    <a href="@Url.Content("~/Anuncio/Index")">
-                                        <i class="fa fa-user"></i> Anuncios
-                                    </a>
-                                </li>
+                            {                                
                                 <li>
                                     <a href="@Url.Content("~/Empresa/Index")">
                                         <i class="fa fa-industry"></i> Empresas

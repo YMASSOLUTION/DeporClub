@@ -77,10 +77,13 @@ namespace Vista.Controllers
         {
             try
             {
+                obj.activo = true;
                 if (ModelState.IsValid)
                 {
                     obj.idCancha = cboCampo;
                     obj.idUsuario = (int)Session["idUsuario"];
+
+                   
 
                     if (NReserva.Instancia.Create(obj))
                     {
@@ -88,6 +91,7 @@ namespace Vista.Controllers
                     }
                     else
                     {
+                        ViewBag.idEmpresa = (int)Session["idEmpresa"];
                         ViewBag.error = "La cancha seleccionada ya ha sido reservada en el horario escogido.";
                         return View(obj);
                     }
@@ -103,6 +107,7 @@ namespace Vista.Controllers
                 return View(obj);
             }
         }
+
         [HttpPost]
         public ActionResult Edit(int id)
         {
@@ -199,6 +204,14 @@ namespace Vista.Controllers
             {
                 return Json("error", JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [HttpPost]
+        public JsonResult listarHorarioDisponible(string fecha, int idcampo)
+        {
+            List<EHorario> listHorario = new List<EHorario>();
+            listHorario = NReserva.Instancia.SelectHorariosDisponiblesParaReserva(Convert.ToDateTime(fecha), idcampo);
+            return Json(listHorario, JsonRequestBehavior.AllowGet);
         }
     }
 }

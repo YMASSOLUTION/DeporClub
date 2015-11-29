@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Services;
 using Entidad;
 using Negocio;
+using System.Globalization;
 namespace SysCanchas.WebServices
 {
     [WebService(Namespace = "http://tempuri.org/")]
@@ -18,8 +19,10 @@ namespace SysCanchas.WebServices
             Usuario obj = new Usuario();
             obj = NUsuario.Instancia.Login(usuario, clave);
             EUsuario eobj = new EUsuario();
+            eobj.id = obj.id;
             eobj.nick = obj.nick;
             eobj.activo = obj.activo;
+            eobj.idDeportista = obj.Deportista.ElementAt(0).id;
             return eobj;
         }
         
@@ -45,18 +48,36 @@ namespace SysCanchas.WebServices
         }
 
         [WebMethod]
-        public bool registrarReserva(string fecha, int idUsuario, int idCancha, string horaInicio, string horaFin)
+        public bool registrarReserva(string fecha, int idUsuario, int idCancha, string[] horaInicio, string[] horaFin)
         {
-            Reserva reserva = new Reserva();
-            reserva.fechaHora = Convert.ToDateTime(fecha);
-            reserva.idUsuario = idUsuario;
-            reserva.idCancha = idCancha;
-            TimeSpan horaInicio2 = TimeSpan.Parse(horaInicio);
-            TimeSpan horaFin2 = TimeSpan.Parse(horaFin);
-            reserva.horaInicio = horaInicio2;
-            reserva.horaFin = horaFin2;
-            reserva.activo = true;
-            return NReserva.Instancia.Create(reserva);
+            bool flag = false;
+
+            for (int i = 0; i < horaInicio.Length; i++)
+            {
+                Reserva reserva = new Reserva();
+                reserva.fecha = Convert.ToDateTime(fecha);
+                reserva.idUsuario = idUsuario;
+                reserva.idCancha = idCancha;
+
+                TimeSpan horaInicio2 = DateTime.ParseExact(horaInicio[i], "HH", CultureInfo.InvariantCulture).TimeOfDay;
+                TimeSpan horaFin2 = DateTime.ParseExact(horaFin[i], "HH", CultureInfo.InvariantCulture).TimeOfDay;
+                reserva.horaInicio = horaInicio2;
+                reserva.horaFin = horaFin2;
+                reserva.activo = true;
+
+                if (NReserva.Instancia.Create(reserva))
+                {
+                    flag = true;
+                }
+            }
+
+
+            if (flag)
+                return true;
+            else
+                return false;
+
+            
         }
 
         [WebMethod]
@@ -113,22 +134,120 @@ namespace SysCanchas.WebServices
         
         }
 
-       /* [WebMethod]
-        public List<EPelotero> listarPeloteros(string nombre, int idPelotero)
-        {
-            List<Pelotero> lista = new List<Pelotero>();
-            List<EPelotero> elista = new List<EPelotero>();
-            lista = NPelotero.Instancia.SelectAll(nombre,idPelotero);
-            foreach (var item in lista)
-	        {
-                EPelotero eobj= new EPelotero();
-                eobj.id = item.id;
-                eobj.nombre=item.nombre;
-                eobj.apellidos=item.apellidos;
-		        elista.Add(eobj);
-	        }
-            return elista;
+        [WebMethod]
+
+        public List<EReserva> listarReservas(int idUsuario) {
+            List<Reserva> listilla = NReserva.Instancia.SelectReservaByIdUsuario(idUsuario);
+            List<EReserva> listaReserva = new List<EReserva>();
+            foreach(var item in listilla){
+                EReserva obj = new EReserva();
+                obj.id = item.id;
+                obj.centrodeportivo = item.Campo.CentroDeportivo.nombre;
+                obj.campo = item.Campo.nombre;
+                obj.fecha = item.fecha.ToString();
+                obj.horaInicio = item.horaInicio.ToString();
+                obj.horaFin = item.horaFin.ToString();
+
+
+                listaReserva.Add(obj);
+            }
+
+            return listaReserva;
         }
+
+        [WebMethod]
+        public List<EDeportista> listarAmigos(int idDeportista) {
+
+            List<Deportista> listilla = NDeportista.Instancia.listarAmigos(idDeportista);
+
+            List<EDeportista> lista = new List<EDeportista>();
+
+            foreach(var item in listilla){
+                EDeportista obj = new EDeportista();
+                obj.id = item.id;
+                obj.nombre = item.nombre;
+                obj.apellidos = item.apellidos;
+                obj.celular = item.celular;
+
+                lista.Add(obj);
+            }
+
+            return lista;
+        }
+
+        [WebMethod]
+
+        public List<EDeportista> listarDeportistas(int idDeportista) {
+
+            List<Deportista> listilla = NDeportista.Instancia.listarDeportistas(idDeportista);
+
+            List<EDeportista> lista = new List<EDeportista>();
+
+            foreach (var item in listilla)
+            {
+                EDeportista obj = new EDeportista();
+                obj.id = item.id;
+                obj.nombre = item.nombre;
+                obj.apellidos = item.apellidos;
+                obj.celular = item.celular;
+
+                lista.Add(obj);
+            }
+
+            return lista;
+        }
+
+        [WebMethod]
+        public bool solicitudAmistad(int idPelotero, int[] idreceptores)
+        {
+            bool flag = false;
+
+            foreach(var item in idreceptores){
+                SolicitudAmistad objSolicitud = new SolicitudAmistad();
+                objSolicitud.fechaHora = System.DateTime.Now;
+                objSolicitud.activo = true;
+                objSolicitud.estado = "pendiente";
+                objSolicitud.idPelotero = idPelotero;
+                objSolicitud.idReceptor = item;
+
+                if (NSolicitudAmistad.Instancia.registrarSolicitud(objSolicitud))
+                {
+                    flag = true;
+                }
+            }
+
+            if (flag)
+                return true;
+            else
+                return false;
+
+            
+        }
+
+        [WebMethod]
+
+        public bool crearDetalleInvitado(int idReserva, int[] idpeloteros) {
+
+            bool flag = false;
+
+            foreach(var item in idpeloteros){
+                DetalleInvitados obj=new DetalleInvitados();
+                obj.idReserva = idReserva;
+                obj.idDeportista = item;
+
+                if (NDetalleInvitados.Instancia.Create(obj)) {
+                    flag = true;
+                }
+
+            }
+
+            if (flag)
+                return true;
+            else
+                return false;
+        }
+
+       /*
 
         [WebMethod]
         public EPelotero verPerfil(int id)
@@ -143,13 +262,9 @@ namespace SysCanchas.WebServices
 
             return eobj;
         }*/
-        /*
-        [WebMethod]
-        public bool solicitudAmistad(int idPelotero,int idReceptor)
-        {
-            return NPelotero.Instancia.solicitudAmistad(idPelotero,idReceptor);
-        }
-
+        
+        
+        
         [WebMethod]
         public List<ESolicitudAmistad> verSolicitudes(int idPelotero)
         {
@@ -165,11 +280,11 @@ namespace SysCanchas.WebServices
                 obj.fechaHora = item.fechaHora;
                 obj.id = item.id;
                 obj.idPelotero = item.id;
-                obj.Pelotero = new Pelotero();
-                obj.Pelotero.nombre = item.Pelotero.nombre;
-                obj.Pelotero.apellidos = item.Pelotero.apellidos;
-                obj.Pelotero.email = item.Pelotero.email;
-                obj.Pelotero.celular = item.Pelotero.celular;
+                obj.Pelotero = new EDeportista();
+                obj.Pelotero.nombre = item.Deportista.nombre;
+                obj.Pelotero.apellidos = item.Deportista.apellidos;
+                obj.Pelotero.email = item.Deportista.email;
+                obj.Pelotero.celular = item.Deportista.celular;
                 elista.Add(obj);
                 
             }
@@ -177,11 +292,11 @@ namespace SysCanchas.WebServices
         }
 
         [WebMethod]
-        public bool responderSolicitudAmistad(int idPelotero, int idSolicitante, string respuesta)
+        public bool responderSolicitudAmistad(int idSolicitudAmistad)
         {
-            //id Pelotero es el id de la sesion, idsolicitante es del pelotero que envio la solicitud
-            return NPelotero.Instancia.responderSolicitudAmistad(idPelotero,idSolicitante,respuesta);
-        }*/
+            
+            return NDeportista.Instancia.responderSolicitudAmistad(idSolicitudAmistad);
+        }
 
     }
 }

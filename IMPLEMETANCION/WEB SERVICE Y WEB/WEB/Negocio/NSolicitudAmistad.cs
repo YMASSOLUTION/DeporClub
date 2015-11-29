@@ -89,5 +89,10 @@ namespace Negocio
         {
             return DSolicitudAmistad.Instancia.SelectAll(idPelotero);
         }
+
+        public bool registrarSolicitud(SolicitudAmistad obj) {
+
+            return DSolicitudAmistad.Instancia.registrarSolicitud(obj);
+        }
     }
 }

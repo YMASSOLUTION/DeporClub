@@ -49,7 +49,8 @@
                             <tr>
                                 <th>@Html.ActionLink("Fecha", "Index", new { orden = ViewBag.fechaHoraOrden, filtro = ViewBag.filtro })</th>
                                 <th>Hora Inicio</th>
-                                <th>Hora Fin</th>                                
+                                <th>Hora Fin</th>   
+                                <th>Centro Deportivo</th>                             
                                 <th class="hidden-xs">@Html.ActionLink("Cancha", "Index", new { orden = ViewBag.idCanchaOrden, filtro = ViewBag.filtro })</th>
                                 <th class="hidden-xs">@Html.ActionLink("activo", "Index", new { orden = ViewBag.activoOrden, filtro = ViewBag.filtro })</th>
                                 <th class="col-medium center">Acci&oacute;n</th>
@@ -62,14 +63,17 @@
                                 {
                                     <tr>
                                         <td>
-                                            @String.Format("{0:d}", item.fechaHora)                                           
+                                            @String.Format("{0:d}", item.fecha)                                           
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.horaInicio)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.horaFin)
-                                        </td>                                       
+                                        </td>                
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Campo.CentroDeportivo.nombre)
+                                        </td>                       
                                         <td class="hidden-xs">
                                             @Html.DisplayFor(modelItem => item.Campo.nombre)
                                         </td>
@@ -92,18 +96,12 @@
                                                         <i class="fa fa-search icon-only"></i>
                                                     </a>
                                                     <div class="or"></div>
-                                                }
-                                                @using (Html.BeginForm("Edit", "Reserva", FormMethod.Post, new { @class = "inline" }))
-                                                {
-                                                    <input type="hidden" name="id" value="@item.id" />
-                                                    <a class="btnEdit btn btn-inverse">
-                                                        <i class="fa fa-edit icon-only"></i>
-                                                    </a>
-                                                    <div class="or"></div>
                                                     <a class="btnDelete btn btn-danger inline" data-iddelete="@item.id">
-                                                        <i class="fa fa-trash icon-only"></i>
+                                                        <i class="fa fa-ban icon-only"></i>
                                                     </a>
-                                                }
+                                                }                                                
+                                                    
+                                                
                                             </div>
                                         </td>
                                     </tr>
@@ -144,8 +142,8 @@
         $(".btnDelete").click(function () {
             var miid = $(this).attr("data-iddelete");
             swal({
-                title: "Eliminar Reserva",
-                text: "Seguro que quieres eliminar esta Reserva?",
+                title: "Anular Reserva",
+                text: "Seguro que quieres anular esta Reserva?",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonClass: "btn-success",
@@ -159,19 +157,19 @@
                 if (isConfirm) {
                     $.ajax({
                         type: "POST",
-                        url: '/Reserva/DeleteConfirmed',
+                        url: '/Reserva/Disable',
                         data: {
                             id: miid,
                         },
                         success: function (data) {
                             // Realizar algo cuando la llamada es exitosa
                             if (data == "true") {
-                                swal("Eliminación exitosa!", "El registro fue eliminado correctamente.", "success");
+                                swal("Anulación exitosa!", "El registro fue eliminado correctamente.", "success");
                                 $.isLoading("hide");
                                 window.location.href = "/Reserva/Index";
                             }
                             else {
-                                swal("Eliminación erronea!", "El registro no se puedo eliminar.", "error");
+                                swal("Anulación erronea!", "El registro no se puedo anular.", "error");
                                 $.isLoading("hide");
                             }
                         },
