@@ -12,7 +12,7 @@ namespace AccesoDatos
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using Entidad;
+    
     public partial class CanchaDBEntities1 : DbContext
     {
         public CanchaDBEntities1()
